@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\ManageData\ManageData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Resources\" />
+    <Folder Include="ViewModels\DatabaseNameFinAppViewModelss\" />
+    <Folder Include="ViewModels\ReportsFinAppViewModels\" />
+    <Folder Include="ViewModels\QueriesFinAppViewModels\" />
+    <Folder Include="Views\ReportsFinAppViews\" />
+    <Folder Include="Views\DatabaseNameFinAppViews\" />
+    <Folder Include="Views\QueriesFinAppViews\" />
+    <Folder Include="Views\UserControl\" />
+  </ItemGroup>
+
+</Project>
