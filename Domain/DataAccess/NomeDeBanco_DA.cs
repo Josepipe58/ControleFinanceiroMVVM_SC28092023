@@ -31,10 +31,10 @@ namespace Domain.DataAccess
             return consulta;
         }
 
-        public string Excluir(int id)
+        public string Excluir(NomeDeBanco excluir)
         {
             LimparParametros();
-            AdicionarParametros("@id", id);
+            AdicionarParametros("@id", excluir.Id);
             consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
                 "Delete From NomeDeBancos Where Id = @id; Select @id as Retorno;").ToString();
             return consulta;

@@ -34,10 +34,10 @@ namespace Domain.DataAccess
             return consulta;
         }
 
-        public string Excluir(int id)
+        public string Excluir(Categoria excluir)
         {
             LimparParametros();
-            AdicionarParametros("@Id", id);
+            AdicionarParametros("@Id", excluir.Id);
             consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Delete From Categorias Where Id = @Id; Select @Id as Retorno;").ToString();
             return consulta;

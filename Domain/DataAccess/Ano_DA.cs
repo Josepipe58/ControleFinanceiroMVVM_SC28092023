@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using Database.DatabaseContext;
 using Database.Models;
+using Domain.Messages;
 using System;
 using System.Data;
 
@@ -32,10 +33,10 @@ namespace Domain.DataAccess
             return consulta;
         }
 
-        public string Excluir(int id)
+        public string Excluir(Ano excluir)
         {
             LimparParametros();
-            AdicionarParametros("@Id", id);
+            AdicionarParametros("@Id", excluir.Id);
             consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Delete From Anos Where Id = @Id; Select @Id as Retorno;").ToString();
             return consulta;
