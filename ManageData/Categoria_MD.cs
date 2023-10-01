@@ -10,9 +10,9 @@ namespace ManageData
 {
     public class Categoria_MD : Categoria_DV
     {
-        #region |=================================| Propriedades |==================================================|        
-
-        //|=========================| Lista de Categorias de Despesas |===================================|
+        #region |=================================| Propriedades |==================================================| 
+        
+        public string nomeDoMetodo = string.Empty;
 
         //Carregar DataGrid Dados.
         private ListaDeCategorias _listaDeCategorias;
@@ -56,7 +56,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeCadastro(erro);
+                    nomeDoMetodo = "Cadastrar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -74,7 +76,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeAlterar(erro);
+                    nomeDoMetodo = "Alterar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -98,7 +102,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeExcluir(erro);
+                    nomeDoMetodo = "Excluir";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }

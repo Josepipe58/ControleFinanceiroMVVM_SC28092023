@@ -6,14 +6,14 @@ using System.Windows;
 
 namespace Domain.Reports
 {
-    public class RelatorioDePoupanca_DO : Context
+    public class RelatorioDePoupanca : Context
     {
         //====================================================| Saldo Total da Poupança, Receitas e Investimentos |=========================================================//
         public ListaDeValoresMeses SaldoTotalDaPoupancaReceitasEInvestimentos(int selecionarAno)
         {
             try
             {
-                ListaDeValoresMeses listaDeValoresMeses = new ListaDeValoresMeses();
+                ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
                 AdicionarParametros("@selecionarAno", selecionarAno);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
@@ -157,7 +157,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -189,7 +189,7 @@ namespace Domain.Reports
         {
             try
             {
-                ListaDeValoresMeses listaDeValoresMeses = new ListaDeValoresMeses();
+                ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
                 AdicionarParametros("@selecionarAno", selecionarAno);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
@@ -282,7 +282,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -314,7 +314,7 @@ namespace Domain.Reports
         {
             try
             {
-                ListaDeValoresMeses listaDeValoresMeses = new ListaDeValoresMeses();
+                ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
                 AdicionarParametros("@selecionarAno", selecionarAno);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
@@ -334,7 +334,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -366,7 +366,7 @@ namespace Domain.Reports
         {
             try
             {
-                ListaDeValoresMeses listaDeValoresMeses = new ListaDeValoresMeses();
+                ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
                 AdicionarParametros("@selecionarAno", selecionarAno);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
@@ -463,7 +463,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -495,7 +495,7 @@ namespace Domain.Reports
         {
             try
             {
-                ListaDeValoresMeses listaDeValoresMeses = new ListaDeValoresMeses();
+                ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
                 AdicionarParametros("@selecionarAno", selecionarAno);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
@@ -515,7 +515,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),

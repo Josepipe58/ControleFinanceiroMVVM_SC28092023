@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Domain.Reports
 {
-    public class RelatorioDeDespesa_DO : Context
+    public class RelatorioDeDespesa : Context
     {
         //========================================================| Relatório de Despesas Totais |======================================================================//        
         public ListaDeValoresMeses RelatorioDeDespesasTotais(int selecionarAno)
@@ -58,7 +58,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -192,7 +192,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -300,7 +300,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -352,7 +352,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
@@ -429,7 +429,7 @@ namespace Domain.Reports
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
-                    Meses meses = new Meses
+                    Meses meses = new()
                     {
                         Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
                         Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),

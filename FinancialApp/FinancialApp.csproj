@@ -15,9 +15,8 @@
   <ItemGroup>
     <Folder Include="Images\" />
     <Folder Include="Resources\" />
-    <Folder Include="ViewModels\DatabaseNameFinAppViewModelss\" />
     <Folder Include="ViewModels\ReportsFinAppViewModels\" />
-    <Folder Include="ViewModels\QueriesFinAppViewModels\" />
+    <Folder Include="ViewModels\QueriesViewModels\" />
     <Folder Include="Views\ReportsFinAppViews\" />
     <Folder Include="Views\DatabaseNameFinAppViews\" />
     <Folder Include="Views\QueriesFinAppViews\" />

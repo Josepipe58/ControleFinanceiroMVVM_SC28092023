@@ -5,96 +5,8 @@ namespace Domain.Messages
 {
     public class GerenciarMensagens
     {
-        #region |====================================| Erros do Try Catch |====================================|
-        public static string ErroDeCadastro(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: Cadastrar." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        public static string ErroDeAlterar(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: Alterar." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        public static string ErroDeExcluir(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: Excluir." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        public static string ErroSaldoDaCarteira(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoDaCarteira." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        public static string ErroSaldoDaPoupanca(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoDaPoupanca." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        public static string ErroSaldoDeInvestimentos(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoDeInvestimentos." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        public static string ErroSaldoTotalPoupancaEInvestimentos(Exception erro)
-        {
-
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoTotalPoupancaEInvestimentos." +
-                       $"\nDetalhes: {erro.Message} ", "Mensagem de Erro!",
-                       MessageBoxButton.OK, MessageBoxImage.Error).ToString();
-        }
-
-        //|================================| Erros de DataGrid e ComboBox de Anos  |==========================================|
-        public static void ErroDeCarregarDataGridEComboBoxDeAnos(Exception erro)
-        {
-
-            MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: CarregarDataGridEComboBoxDeAnos." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        //|================================| Erros de DataGrid e ComboBox de Categorias  |====================================|
-        public static void ErroDeCarregarDataGridEComboBoxDeCategorias(Exception erro)
-        {
-
-            MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: CarregarDataGridEComboBoxDeCategorias." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        //|================================| Erros de DataGrid e ComboBox de SubCategorias  |=================================|
-        public static void ErroDeCarregarDataGridDeSubCategorias(Exception erro)
-        {
-
-            MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: CarregarDataGridDeSubCategorias." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        public static void ErroDeCarregarComboBoxDeSubCategorias(Exception erro)
-        {
-
-            MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: CarregarComboBoxDeSubCategoria." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-        #endregion
-
         #region |====================================| Mensagens - CRUD |======================================|
+
         public static void SucessoAoCadastrar(int id)
         {
             MessageBox.Show($"Registro cadastrado com sucesso.\nCódigo do registro: {id}",
@@ -118,6 +30,39 @@ namespace Domain.Messages
             return MessageBox.Show($"Você tem certeza que deseja excluir esse registro?" +
             $"\nNúmero do Código: {id}", "Cuidado! Atenção!",
             MessageBoxButton.YesNo, MessageBoxImage.Information);
+        }
+
+        public static void SelecionarRegistroDeExcluir()
+        {
+            MessageBox.Show("Atenção! Existe um ou mais de um campo, que está vazio.\n Corrija esse erro para continuar.",
+                "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public static void PreencherCampoVazio()
+        {
+            MessageBox.Show("Atenção!\nOcorreu um erro, verifique as seguintes opções:\nSe o campo do Id está vazio ou preenchido.\n" +
+                   "Se estiver vazio, clique no botão de Cadastrar.\nSe estiver preenchido, clique no botão de Alterar ou Excluir.\n" +
+                   "Ou ainda, verifique se existe algum outro campo, além do campo Id, que esteja vazio.\nCorrija esses erros, para continuar.",
+                   "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        #endregion
+
+        #region |====================================| Erros do Try Catch(Exception) e Nome de Métodos |====================================|
+
+        public static string ErroDeExcecaoENomeDoMetodo(Exception erro, string nomeDoMetodo)
+        {
+            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: {nomeDoMetodo}." +
+                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error).ToString();
+        }
+
+        #endregion
+
+        #region |====================================| Mensagem de Erro de Switch Case |======================================|
+
+        public static void MensagemDeErroDeSwitchCase()
+        {
+            MessageBox.Show($"Atenção! Ocorreu um erro no Switch Case.\nNão foi possível selecionar nenhum mês.",
+                            "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         #endregion
     }

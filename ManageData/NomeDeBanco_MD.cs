@@ -8,23 +8,23 @@ using System.Windows;
 
 namespace ManageData
 {
-    public class Ano_MD : Ano_DV
+    public class NomeDeBanco_MD : NomeDeBanco_DV
     {
-        #region |=================================| Propriedades |==================================================|
+        #region |=================================| Propriedades |==================================================| 
 
         public string nomeDoMetodo = string.Empty;
 
         //Carregar DataGrid Dados.
-        private ListaDeAnos _listaDeAnos;
-        public ListaDeAnos ListaDeAnos
+        private ListaDeNomeDeBancos _listaDeNomeDeBancos;
+        public ListaDeNomeDeBancos ListaDeNomeDeBancos
         {
-            get { return _listaDeAnos; }
+            get { return _listaDeNomeDeBancos; }
             set
             {
-                if (_listaDeAnos != value)
+                if (_listaDeNomeDeBancos != value)
                 {
-                    _listaDeAnos = value;
-                    OnPropertyChanged(nameof(ListaDeAnos));
+                    _listaDeNomeDeBancos = value;
+                    OnPropertyChanged(nameof(ListaDeNomeDeBancos));
                 }
             }
         }
@@ -32,24 +32,24 @@ namespace ManageData
 
         #region |=================================| Construtor |====================================================|
 
-        public Ano_MD()
+        public NomeDeBanco_MD()
         {
-            ListaDeAnos = new ListaDeAnos();
+            ListaDeNomeDeBancos = new ListaDeNomeDeBancos();
         }
         #endregion
 
         #region |=================================| Métodos |=======================================================|
 
-        //|=================================| Cadastrar |==========================================|
+        //|===================================| Cadastrar |===============================================|
 
-        public void Cadastrar(Ano ano)
+        public void Cadastrar(NomeDeBanco nomeDeBanco)
         {
-            if (ValidarCadastrar(ano) == true)
+            if (ValidarCadastrar(nomeDeBanco) == true)
             {
                 try
                 {
-                    Ano_DA ano_DA = new();
-                    string retorno = ano_DA.Cadastrar(ano);
+                    NomeDeBanco_DA categoria_DA = new();
+                    string retorno = categoria_DA.Cadastrar(nomeDeBanco);
                     int codigoDeRetorno = Convert.ToInt32(retorno);
                     GerenciarMensagens.SucessoAoCadastrar(codigoDeRetorno);
                     LimparEAtualizarDados();
@@ -62,17 +62,16 @@ namespace ManageData
                 }
             }
         }
-        //|=================================| Alterar |============================================|
-
-        public void Alterar(Ano ano)
+        //|===================================| Alterar |=================================================|
+        public void Alterar(NomeDeBanco nomeDeBanco)
         {
-            if (ValidarAlterarExcluir(ano) == true)
+            if (ValidarAlterarExcluir(nomeDeBanco) == true)
             {
                 try
                 {
-                    Ano_DA ano_DA = new();
-                    ano_DA.Alterar(ano);
-                    GerenciarMensagens.SucessoAoAlterar(ano.Id);
+                    NomeDeBanco_DA categoria_DA = new();
+                    categoria_DA.Alterar(nomeDeBanco);
+                    GerenciarMensagens.SucessoAoAlterar(nomeDeBanco.Id);
                     LimparEAtualizarDados();
                 }
                 catch (Exception erro)
@@ -83,13 +82,12 @@ namespace ManageData
                 }
             }
         }
-        //|=================================| Excluir |============================================|
-
-        public void Excluir(Ano ano)
+        //|===================================| Excluir |=================================================|
+        public void Excluir(NomeDeBanco nomeDeBanco)
         {
-            if (ValidarAlterarExcluir(ano) == true)
+            if (ValidarAlterarExcluir(nomeDeBanco) == true)
             {
-                MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(ano.Id);
+                MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(nomeDeBanco.Id);
                 if (resultado == MessageBoxResult.No)
                 {
                     LimparEAtualizarDados();
@@ -97,9 +95,9 @@ namespace ManageData
                 }
                 try
                 {
-                    Ano_DA ano_DA = new();
-                    ano_DA.Excluir(ano);
-                    GerenciarMensagens.SucessoAoExcluir(ano.Id);
+                    NomeDeBanco_DA categoria_DA = new();
+                    categoria_DA.Excluir(nomeDeBanco);
+                    GerenciarMensagens.SucessoAoExcluir(nomeDeBanco.Id);
                     LimparEAtualizarDados();
                 }
                 catch (Exception erro)
@@ -110,14 +108,13 @@ namespace ManageData
                 }
             }
         }
-        //|=================================| Limpar e Atualizar Dados |===========================|
-
+        //|===================================| Limpar e Atualizar Dados |================================|
         public void LimparEAtualizarDados()
         {
-            Ano_DA ano_DA = new();
-            Ano.Id = 0;
-            Ano.AnoDoCadastro = 0;
-            ListaDeAnos = ano_DA.ConsultarAnos();
+            NomeDeBanco_DA categoria_DA = new();
+            NomeDeBanco.Id = 0;
+            NomeDeBanco.NomeDoBanco = "";
+            ListaDeNomeDeBancos = categoria_DA.ConsultarNomeDeBancos();
         }
         #endregion
     }

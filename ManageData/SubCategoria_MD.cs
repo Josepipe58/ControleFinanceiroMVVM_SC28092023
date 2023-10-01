@@ -12,7 +12,34 @@ namespace ManageData
     {
         #region |=================================| Propriedades |==================================================|        
 
-        //|=========================| Lista de SubCategorias de Despesas |===================================|
+        public string nomeDoMetodo = string.Empty;
+
+        //Propriedade de Categorias
+        private Categoria _categoria;
+        public Categoria Categoria
+        {
+            get { return _categoria; }
+            set
+            {
+                _categoria = value;
+                OnPropertyChanged(nameof(Categoria));
+            }
+        }
+
+        //Carregar ComboBox de Categorias.
+        private ListaDeCategorias _listaDeCategorias;
+        public ListaDeCategorias ListaDeCategorias
+        {
+            get { return _listaDeCategorias; }
+            set
+            {
+                if (_listaDeCategorias != value)
+                {
+                    _listaDeCategorias = value;
+                    OnPropertyChanged(nameof(ListaDeCategorias));
+                }
+            }
+        }
 
         //Carregar DataGrid Dados.
         private ListaDeSubCategorias _listaDeSubCategorias;
@@ -56,7 +83,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeCadastro(erro);
+                    nomeDoMetodo = "Cadastrar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -74,7 +103,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeAlterar(erro);
+                    nomeDoMetodo = "Alterar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -98,7 +129,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeExcluir(erro);
+                    nomeDoMetodo = "Excluir";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }

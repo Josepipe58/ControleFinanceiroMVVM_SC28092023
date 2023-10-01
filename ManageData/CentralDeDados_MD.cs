@@ -16,6 +16,7 @@ namespace ManageData
     {
         #region |====================================| Propriedades |====================================|
 
+        public static string nomeDoMetodo = string.Empty;
         private static SaldoFinanceiroCPI saldoFinanceiroCPI;
         private static SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento;
 
@@ -97,7 +98,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeCadastro(erro);
+                    nomeDoMetodo = "Cadastrar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -116,7 +119,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeAlterar(erro);
+                    nomeDoMetodo = "Alterar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -141,7 +146,9 @@ namespace ManageData
                 }
                 catch (Exception erro)
                 {
-                    GerenciarMensagens.ErroDeExcluir(erro);
+                    nomeDoMetodo = "Excluir";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
                 }
             }
         }
@@ -152,7 +159,7 @@ namespace ManageData
             CentralDeDados_DA centralDeDados_DA = new();
             CentralDeDados.Id = 0;
             CentralDeDados.Valor = 0;
-            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDados(CentralDeDados.Ano);
+            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
         }
         //|=================================| Atualizar Dados |===========================|            
 
@@ -173,12 +180,11 @@ namespace ManageData
             CentralDeDados.Mes = mesAtual;
             CentralDeDados.Data = Convert.ToDateTime(dataAtual);
             CentralDeDados.Ano = ListaDaCentralDeDados[0].Ano;
-            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDados(CentralDeDados.Ano);
+            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
         }
 
         public static double SaldoDaCarteira(int selecionarAno)
-        {
-
+        {             
             try
             {
                 saldoFinanceiroCPI.SaldoDaCarteira =
@@ -187,7 +193,8 @@ namespace ManageData
             }
             catch (Exception erro)
             {
-                GerenciarMensagens.ErroSaldoDaCarteira(erro);
+                nomeDoMetodo = "SaldoDaCarteira";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
                 return 0;
             }
         }
@@ -202,7 +209,8 @@ namespace ManageData
             }
             catch (Exception erro)
             {
-                GerenciarMensagens.ErroSaldoDaPoupanca(erro);
+                nomeDoMetodo = "SaldoDaPoupanca";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
                 return 0;
             }
         }
@@ -217,7 +225,8 @@ namespace ManageData
             }
             catch (Exception erro)
             {
-                GerenciarMensagens.ErroSaldoDeInvestimentos(erro);
+                nomeDoMetodo = "SaldoDeInvestimentos";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
                 return 0;
             }
         }
@@ -232,7 +241,8 @@ namespace ManageData
             }
             catch (Exception erro)
             {
-                GerenciarMensagens.ErroSaldoTotalPoupancaEInvestimentos(erro);
+                nomeDoMetodo = "SaldoTotalPoupancaEInvestimentos";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
                 return 0;
             }
         }

@@ -57,7 +57,7 @@ namespace Domain.DataAccess
         }
 
         //Consulta Geral da Central de Dados.
-        public ListaDaCentralDeDados ConsultaGeralDaCentralDeDados(int ano)
+        public ListaDaCentralDeDados ConsultaGeralDaCentralDeDadosPorAno(int ano)
         {
             ListaDaCentralDeDados listaDaCentralDeDados = new();
             LimparParametros();
