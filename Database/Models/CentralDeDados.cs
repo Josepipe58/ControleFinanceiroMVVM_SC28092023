@@ -1,28 +1,125 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
+using System;
+using System.Collections.ObjectModel;
 
 namespace Database.Models
 {
-    public class CentralDeDados
+    public class CentralDeDados : BaseModelo
     {
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
 
-        public string NomeDaCategoria { get; set; } = string.Empty;
+        private string _nomeDaCategoria;
+        public string NomeDaCategoria
+        {
+            get { return _nomeDaCategoria; }
+            set
+            {
+                _nomeDaCategoria = value;
+                OnPropertyChanged(nameof(NomeDaCategoria));
+            }
+        }
 
-        public string NomeDaSubCategoria { get; set; } = string.Empty;
+        private string _nomeSubCategoria;
+        public string NomeDaSubCategoria
+        {
+            get { return _nomeSubCategoria; }
+            set
+            {
+                _nomeSubCategoria = value;
+                OnPropertyChanged(nameof(NomeDaSubCategoria));
+            }
+        }
 
-        public decimal Valor { get; set; }
+        private decimal _valor;
+        public decimal Valor
+        {
+            get { return _valor; }
+            set
+            {
+                _valor = value;
+                OnPropertyChanged(nameof(Valor));
+            }
+        }
 
-        public string Filtros { get; set; } = string.Empty;
+        private string _filtros;
+        public string Filtros
+        {
+            get { return _filtros; }
+            set
+            {
+                _filtros = value;
+                OnPropertyChanged(nameof(Filtros));
+            }
+        }
 
-        public string Tipo { get; set; } = string.Empty;
+        private string _tipo;
+        public string Tipo
+        {
+            get { return _tipo; }
+            set
+            {
+                _tipo = value;
+                OnPropertyChanged(nameof(Tipo));
+            }
+        }
 
-        public DateTime Data { get; set; }
+        private DateTime _data;
+        public DateTime Data
+        {
+            get { return _data; }
+            set
+            {
+                _data = value;
+                OnPropertyChanged(nameof(Data));
+            }
+        }
 
-        public string Mes { get; set; } = string.Empty;
+        private string _mes;
+        public string Mes
+        {
+            get { return _mes; }
+            set
+            {
+                _mes = value;
+                OnPropertyChanged(nameof(Mes));
+            }
+        }
 
-        public int Ano { get; set; }
+        private int _ano;
+        public int Ano
+        {
+            get { return _ano; }
+            set
+            {
+                _ano = value;
+                OnPropertyChanged(nameof(Ano));
+            }
+        }
+
+        public CentralDeDados(){ }
+
+        public CentralDeDados(CentralDeDados centralDeDados)
+        {
+            Id = centralDeDados.Id;
+            NomeDaCategoria = centralDeDados.NomeDaCategoria;
+            NomeDaSubCategoria = centralDeDados.NomeDaSubCategoria;
+            Valor = centralDeDados.Valor;
+            Filtros = centralDeDados.Filtros;
+            Tipo = centralDeDados.Tipo;
+            Data = centralDeDados.Data;
+            Mes = centralDeDados.Mes;
+            Ano = centralDeDados.Ano;
+        }
     }
 
-    public class ListaDaCentralDeDados : List<CentralDeDados> { }
+    public class ListaDaCentralDeDados : ObservableCollection<CentralDeDados> { }
 }

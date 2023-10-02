@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ManageData.DataValidation
+namespace FinancialApp.ManageData.DataValidation
 {
     public class DataValidationBase : INotifyPropertyChanged
     {

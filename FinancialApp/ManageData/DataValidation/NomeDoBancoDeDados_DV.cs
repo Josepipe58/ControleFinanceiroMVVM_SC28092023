@@ -2,14 +2,14 @@
 using Database.Models;
 using System.Windows;
 
-namespace ManageData.DataValidation
+namespace FinancialApp.ManageData.DataValidation
 {
-    public class NomeDeBanco_DV : DataValidationBase
+    public class NomeDoBancoDeDados_DV : DataValidationBase
     {
         #region |=================================| Propriedades |==================================================|
 
-        private NomeDeBanco _nomeDeBanco;
-        public NomeDeBanco NomeDeBanco
+        private NomeDoBancoDeDados _nomeDeBanco;
+        public NomeDoBancoDeDados NomeDeBanco
         {
             get { return _nomeDeBanco; }
             set
@@ -22,9 +22,9 @@ namespace ManageData.DataValidation
 
         #region |=================================| Construtor |====================================================|
 
-        public NomeDeBanco_DV()
+        public NomeDoBancoDeDados_DV()
         {
-            NomeDeBanco = new NomeDeBanco();
+            NomeDeBanco = new NomeDoBancoDeDados();
         }
         #endregion
 
@@ -38,7 +38,7 @@ namespace ManageData.DataValidation
 
         //|=================================| Validar Cadastrar |==================================================|
 
-        public bool ValidarCadastrar(NomeDeBanco nomeDeBanco)
+        public bool ValidarCadastrar(NomeDoBancoDeDados nomeDeBanco)
         {
             NomeDeBanco = nomeDeBanco;
             if ((NomeDeBanco.Id >= 0 || NomeDeBanco.Id <= 0) && NomeDeBanco.NomeDoBanco == null)
@@ -74,7 +74,7 @@ namespace ManageData.DataValidation
 
         //|=================================| Validar Alterar e Excluir |==========================================|
 
-        public bool ValidarAlterarExcluir(NomeDeBanco nomeDeBanco)
+        public bool ValidarAlterarExcluir(NomeDoBancoDeDados nomeDeBanco)
         {
             NomeDeBanco = nomeDeBanco;
             if ((NomeDeBanco.Id >= 0 || NomeDeBanco.Id <= 0) && NomeDeBanco.NomeDoBanco == null)

@@ -1,11 +1,11 @@
 ﻿using Domain.DataAccess;
-using ManageData.Commands;
+using FinancialApp.ManageData.Commands;
 
 namespace FinancialApp.ViewModels
 {
     public class NomeDeBancoViewModel : ComandosDeNomeDeBanco
     {
-        public NomeDeBanco_DA nomeDeBanco_DA;
+        public NomeDoBancoDeDados_DA nomeDeBanco_DA;
 
         public NomeDeBancoViewModel()
         {

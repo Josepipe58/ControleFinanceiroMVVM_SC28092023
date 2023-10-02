@@ -6,11 +6,11 @@ using System;
 
 namespace Domain.DataAccess
 {
-    public class NomeDeBanco_DA : DatabaseNameContext
+    public class NomeDoBancoDeDados_DA : DatabaseNameContext
     {
         public string consulta = string.Empty;
 
-        public string Cadastrar(NomeDeBanco cadastrar)
+        public string Cadastrar(NomeDoBancoDeDados cadastrar)
         {
             LimparParametros();
             AdicionarParametros("@Id", cadastrar.Id + 1);
@@ -21,7 +21,7 @@ namespace Domain.DataAccess
             return consulta;
         }
 
-        public string Alterar(NomeDeBanco alterar)
+        public string Alterar(NomeDoBancoDeDados alterar)
         {
             LimparParametros();
             AdicionarParametros("@id", alterar.Id);
@@ -31,7 +31,7 @@ namespace Domain.DataAccess
             return consulta;
         }
 
-        public string Excluir(NomeDeBanco excluir)
+        public string Excluir(NomeDoBancoDeDados excluir)
         {
             LimparParametros();
             AdicionarParametros("@id", excluir.Id);
@@ -48,7 +48,7 @@ namespace Domain.DataAccess
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
-                NomeDeBanco oNomeDeBancos = new()
+                NomeDoBancoDeDados oNomeDeBancos = new()
                 {
                     Id = Convert.ToInt32(dataRow["Id"]),
                     NomeDoBanco = Convert.ToString(dataRow["NomeDoBanco"])

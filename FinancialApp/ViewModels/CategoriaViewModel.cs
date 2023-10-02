@@ -1,5 +1,5 @@
 ﻿using Domain.DataAccess;
-using ManageData.Commands;
+using FinancialApp.ManageData.Commands;
 
 namespace FinancialApp.ViewModels
 {

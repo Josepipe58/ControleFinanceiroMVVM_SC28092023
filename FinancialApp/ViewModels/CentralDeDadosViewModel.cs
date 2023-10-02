@@ -2,7 +2,7 @@
 using Domain.DataAccess;
 using Domain.Lists;
 using Domain.Reports;
-using ManageData.Commands;
+using FinancialApp.ManageData.Commands;
 using System.Collections.Generic;
 
 namespace FinancialApp.ViewModels

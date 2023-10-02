@@ -1,24 +1,33 @@
-﻿using Domain.DataAccess;
-using ManageData.Commands;
+﻿#nullable disable
+using Database.Models;
+using Domain.DataAccess;
+using FinancialApp.ManageData.Commands;
 
 namespace FinancialApp.ViewModels
 {
     public class SubCategoriaViewModel : ComandosDeSubCategoria
     {
-        public SubCategoria_DA ad_SubCategoriaDeDespesa;
-        public Categoria_DA ad_CategoriaDeDespesa;
+        public SubCategoria_DA subCategoriaDeDespesa_DA;
+        public Categoria_DA categoriaDeDespesa_DA;
+        public FiltroDeControle_DA filtroDeControle_DA;
 
         public SubCategoriaViewModel()
         {
-            //Carregar ComboBox de Categorias
-            Categoria = new();
-            ad_CategoriaDeDespesa = new();
-            ListaDeCategorias = ad_CategoriaDeDespesa.ConsultarCategorias();
+            Categoria = new Categoria();
+            SubCategoria = new SubCategoria();
+            FiltroDeControle = new FiltroDeControle();
 
-            //DataGrid Dados
-            SubCategoria = new();
-            ad_SubCategoriaDeDespesa = new();
-            ListaDeSubCategorias = ad_SubCategoriaDeDespesa.ConsultarSubCategorias();
+            //Carregar ComboBox do Filtro de Cntrole           
+            filtroDeControle_DA = new FiltroDeControle_DA();
+            ListaDeFiltrosDeControle = filtroDeControle_DA.ConsultarFiltrosDeControle();
+
+            //Carregar ComboBox de Categorias            
+            categoriaDeDespesa_DA = new Categoria_DA();
+            ListaDeCategorias = categoriaDeDespesa_DA.ConsultarCategorias();
+
+            //DataGrid Dados            
+            subCategoriaDeDespesa_DA = new SubCategoria_DA();
+            ListaDeSubCategorias = subCategoriaDeDespesa_DA.ConsultarSubCategorias();
         }
     }
 }

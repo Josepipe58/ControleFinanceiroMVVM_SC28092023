@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="FinancialApp.Views.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignHeight="900" d:DesignWidth="1400">
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource controlefinanceiro_image}">
+        <Label Content=".NET 2023 MVVM com SqlClient" Margin="0,0,0,90" HorizontalAlignment="Right" Width="190" Height="26" 
+               VerticalAlignment="Bottom" FontWeight="Bold"/>
+    </Grid>
+</UserControl>

@@ -1,13 +1,40 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
+using System.Collections.ObjectModel;
 
 namespace Database.Models
 {
-    public class FiltroDeControle
+    public class FiltroDeControle :BaseModelo
     {
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
 
-        public string NomeDoFiltro { get; set; } = string.Empty;
+        private string _nomeDoFiltro;
+        public string NomeDoFiltro
+        {
+            get { return _nomeDoFiltro; }
+            set
+            {
+                _nomeDoFiltro = value;
+                OnPropertyChanged(nameof(NomeDoFiltro));
+            }
+        }
+
+        public FiltroDeControle(){ }
+
+        public FiltroDeControle(FiltroDeControle filtroDeControle)
+        {
+            Id = filtroDeControle.Id;
+            NomeDoFiltro = filtroDeControle.NomeDoFiltro;
+        }
     }
 
-    public class ListaDeFiltrosDeControle : List<FiltroDeControle> { }
+    public class ListaDeFiltrosDeControle : ObservableCollection<FiltroDeControle> { }
 }

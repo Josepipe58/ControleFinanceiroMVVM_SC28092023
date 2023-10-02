@@ -2,7 +2,7 @@
 using Database.Models;
 using System.Windows;
 
-namespace ManageData.DataValidation
+namespace FinancialApp.ManageData.DataValidation
 {
     public class Categoria_DV : DataValidationBase
     {

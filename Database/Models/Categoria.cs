@@ -1,17 +1,64 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
+using System.Collections.ObjectModel;
 
 namespace Database.Models
 {
-    public class Categoria
+    public class Categoria : BaseModelo
     {
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
 
-        public string NomeDaCategoria { get; set; } = string.Empty;
+        private string _nomeDaCategoria;
+        public string NomeDaCategoria
+        {
+            get { return _nomeDaCategoria; }
+            set
+            {
+                _nomeDaCategoria = value;
+                OnPropertyChanged(nameof(NomeDaCategoria));
+            }
+        }
 
-        public int FiltroDeControleId { get; set; }
+        private int _filtroDeControleId;
+        public int FiltroDeControleId
+        {
+            get { return _filtroDeControleId; }
+            set
+            {
+                _filtroDeControleId = value;
+                OnPropertyChanged(nameof(FiltroDeControleId));
+            }
+        }
 
-        public string NomeDoFiltro { get; set; } = string.Empty;
+        private string _nomeDoFiltro;
+        public string NomeDoFiltro
+        {
+            get { return _nomeDoFiltro; }
+            set
+            {
+                _nomeDoFiltro = value;
+                OnPropertyChanged(nameof(NomeDoFiltro));
+            }
+        }
+
+        public Categoria() { }
+
+        public Categoria(Categoria categoria)
+        {
+            Id = categoria.Id;            
+            NomeDaCategoria = categoria.NomeDaCategoria;
+            FiltroDeControleId = categoria.FiltroDeControleId;
+            NomeDoFiltro = categoria.NomeDoFiltro;
+        }
     }
 
-    public class ListaDeCategorias : List<Categoria> { }
+    public class ListaDeCategorias : ObservableCollection<Categoria> { }
 }

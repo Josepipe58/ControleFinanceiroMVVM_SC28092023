@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using Domain.Lists;
 using Domain.Messages;
+using FinancialApp.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -35,7 +36,7 @@ namespace ManageData.Commands
             MenuItemsCollection = new CollectionViewSource { Source = menuItems };
 
             // Configura a página de inicialização.
-            //SelecionarControleDeUsuario = new PaginaInicial();
+            SelecionarControleDeUsuario = new HomePage();
         }
 
         private void ExibirPaginaInicial()

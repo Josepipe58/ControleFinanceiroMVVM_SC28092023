@@ -1,12 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace Database.Models
 {
-    public class Ano
+    public class Ano : BaseModelo
     {
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
 
-        public int AnoDoCadastro { get; set; }
+        private int _anoDoCadastro;
+        public int AnoDoCadastro
+        {
+            get { return _anoDoCadastro; }
+            set
+            {
+                _anoDoCadastro = value;
+                OnPropertyChanged(nameof(AnoDoCadastro));
+            }
+        }
+
+        public Ano(){ }
+
+        public Ano(Ano ano)
+        {
+            Id = ano.Id;
+            AnoDoCadastro = ano.AnoDoCadastro;
+        }
     }
-    public class ListaDeAnos : List<Ano> { }
+
+    public class ListaDeAnos : ObservableCollection<Ano> { }
 }
