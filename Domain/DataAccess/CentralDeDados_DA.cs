@@ -8,7 +8,7 @@ namespace Domain.DataAccess
 {
     public class CentralDeDados_DA : Context
     {
-        public string consulta = string.Empty;
+        public string _consulta = string.Empty;
 
         public string Cadastrar(CentralDeDados cadastrar)
         {
@@ -21,12 +21,12 @@ namespace Domain.DataAccess
             AdicionarParametros("@Tipo", cadastrar.Tipo);
             AdicionarParametros("@Data", cadastrar.Data);
             AdicionarParametros("@Mes", cadastrar.Mes);
-            AdicionarParametros("@Ano", cadastrar.Ano);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            AdicionarParametros("@ano", cadastrar.Ano);
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
             "Select @Id = Id +1 From CentralDeDados; Insert Into CentralDeDados (Id, NomeDaCategoria, NomeDaSubCategoria, Valor, Filtros, " +
             "Tipo, Data, Mes, Ano) Values (@Id, @NomeDaCategoria, @NomeDaSubCategoria, @Valor, " +
-            "@Filtros, @Tipo, @Data, @Mes, @Ano); Select @Id as Retorno;").ToString();
-            return consulta;
+            "@Filtros, @Tipo, @Data, @Mes, @ano); Select @Id as Retorno;").ToString();
+            return _consulta;
         }
 
         public string Alterar(CentralDeDados alterar)
@@ -40,20 +40,20 @@ namespace Domain.DataAccess
             AdicionarParametros("@Tipo", alterar.Tipo);
             AdicionarParametros("@Data", alterar.Data);
             AdicionarParametros("@Mes", alterar.Mes);
-            AdicionarParametros("@Ano", alterar.Ano);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            AdicionarParametros("@ano", alterar.Ano);
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Update CentralDeDados Set NomeDaCategoria = @NomeDaCategoria, NomeDaSubCategoria = @NomeDaSubCategoria, Valor = @Valor, " +
-                "Filtros = @Filtros, Tipo = @Tipo, Data = @Data, Mes = @Mes, Ano = @Ano Where Id = @Id; Select @Id as Retorno;").ToString();
-            return consulta;
+                "Filtros = @Filtros, Tipo = @Tipo, Data = @Data, Mes = @Mes, Ano = @ano Where Id = @Id; Select @Id as Retorno;").ToString();
+            return _consulta;
         }
 
         public string Excluir(CentralDeDados excluir)
         {
             LimparParametros();
             AdicionarParametros("@Id", excluir.Id);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Delete From CentralDeDados Where Id = @Id; Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         //Consulta Geral da Central de Dados.
@@ -61,9 +61,9 @@ namespace Domain.DataAccess
         {
             ListaDaCentralDeDados listaDaCentralDeDados = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select * From CentralDeDados Where Ano = @Ano Order By Id Desc;");
+                "Select * From CentralDeDados Where Ano = @ano Order By Id Desc;");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -84,15 +84,15 @@ namespace Domain.DataAccess
             return listaDaCentralDeDados;
         }
 
-        //Fazer consulta de acordo com o filtro selecionado no ComboBox.
+        //Fazer _consulta de acordo com o filtro selecionado no ComboBox.
         public ListaDaCentralDeDados ConsultarFiltroSelecionadoNoComboBox(string filtros, int ano)
         {
             ListaDaCentralDeDados listaDaCentralDeDados = new();
             LimparParametros();
             AdicionarParametros("@Filtros", filtros);
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select * From CentralDeDados Where Ano = @Ano And Filtros = @Filtros Order By Id Desc;");
+                "Select * From CentralDeDados Where Ano = @ano And Filtros = @Filtros Order By Id Desc;");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -118,9 +118,9 @@ namespace Domain.DataAccess
         {
             ListaDaCentralDeDados listaDaCentralDeDados = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select * From CentralDeDados Where Ano = @Ano " +
+                "Select * From CentralDeDados Where Ano = @ano " +
                 "And NomeDaCategoria In ('Renda', 'Venda') Order By Id Desc;");
 
             foreach (DataRow dataRow in dataTable.Rows)

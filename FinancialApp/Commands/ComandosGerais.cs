@@ -1,9 +1,10 @@
 ﻿#nullable disable
+using FinancialApp.Views;
 using System.Windows.Input;
 
-namespace ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosGerais :CommandBase
+    public class ComandosGerais : BaseCommand
     {
         private object _selecionarControleDeUsuario;
         public object SelecionarControleDeUsuario
@@ -16,11 +17,11 @@ namespace ManageData.Commands
             }
         }
 
-        #region | Comandos de Voltar Para o Menu De Consultas e Relatorios |
+        #region |==========| Comandos de Voltar Para o Menu De Consultas e Relatorios |=========================|
 
         private void VoltarParaMenuDeConsultasERelatorios()
         {
-            //SelecionarControleDeUsuario = new MenuDeConsultasERelatorios_UC();
+            SelecionarControleDeUsuario = new MenuDeConsultasERelatorios();
         }
 
         private ICommand _comandoVoltarParaMenuDeConsultasERelatorios;
@@ -39,47 +40,7 @@ namespace ManageData.Commands
 
         #endregion
 
-        #region | Comandos de Categorias e SubCategorias |
-
-        public void CategoriaComando()
-        {
-            //SelecionarControleDeUsuario = new Categoria_UC();
-        }
-
-        private ICommand _comandoDaCategoria;
-        public ICommand ComandoDaCategoria
-        {
-            get
-            {
-                if (_comandoDaCategoria == null)
-                {
-                    _comandoDaCategoria = new RelayCommand(param => CategoriaComando());
-                }
-                return _comandoDaCategoria;
-            }
-        }
-
-        public void SubCategoriaComando()
-        {
-            //SelecionarControleDeUsuario = new SubCategoria_UC();
-        }
-
-        private ICommand _comandoDaSubCategoria;
-        public ICommand ComandoDaSubCategoria
-        {
-            get
-            {
-                if (_comandoDaSubCategoria == null)
-                {
-                    _comandoDaSubCategoria = new RelayCommand(param => SubCategoriaComando());
-                }
-                return _comandoDaSubCategoria;
-            }
-        }
-
-        #endregion
-
-        #region | Relatórios de Despesas, Poupanças, Receitas e Investimentos |
+        #region |==========| Relatórios de Despesas, Poupanças, Receitas e Investimentos |======================| 
 
         public void RelatorioDeDespesas()
         {
@@ -155,8 +116,7 @@ namespace ManageData.Commands
 
         #endregion
 
-
-        #region | Consultas de Despesas, Finanças, Receitas e Aposentadoria |
+        #region |===========| Consultas de Despesas, Finanças, Receitas e Aposentadoria |=======================|
 
         public void ConsultarDespesas()
         {

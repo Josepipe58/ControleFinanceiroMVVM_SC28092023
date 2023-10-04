@@ -1,9 +1,10 @@
 ﻿#nullable disable
+using FinancialApp.ManageData;
 using System.Windows.Input;
 
-namespace FinancialApp.ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosDeCategoria : Categoria_MD
+    public class CategoriaCommand : Categoria_MD
     {
         #region |=================================| Comandos |==================================================|
 
@@ -54,7 +55,7 @@ namespace FinancialApp.ManageData.Commands
             get
             {
                 _comandoDeAtualizarCategoria ??= new RelayCommand(param =>
-                LimparEAtualizarDados());
+                AtualizarDados());
                 return _comandoDeAtualizarCategoria;
             }
         }

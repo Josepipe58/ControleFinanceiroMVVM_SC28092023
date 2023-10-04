@@ -1,13 +1,14 @@
 ﻿#nullable disable
 using System.Windows.Input;
+using FinancialApp.ManageData;
 
-namespace FinancialApp.ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosDeSubCategoria : SubCategoria_MD
+    public class SubCategoriaCommand : SubCategoria_MD
     {
-        #region |=================================| Comandos |==================================================|
+        #region |===========================| Comandos de SubCategoria |========================================|
 
-        //|=================================| Comando Cadastrar |==================================================|
+        //|================================| Comando Cadastrar |===============================================|
 
         private ICommand _comandoDeCadastrarSubCategoria;
         public ICommand ComandoDeCadastrarSubCategoria
@@ -20,7 +21,7 @@ namespace FinancialApp.ManageData.Commands
             }
         }
 
-        //|=================================| Comando Alterar |====================================================|
+        //|================================| Comando Alterar |=================================================|
 
         private ICommand _comandoDeAlterarSubCategoria;
         public ICommand ComandoDeDeAlterarSubCategoria
@@ -33,7 +34,7 @@ namespace FinancialApp.ManageData.Commands
             }
         }
 
-        //|=================================| Comando Excluir |====================================================|
+        //|================================| Comando Excluir |=================================================|
 
         private ICommand _comandoDeExcluirSubCategoria;
         public ICommand ComandoDeDeExcluirSubCategoria
@@ -46,15 +47,15 @@ namespace FinancialApp.ManageData.Commands
             }
         }
 
-        //|=================================| Comando Atualizar |==================================================|
+        //|================================| Comando Atualizar |===============================================|
 
         private ICommand _comandoDeAtualizarSubCategoria;
         public ICommand ComandoDeDeAtualizarSubCategoria
         {
             get
             {
-                _comandoDeAtualizarSubCategoria ??= new RelayCommand(param =>
-                LimparEAtualizarDados());
+                _comandoDeAtualizarSubCategoria ??= new RelayCommand(param => 
+                AtualizarDados());
                 return _comandoDeAtualizarSubCategoria;
             }
         }

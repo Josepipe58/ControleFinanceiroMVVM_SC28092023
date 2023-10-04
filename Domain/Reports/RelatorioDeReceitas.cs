@@ -12,21 +12,21 @@ namespace Domain.Reports
         {
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Janeiro') as Janeiro," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Fevereiro') as Fevereiro," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Março') as Marco," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Abril') as Abril," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Maio') as Maio," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Junho') as Junho," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Julho') as Julho," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Agôsto') as Agosto," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Setembro') as Setembro," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Outubro') as Outubro," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Novembro') as Novembro," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Dezembro') as Dezembro," +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' ) as TotalAno");
+                "Select(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Janeiro') as Janeiro," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Fevereiro') as Fevereiro," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Março') as Marco," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Abril') as Abril," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Maio') as Maio," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Junho') as Junho," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Julho') as Julho," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Agôsto') as Agosto," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Setembro') as Setembro," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Outubro') as Outubro," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Novembro') as Novembro," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita' And Mes = 'Dezembro') as Dezembro," +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Tipo = 'Receita') as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -55,21 +55,21 @@ namespace Domain.Reports
         {
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "select(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Janeiro') as Janeiro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Fevereiro') as Fevereiro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Março') as Marco," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Abril') as Abril," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Maio') as Maio," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Junho') as Junho," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Julho') as Julho," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Agôsto') as Agosto," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Setembro') as Setembro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Outubro') as Outubro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Novembro') as Novembro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Dezembro') as Dezembro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' ) as TotalAno");
+                "select(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Janeiro') as Janeiro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Fevereiro') as Fevereiro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Março') as Marco," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Abril') as Abril," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Maio') as Maio," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Junho') as Junho," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Julho') as Julho," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Agôsto') as Agosto," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Setembro') as Setembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Outubro') as Outubro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Novembro') as Novembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Dezembro') as Dezembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' ) as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -98,21 +98,21 @@ namespace Domain.Reports
         {
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "select (select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Janeiro') as Janeiro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Fevereiro') as Fevereiro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Março') as Marco," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Abril') as Abril," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Maio') as Maio," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Junho') as Junho," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Julho') as Julho," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Agôsto') as Agosto," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Setembro') as Setembro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Outubro') as Outubro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Novembro') as Novembro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Dezembro') as Dezembro," +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Descontos no Benefício do INSS') as TotalAno");
+                "select (select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Janeiro') as Janeiro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Fevereiro') as Fevereiro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Março') as Marco," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Abril') as Abril," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Maio') as Maio," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Junho') as Junho," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Julho') as Julho," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Agôsto') as Agosto," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Setembro') as Setembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Outubro') as Outubro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Novembro') as Novembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS' And Mes = 'Dezembro') as Dezembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Descontos no Benefício do INSS') as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -141,47 +141,47 @@ namespace Domain.Reports
         {
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "select((select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Saldo da Carteira' And Mes = 'Janeiro') + " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Janeiro')) - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Janeiro') as Janeiro," +
+                "select((select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Saldo da Carteira' And Mes = 'Janeiro') + " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Janeiro')) - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Janeiro') as Janeiro," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Fevereiro') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Fevereiro') as Fevereiro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Fevereiro') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Fevereiro') as Fevereiro," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Março') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Março') as Marco," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Março') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Março') as Marco," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Abril') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Abril') as Abril," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Abril') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Abril') as Abril," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Maio') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Maio') as Maio," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Maio') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Maio') as Maio," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Junho') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Junho') as Junho," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Junho') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Junho') as Junho," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Julho') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Julho') as Julho," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Julho') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Julho') as Julho," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Agôsto') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Agôsto') as Agosto," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Agôsto') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Agôsto') as Agosto," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Setembro') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Setembro') as Setembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Setembro') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Setembro') as Setembro," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Outubro') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Outubro') as Outubro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Outubro') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Outubro') as Outubro," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Novembro') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Novembro') as Novembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Novembro') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Novembro') as Novembro," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda' And Mes = 'Dezembro') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais' And Mes = 'Dezembro') as Dezembro," +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda' And Mes = 'Dezembro') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais' And Mes = 'Dezembro') as Dezembro," +
 
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Renda') - " +
-                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais') as TotalAno");
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And NomeDaCategoria = 'Renda') - " +
+                "(select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais') as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -210,104 +210,104 @@ namespace Domain.Reports
         {
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
                 "Declare @Janeiro decimal (18, 2)" +
-                "Set @Janeiro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Tipo = 'Carteira' And Ano = @Ano And Mes = 'Janeiro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Janeiro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Janeiro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Janeiro') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Janeiro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Janeiro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Janeiro')))" +
+                "Set @Janeiro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Tipo = 'Carteira' And Ano = @ano And Mes = 'Janeiro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Janeiro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Janeiro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Janeiro') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Janeiro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Janeiro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Janeiro')))" +
 
                 "Declare @Fevereiro decimal (18, 2)" +
-                "Set @Fevereiro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Fevereiro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Fevereiro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Fevereiro') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Fevereiro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Fevereiro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Fevereiro')))" +
+                "Set @Fevereiro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Fevereiro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Fevereiro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Fevereiro') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Fevereiro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Fevereiro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Fevereiro')))" +
 
                 "Declare @Marco decimal (18, 2)" +
-                "Set @Marco = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Março') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Março')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Março') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Março')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Março') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Março')))" +
+                "Set @Marco = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Março') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Março')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Março') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Março')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Março') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Março')))" +
 
                 "Declare @Abril decimal (18, 2)" +
-                "Set @Abril = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Abril') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Abril')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Abril') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Abril')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Abril') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Abril')))" +
+                "Set @Abril = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Abril') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Abril')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Abril') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Abril')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Abril') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Abril')))" +
 
                 "Declare @Maio decimal (18, 2)" +
-                "Set @Maio = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Maio') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Maio')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Maio') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Maio')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Maio') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Maio')))" +
+                "Set @Maio = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Maio') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Maio')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Maio') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Maio')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Maio') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Maio')))" +
 
                 "Declare @Junho decimal (18, 2)" +
-                "Set @Junho = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Junho') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Junho')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Junho') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Junho')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Junho') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Junho')))" +
+                "Set @Junho = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Junho') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Junho')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Junho') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Junho')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Junho') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Junho')))" +
 
                 "Declare @Julho decimal (18, 2)" +
-                "Set @Julho = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Julho') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Julho')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Julho') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Julho')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Julho') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Julho')))" +
+                "Set @Julho = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Julho') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Julho')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Julho') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Julho')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Julho') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Julho')))" +
 
                 "Declare @Agosto decimal (18, 2)" +
-                "Set @Agosto = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Agôsto') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Agôsto')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Agôsto') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Agôsto')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Agôsto') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Agôsto'))) " +
+                "Set @Agosto = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Agôsto') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Agôsto')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Agôsto') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Agôsto')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Agôsto') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Agôsto'))) " +
 
                 "Declare @Setembro decimal (18, 2)" +
-                "Set @Setembro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Setembro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Setembro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Setembro') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Setembro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Setembro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Setembro')))" +
+                "Set @Setembro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Setembro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Setembro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Setembro') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Setembro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Setembro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Setembro')))" +
 
                 "Declare @Outubro decimal (18, 2)" +
-                "Set @Outubro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Outubro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Outubro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Outubro') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Outubro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Outubro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Outubro')))" +
+                "Set @Outubro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Outubro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Outubro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Outubro') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Outubro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Outubro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Outubro')))" +
 
                 "Declare @Novembro decimal (18, 2)" +
-                "Set @Novembro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Novembro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Novembro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Novembro') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Novembro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Novembro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Novembro')))" +
+                "Set @Novembro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Novembro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Novembro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Novembro') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Novembro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Novembro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Novembro')))" +
 
                 "Declare @Dezembro decimal (18, 2)" +
-                "Set @Dezembro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Dezembro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano And Mes = 'Dezembro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @Ano And Mes = 'Dezembro') - " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @Ano And Mes = 'Dezembro')) - " +
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano And Mes = 'Dezembro') + " +
-                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano And Mes = 'Dezembro')))" +
+                "Set @Dezembro = (Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Dezembro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @ano And Mes = 'Dezembro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Tipo = 'Despesas Gerais' And Ano = @ano And Mes = 'Dezembro') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Tarifas da Poupança' And Ano = @ano And Mes = 'Dezembro')) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @ano And Mes = 'Dezembro') + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @ano And Mes = 'Dezembro')))" +
 
                 "Select(Select @Janeiro) as Janeiro," +
                 "(Select @Janeiro + @Fevereiro) as Fevereiro," +

@@ -9,136 +9,136 @@ namespace Domain.Reports
     public class RelatorioDePoupanca : Context
     {
         //====================================================| Saldo Total da Poupança, Receitas e Investimentos |=========================================================//
-        public ListaDeValoresMeses SaldoTotalDaPoupancaReceitasEInvestimentos(int selecionarAno)
+        public ListaDeValoresMeses SaldoTotalDaPoupancaReceitasEInvestimentos(int ano)
         {
             try
             {
                 ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
                     "Declare @Janeiro decimal(18, 2)" +
-                    "Set @Janeiro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Saldo Anterior' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Saldo Anterior' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Janeiro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Janeiro'))) " +
+                    "Set @Janeiro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Saldo Anterior' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Saldo Anterior' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Janeiro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Janeiro'))) " +
 
                     "Declare @Fevereiro decimal(18, 2) " +
-                    "Set @Fevereiro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Fevereiro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Fevereiro'))) " +
+                    "Set @Fevereiro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Fevereiro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Fevereiro'))) " +
 
                     "Declare @Marco decimal(18, 2) " +
-                    "Set @Marco = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Março')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Março'))) " +
+                    "Set @Marco = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Março')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Março'))) " +
 
                     "Declare @Abril decimal(18, 2) " +
-                    "Set @Abril = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Abril')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Abril'))) " +
+                    "Set @Abril = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Abril')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Abril'))) " +
 
                     "Declare @Maio decimal(18, 2) " +
-                    "Set @Maio = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Maio')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Maio'))) " +
+                    "Set @Maio = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Maio')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Maio'))) " +
 
                     "Declare @Junho decimal(18, 2) " +
-                    "Set @Junho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Junho')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Junho'))) " +
+                    "Set @Junho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Junho')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Junho'))) " +
 
                     "Declare @Julho decimal(18, 2) " +
-                    "Set @Julho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Julho')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Julho'))) " +
+                    "Set @Julho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Julho')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Julho'))) " +
 
                     "Declare @Agosto decimal(18, 2) " +
-                    "Set @Agosto = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Agôsto')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Agôsto'))) " +
+                    "Set @Agosto = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Agôsto')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Agôsto'))) " +
 
                     "Declare @Setembro decimal(18, 2) " +
-                    "Set @Setembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Setembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Setembro'))) " +
+                    "Set @Setembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Setembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Setembro'))) " +
 
                     "Declare @Outubro decimal(18, 2) " +
-                    "Set @Outubro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Outubro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Outubro'))) " +
+                    "Set @Outubro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Outubro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Outubro'))) " +
 
                     "Declare @Novembro decimal(18, 2) " +
-                    "Set @Novembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito Inicial' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Novembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Novembro'))) " +
+                    "Set @Novembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito Inicial' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Novembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Novembro'))) " +
 
                     "Declare @Dezembro decimal(18, 2) " +
-                    "Set @Dezembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Venda' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Juros de Investimentos' And Mes = 'Dezembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And SubCategoria = 'Saque' And Mes = 'Dezembro'))) " +
+                    "Set @Dezembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Venda' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Juros de Investimentos' And Mes = 'Dezembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And SubCategoria = 'Saque' And Mes = 'Dezembro'))) " +
 
 
                     "Select(Select @Janeiro) as Janeiro," +
@@ -185,86 +185,86 @@ namespace Domain.Reports
             }
         }
         //============================================================| Saldo Total da Poupanca |=======================================================================//
-        public ListaDeValoresMeses SaldoTotalDaPoupanca(int selecionarAno)
+        public ListaDeValoresMeses SaldoTotalDaPoupanca(int ano)
         {
             try
             {
                 ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
                     "Declare @Janeiro decimal (18, 2)" +
-                    "Set @Janeiro = (Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Saldo Anterior' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Janeiro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Janeiro')))" +
+                    "Set @Janeiro = (Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Saldo Anterior' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Janeiro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Janeiro')))" +
 
                     "Declare @Fevereiro decimal(18, 2)" +
-                    "Set @Fevereiro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Fevereiro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Fevereiro')))" +
+                    "Set @Fevereiro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Fevereiro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Fevereiro')))" +
 
                     "Declare @Março decimal(18, 2)" +
-                    "Set @Março = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Março')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Março')))" +
+                    "Set @Março = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Março')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Março')))" +
 
                     "Declare @Abril decimal(18, 2)" +
-                    "Set @Abril = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Abril')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Abril')))" +
+                    "Set @Abril = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Abril')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Abril')))" +
 
                     "Declare @Maio decimal(18, 2) " +
-                    "Set @Maio = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Maio')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Maio')))" +
+                    "Set @Maio = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Maio')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Maio')))" +
 
                     "Declare @Junho decimal(18, 2) " +
-                    "Set @Junho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Junho')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Junho')))" +
+                    "Set @Junho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Junho')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Junho')))" +
 
                     "Declare @Julho decimal(18, 2)" +
-                    "Set @Julho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Julho')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Julho')))" +
+                    "Set @Julho = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Julho')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Julho')))" +
 
                     "Declare @Agôsto decimal(18, 2)" +
-                    "Set @Agôsto = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Agôsto')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Agôsto')))" +
+                    "Set @Agôsto = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Agôsto')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Agôsto')))" +
 
                     "Declare @Setembro decimal(18, 2)" +
-                    "Set @Setembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Setembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Setembro')))" +
+                    "Set @Setembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Setembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Setembro')))" +
 
                     "Declare @Outubro decimal(18, 2)" +
-                    "Set @Outubro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Outubro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Outubro')))" +
+                    "Set @Outubro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Outubro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Outubro')))" +
 
                     "Declare @Novembro decimal(18, 2)" +
-                    "Set @Novembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Novembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Novembro')))" +
+                    "Set @Novembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Novembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Novembro')))" +
 
                     "Declare @Dezembro decimal(18, 2)" +
-                    "Set @Dezembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Categoria = 'Renda' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Depósito' And Mes = 'Dezembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Dezembro')))" +
+                    "Set @Dezembro = (((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Renda' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Depósito' And Mes = 'Dezembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Dezembro')))" +
 
                     "Select(Select @Janeiro) as Janeiro," +
                     "(Select @Janeiro + @Fevereiro) as Fevereiro," +
@@ -310,27 +310,27 @@ namespace Domain.Reports
             }
         }
         //============================================================| Juros da Poupança |========================================================================//
-        public ListaDeValoresMeses JurosDaPoupanca(int selecionarAno)
+        public ListaDeValoresMeses JurosDaPoupanca(int ano)
         {
             try
             {
                 ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Janeiro') as Janeiro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Fevereiro') as Fevereiro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Março') as Marco," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Abril') as Abril," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Maio') as Maio," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Junho') as Junho," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Julho') as Julho," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Agôsto') as Agosto," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Setembro') as Setembro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Outubro') as Outubro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Novembro') as Novembro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança' And Mes = 'Dezembro') as Dezembro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And SubCategoria = 'Juros da Poupança') as TotalAno");
+                    "Select(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Janeiro') as Janeiro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Fevereiro') as Fevereiro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Março') as Marco," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Abril') as Abril," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Maio') as Maio," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Junho') as Junho," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Julho') as Julho," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Agôsto') as Agosto," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Setembro') as Setembro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Outubro') as Outubro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Novembro') as Novembro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança' And Mes = 'Dezembro') as Dezembro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And SubCategoria = 'Juros da Poupança') as TotalAno");
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
@@ -362,104 +362,104 @@ namespace Domain.Reports
             }
         }
         //==============================================| Rendimentos Entre Depositos, Juros e Saques da Poupança |========================================================//
-        public ListaDeValoresMeses RendimentosEntreDepositosJurosESaques(int selecionarAno)
+        public ListaDeValoresMeses RendimentosEntreDepositosJurosESaques(int ano)
         {
             try
             {
                 ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Janeiro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Janeiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Janeiro')) as Janeiro," +
+                    "Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Janeiro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Janeiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Janeiro')) as Janeiro," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Fevereiro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Fevereiro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Fevereiro')) as Fevereiro," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Fevereiro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Fevereiro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Fevereiro')) as Fevereiro," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Março')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Março') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Março')) as Marco," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Março')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Março') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Março')) as Marco," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Abril')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Abril') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Abril')) as Abril," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Abril')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Abril') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Abril')) as Abril," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Maio')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Maio') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Maio')) as Maio," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Maio')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Maio') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Maio')) as Maio," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Junho')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Junho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Junho')) as Junho," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Junho')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Junho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Junho')) as Junho," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Julho')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Julho') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Julho')) as Julho," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Julho')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Julho') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Julho')) as Julho," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Agôsto')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Agôsto') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Agôsto')) as Agosto," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Agôsto')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Agôsto') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Agôsto')) as Agosto," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Setembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Setembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Setembro')) as Setembro," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Setembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Setembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Setembro')) as Setembro," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Outubro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Outubro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Outubro')) as Outubro," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Outubro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Outubro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Outubro')) as Outubro," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Novembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Novembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Novembro')) as Novembro," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Novembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Novembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Novembro')) as Novembro," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito' And Mes = 'Dezembro')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito' And Mes = 'Dezembro') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Dezembro')) as Dezembro," +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito' And Mes = 'Dezembro')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito' And Mes = 'Dezembro') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Dezembro')) as Dezembro," +
 
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Crédito') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Receita') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Crédito')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @selecionarAno And Tipo = 'Débito') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Débito') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa')) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Crédito') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Receita') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Crédito')) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where Ano = @ano And Tipo = 'Débito') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Débito') + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa')) as TotalAno");
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
@@ -491,27 +491,27 @@ namespace Domain.Reports
             }
         }
         //=============================================================| Pagamentos e Transferências |====================================================================//
-        public ListaDeValoresMeses PagamentosETranferencias(int selecionarAno)
+        public ListaDeValoresMeses PagamentosETranferencias(int ano)
         {
             try
             {
                 ListaDeValoresMeses listaDeValoresMeses = new();
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Janeiro') as Janeiro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Fevereiro') as Fevereiro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Março') as Marco," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Abril') as Abril," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Maio') as Maio," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Junho') as Junho," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Julho') as Julho," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Agôsto') as Agosto," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Setembro') as Setembro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Outubro') as Outubro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Novembro') as Novembro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa' And Mes = 'Dezembro') as Dezembro," +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @selecionarAno And Tipo = 'Despesa') as TotalAno");
+                    "Select(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Janeiro') as Janeiro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Fevereiro') as Fevereiro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Março') as Marco," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Abril') as Abril," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Maio') as Maio," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Junho') as Junho," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Julho') as Julho," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Agôsto') as Agosto," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Setembro') as Setembro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Outubro') as Outubro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Novembro') as Novembro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa' And Mes = 'Dezembro') as Dezembro," +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa') as TotalAno");
 
                 foreach (DataRow dataRow in dataTable.Rows)
                 {

@@ -3,9 +3,10 @@ using System.Windows;
 
 namespace Domain.Messages
 {
-    public class GerenciarMensagens
+    public static class GerenciarMensagens
     {
-        #region |====================================| Mensagens - CRUD |======================================|
+              
+        #region |====================================| Mensagens de CRUD com Sucesso |==================================|
 
         public static void SucessoAoCadastrar(int id)
         {
@@ -31,33 +32,39 @@ namespace Domain.Messages
             $"\nNúmero do Código: {id}", "Cuidado! Atenção!",
             MessageBoxButton.YesNo, MessageBoxImage.Information);
         }
+        #endregion
 
-        public static void SelecionarRegistroDeExcluir()
+        #region |====================================| Mensagens de CRUD com Erros |====================================|
+        public static void ErroAoCadastrar()
         {
-            MessageBox.Show("Atenção! Existe um ou mais de um campo, que está vazio.\n Corrija esse erro para continuar.",
-                "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Atenção!\nO campo Id tem que ser igual a 0 ou vazio.\nOutra opção é clicar no botão Alterar." +
+                    "\nCorrija esses erros, para continuar.", "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public static void ErroAoAlterarOuExcluir()
+        {
+            MessageBox.Show("Atenção!\nO campo Id tem que ser maior do que 0.\nOutra opção é clicar no botão Cadastrar." +
+                    "\nCorrija esses erros, para continuar.", "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public static void PreencherCampoVazio()
         {
-            MessageBox.Show("Atenção!\nOcorreu um erro, verifique as seguintes opções:\nSe o campo do Id está vazio ou preenchido.\n" +
-                   "Se estiver vazio, clique no botão de Cadastrar.\nSe estiver preenchido, clique no botão de Alterar ou Excluir.\n" +
-                   "Ou ainda, verifique se existe algum outro campo, além do campo Id, que esteja vazio.\nCorrija esses erros, para continuar.",
-                   "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Atenção! Existe um ou mais de um campo, que está vazio.\n Corrija esse erro para continuar.",
+                "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
+              
+        #region |================================| Erros do Try Catch(Exception) |======================================|
 
-        #region |====================================| Erros do Try Catch(Exception) e Nome de Métodos |====================================|
-
-        public static string ErroDeExcecaoENomeDoMetodo(Exception erro, string nomeDoMetodo)
+        public static string ErroDeExcecaoENomeDoMetodo(Exception erro, string _nomeDoMetodo)
         {
-            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: {nomeDoMetodo}." +
+            return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: {_nomeDoMetodo}." +
                     $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error).ToString();
         }
 
         #endregion
-
-        #region |====================================| Mensagem de Erro de Switch Case |======================================|
+              
+        #region |=================================| Mensagem de Erro de Switch Case |===================================|
 
         public static void MensagemDeErroDeSwitchCase()
         {

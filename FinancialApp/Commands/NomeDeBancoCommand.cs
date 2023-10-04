@@ -1,12 +1,13 @@
 ﻿#nullable disable
+using FinancialApp.ManageData;
 using System.Windows.Input;
 
-namespace FinancialApp.ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosDeNomeDeBanco : NomeDoBancoDeDados_MD
+    public class NomeDeBancoCommand : NomeDoBancoDeDados_MD
     {
-        #region |=================================| Comandos |==================================================|
-        //|=================================| Comando Cadastrar |==================================================|
+        #region |===========================| Comandos do Nome de Bancos |======================================|
+        //|=================================| Comando Cadastrar |===============================================|
 
         private ICommand _comandoDeCadastrarNomeDeBanco;
         public ICommand ComandoDeCadastrarNomeDeBanco
@@ -19,7 +20,7 @@ namespace FinancialApp.ManageData.Commands
             }
         }
 
-        //|=================================| Comando Alterar |====================================================|
+        //|================================| Comando Alterar |=================================================|
 
         private ICommand _comandoDeAlterarNomeDeBanco;
         public ICommand ComandoDeDeAlterarNomeDeBanco
@@ -32,7 +33,7 @@ namespace FinancialApp.ManageData.Commands
             }
         }
 
-        //|=================================| Comando Excluir |====================================================|
+        //|================================| Comando Excluir |=================================================|
 
         private ICommand _comandoDeExcluirNomeDeBanco;
         public ICommand ComandoDeDeExcluirNomeDeBanco
@@ -45,7 +46,7 @@ namespace FinancialApp.ManageData.Commands
             }
         }
 
-        //|=================================| Comando Atualizar |==================================================|
+        //|================================| Comando Atualizar |===============================================|
 
         private ICommand _comandoDeAtualizarNomeDeBanco;
         public ICommand ComandoDeDeAtualizarNomeDeBanco

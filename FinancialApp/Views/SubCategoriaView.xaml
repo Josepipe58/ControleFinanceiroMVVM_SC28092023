@@ -58,21 +58,26 @@
 
                             <!--| TextBoxes) |-->
                             <TextBox x:Name="TxtIdCategoria" FontSize="16" Height="30" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}"
-                                 Margin="195,40,0,0" IsReadOnly="True" Text="{Binding SubCategoria.CategoriaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Margin="195,40,0,0" Text="{Binding SubCategoria.CategoriaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsReadOnly="True"/>
 
                             <TextBox x:Name="TxtIdSubCategoria" FontSize="16" Height="30" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}"
-                                 Margin="195,100,0,0" IsReadOnly="True" Text="{Binding SubCategoria.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Margin="195,100,0,0" Text="{Binding SubCategoria.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     IsReadOnly="True"/>
 
                             <TextBox x:Name="TxtSubCategoria" FontSize="16" Height="30" Width="300" Style="{DynamicResource TxtBrancoEBordaAzul}"
-                                 Margin="485,100,0,0" Text="{Binding SubCategoria.NomeDaSubCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding SubCategoria.NomeDaSubCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="485,100,0,0"/>
 
-                            <!--| ComboBox de Categorias ItemsSource="{Binding ListaDeFiltrosDeControle}" |-->
+                            <!--| ComboBox de Categorias |-->
                             <ComboBox Name="CbxNomeDeFiltros" Height="40" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="355,35,0,0" 
-                                      DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" Text="{Binding SubCategoria.NomeDoFiltro}"
-                                      SelectionChanged="CbxNomeDeFiltros_SelectionChanged"/>
+                                      DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" SelectionChanged="CbxNomeDeFiltros_SelectionChanged"
+                                      Text="{Binding SubCategoria.NomeDoFiltro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedIndex="0"/>
 
-                            <ComboBox Name="CbxCategoria" Height="40" Width="310" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="720,35,0,0"                                     
-                                      Text="{Binding SubCategoria.NomeDaCategoria}"/>
+                            <ComboBox Name="CbxCategoria" Height="40" Width="310" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="720,35,0,0"                                      
+                                      Text="{Binding SubCategoria.NomeDaCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValue="{Binding SubCategoria.CategoriaId}" SelectedIndex="0"/>
 
                             <!--| Pesquisar SubCategorias|-->
                             <Grid Margin="800,70,0,0" Height="80" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">

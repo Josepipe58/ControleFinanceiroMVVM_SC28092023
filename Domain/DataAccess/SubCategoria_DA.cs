@@ -8,18 +8,18 @@ namespace Domain.DataAccess
 {
     public class SubCategoria_DA : Context
     {
-        public string consulta = string.Empty;
+        public string _consulta = string.Empty;
 
         public string Cadastrar(SubCategoria cadastrar)
         {
             LimparParametros();
-            AdicionarParametros("@Id", cadastrar.Id + 1);
+            AdicionarParametros("@Id", cadastrar.Id +1);
             AdicionarParametros("@NomeDaSubCategoria", cadastrar.NomeDaSubCategoria);
             AdicionarParametros("@CategoriaId", cadastrar.CategoriaId);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Select @Id = Id +1 From SubCategorias; Insert Into SubCategorias (Id, NomeDaSubCategoria, CategoriaId) " +
                 "Values (@Id, @NomeDaSubCategoria, @CategoriaId); Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Alterar(SubCategoria alterar)
@@ -28,19 +28,19 @@ namespace Domain.DataAccess
             AdicionarParametros("@Id", alterar.Id);
             AdicionarParametros("@NomeDaSubCategoria", alterar.NomeDaSubCategoria);
             AdicionarParametros("@CategoriaId", alterar.CategoriaId);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Update SubCategorias Set NomeDaSubCategoria = @NomeDaSubCategoria, CategoriaId = @CategoriaId " +
                 "Where Id = @Id; Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Excluir(SubCategoria excluir)
         {
             LimparParametros();
             AdicionarParametros("@Id", excluir.Id);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Delete From SubCategorias Where Id = @Id; Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         //Preencher DataGrid de SubCategorias.

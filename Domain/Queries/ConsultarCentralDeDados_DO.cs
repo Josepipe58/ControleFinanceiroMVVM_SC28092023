@@ -98,29 +98,41 @@ namespace Domain.Queries
             AdicionarParametros("@NomeDaCategoria", nomeDaCategoria);
             AdicionarParametros("@NomeDaSubCategoria", nomeDaSubCategoria);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-            "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Janeiro')) as Janeiro," +
+            "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Janeiro')) as Janeiro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Fevereiro')) as Fevereiro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Fevereiro')) as Fevereiro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Março')) as Marco," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Março')) as Marco," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Abril')) as Abril," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Abril')) as Abril," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Maio')) as Maio," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Maio')) as Maio," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Junho')) as Junho," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Junho')) as Junho," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Julho')) as Julho," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Julho')) as Julho," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Agôsto')) as Agosto," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Agôsto')) as Agosto," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Setembro')) as Setembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Setembro')) as Setembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Outubro')) as Outubro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Outubro')) as Outubro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Novembro')) as Novembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Novembro')) as Novembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Mes = 'Dezembro')) as Dezembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Mes = 'Dezembro')) as Dezembro," +
 
             "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria)) as TotalAno");
 
@@ -347,116 +359,116 @@ namespace Domain.Queries
             AdicionarParametros("@NomeDaCategoria", nomeDaCategoria);
             AdicionarParametros("@NomeDaSubCategoria", nomeDaSubCategoria);
             AdicionarParametros("@Mes", mes);
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = new();
             switch (mes)
             {
                 case "Janeiro":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Janeiro, " +
+                    "And Mes = @Mes And Ano = @ano)) as Janeiro, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Fevereiro":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Fevereiro, " +
+                    "And Mes = @Mes And Ano = @ano)) as Fevereiro, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Março":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Marco, " +
+                    "And Mes = @Mes And Ano = @ano)) as Marco, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Abril":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Abril, " +
+                    "And Mes = @Mes And Ano = @ano)) as Abril, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Maio":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Maio, " +
+                    "And Mes = @Mes And Ano = @ano)) as Maio, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Junho":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Junho, " +
+                    "And Mes = @Mes And Ano = @ano)) as Junho, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Julho":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Julho, " +
+                    "And Mes = @Mes And Ano = @ano)) as Julho, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Agôsto":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Agosto, " +
+                    "And Mes = @Mes And Ano = @ano)) as Agosto, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Setembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Setembro, " +
+                    "And Mes = @Mes And Ano = @ano)) as Setembro, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Outubro":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Outubro, " +
+                    "And Mes = @Mes And Ano = @ano)) as Outubro, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Novembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Novembro, " +
+                    "And Mes = @Mes And Ano = @ano)) as Novembro, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Dezembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
                     "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as Dezembro, " +
+                    "And Mes = @Mes And Ano = @ano)) as Dezembro, " +
 
                     "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
-                    "And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
                 default:
                     break;
@@ -540,45 +552,46 @@ namespace Domain.Queries
             LimparParametros();
             AdicionarParametros("@NomeDaCategoria", nomeDaCategoria);
             AdicionarParametros("@NomeDaSubCategoria", nomeDaSubCategoria);
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-            "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Janeiro')) as Janeiro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Fevereiro')) as Fevereiro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Março')) as Marco," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
              "And Mes = 'Abril')) as Abril," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Maio')) as Maio," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
              "And Mes = 'Junho')) as Junho," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Julho')) as Julho," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Agôsto')) as Agosto," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
              "And Mes = 'Setembro')) as Setembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Outubro')) as Outubro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Novembro')) as Novembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano " +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @ano " +
             "And Mes = 'Dezembro')) as Dezembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria And Ano = @Ano)) as TotalAno");
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And NomeDaSubCategoria = @NomeDaSubCategoria " +
+            "And Ano = @ano)) as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -776,33 +789,33 @@ namespace Domain.Queries
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
             AdicionarParametros("@NomeDaCategoria", nomeDaCategoria);
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-            "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Janeiro')) as Janeiro," +
+            "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Janeiro')) as Janeiro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Fevereiro')) as Fevereiro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Fevereiro')) as Fevereiro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Março')) as Marco," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Março')) as Marco," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Abril')) as Abril," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Abril')) as Abril," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Maio')) as Maio," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Maio')) as Maio," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Junho')) as Junho," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Junho')) as Junho," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Julho')) as Julho," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Julho')) as Julho," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Agôsto')) as Agosto," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Agôsto')) as Agosto," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Setembro')) as Setembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Setembro')) as Setembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Outubro')) as Outubro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Outubro')) as Outubro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Novembro')) as Novembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Novembro')) as Novembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano And Mes = 'Dezembro')) as Dezembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano And Mes = 'Dezembro')) as Dezembro," +
 
-            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @Ano)) as TotalAno");
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Ano = @ano)) as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -833,92 +846,92 @@ namespace Domain.Queries
             LimparParametros();
             AdicionarParametros("@NomeDaCategoria", nomeDaCategoria);
             AdicionarParametros("@Mes", mes);
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = new();
             switch (mes)
             {
                 case "Janeiro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Janeiro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Janeiro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Fevereiro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Fevereiro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Fevereiro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Março":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Marco, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Marco, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Abril":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Abril, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Abril, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Maio":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Maio, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Maio, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Junho":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Junho, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Junho, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Julho":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Julho, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Julho, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Agôsto":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And And Mes = @Mes And Ano = @Ano)) as Agosto, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And And Mes = @Mes And Ano = @ano)) as Agosto, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Setembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Setembro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Setembro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Outubro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Outubro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Outubro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Novembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Novembro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Novembro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Dezembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as Dezembro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as Dezembro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = @NomeDaCategoria And Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
                 default:
                     break;
@@ -1001,92 +1014,92 @@ namespace Domain.Queries
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
             AdicionarParametros("@Mes", mes);
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = new();
             switch (mes)
             {
                 case "Janeiro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Janeiro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Janeiro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Fevereiro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Fevereiro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Fevereiro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Março":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Marco, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Marco, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Abril":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Abril, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Abril, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Maio":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Maio, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Maio, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Junho":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Junho, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Junho, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Julho":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Julho, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Julho, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Agôsto":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Agosto, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Agosto, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Setembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Setembro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Setembro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Outubro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Outubro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Outubro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Novembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Novembro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Novembro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
 
                 case "Dezembro":
                     dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as Dezembro, " +
+                    "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as Dezembro, " +
 
-                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @Ano)) as TotalAno");
+                    "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Mes = @Mes And Ano = @ano)) as TotalAno");
                     break;
                 default:
                     break;
@@ -1335,33 +1348,33 @@ namespace Domain.Queries
         {
             ListaDeValoresMeses listaDeValoresMeses = new();
             LimparParametros();
-            AdicionarParametros("@Ano", ano);
+            AdicionarParametros("@ano", ano);
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Janeiro' And Tipo = 'Despesas Gerais')) as Janeiro," +
+                "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Janeiro' And Tipo = 'Despesas Gerais')) as Janeiro," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Fevereiro' And Tipo = 'Despesas Gerais')) as Fevereiro," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Fevereiro' And Tipo = 'Despesas Gerais')) as Fevereiro," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Março' And Tipo = 'Despesas Gerais')) as Marco," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Março' And Tipo = 'Despesas Gerais')) as Marco," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Abril' And Tipo = 'Despesas Gerais')) as Abril," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Abril' And Tipo = 'Despesas Gerais')) as Abril," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Maio' And Tipo = 'Despesas Gerais')) as Maio," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Maio' And Tipo = 'Despesas Gerais')) as Maio," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Junho' And Tipo = 'Despesas Gerais')) as Junho," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Junho' And Tipo = 'Despesas Gerais')) as Junho," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Julho' And Tipo = 'Despesas Gerais')) as Julho," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Julho' And Tipo = 'Despesas Gerais')) as Julho," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Agôsto' And Tipo = 'Despesas Gerais')) as [Agosto]," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Agôsto' And Tipo = 'Despesas Gerais')) as [Agosto]," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Setembro' And Tipo = 'Despesas Gerais')) as Setembro," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Setembro' And Tipo = 'Despesas Gerais')) as Setembro," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Outubro' And Tipo = 'Despesas Gerais')) as Outubro," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Outubro' And Tipo = 'Despesas Gerais')) as Outubro," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Novembro' And Tipo = 'Despesas Gerais')) as Novembro," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Novembro' And Tipo = 'Despesas Gerais')) as Novembro," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Dezembro' And Tipo = 'Despesas Gerais')) as Dezembro," +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Mes = 'Dezembro' And Tipo = 'Despesas Gerais')) as Dezembro," +
 
-                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais')) as TotalAno");
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @ano And Tipo = 'Despesas Gerais')) as TotalAno");
 
             foreach (DataRow dataRow in dataTable.Rows)
             {

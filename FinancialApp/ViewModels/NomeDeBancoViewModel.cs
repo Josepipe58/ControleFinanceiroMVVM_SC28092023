@@ -1,18 +1,18 @@
 ﻿using Domain.DataAccess;
-using FinancialApp.ManageData.Commands;
+using FinancialApp.Commands;
 
 namespace FinancialApp.ViewModels
 {
-    public class NomeDeBancoViewModel : ComandosDeNomeDeBanco
+    public class NomeDeBancoViewModel : NomeDeBancoCommand
     {
-        public NomeDoBancoDeDados_DA nomeDeBanco_DA;
+        public NomeDoBancoDeDados_DA _nomeDeBanco_DA;
 
         public NomeDeBancoViewModel()
         {
             NomeDeBanco = new();
-            nomeDeBanco_DA = new();
+            _nomeDeBanco_DA = new();
 
-            ListaDeNomeDeBancos = nomeDeBanco_DA.ConsultarNomeDeBancos();
+            ListaDeNomeDeBancos = _nomeDeBanco_DA.ConsultarNomeDeBancos();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Domain.DataAccess
 {
     public class Aposentadoria_DA : Context
     {
-        public string consulta = string.Empty;
+        public string _consulta = string.Empty;
 
         public string Cadastrar(Aposentadoria cadastrar)
         {
@@ -21,11 +21,11 @@ namespace Domain.DataAccess
             AdicionarParametros("@valorDoAumento", cadastrar.ValorDoAumento);
             AdicionarParametros("@atualizarValor", cadastrar.AtualizarValor);
             AdicionarParametros("@saldoAtual", cadastrar.SaldoAtual);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
             "Select @Id = Id +1 From Aposentadorias; Insert Into Aposentadorias (Id, Data, AnoDoIndice, AnoDoReajuste, IndiceDoAumento, ValorDoAumento, AtualizarValor, " +
             "SaldoAtual) Values (@Id, @data, @anoDoIndice, @anoDoReajuste, @indiceDoAumento, @valorDoAumento,  @atualizarValor, @saldoAtual); " +
             "Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Alterar(Aposentadoria alterar)
@@ -39,20 +39,20 @@ namespace Domain.DataAccess
             AdicionarParametros("@valorDoAumento", alterar.ValorDoAumento);
             AdicionarParametros("@atualizarValor", alterar.AtualizarValor);
             AdicionarParametros("@saldoAtual", alterar.SaldoAtual);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Update Aposentadorias Set Data = @data, AnoDoIndice = @anoDoIndice, AnoDoReajuste = @anoDoReajuste, IndiceDoAumento = @indiceDoAumento," +
                 "ValorDoAumento = @valorDoAumento, AtualizarValor = @atualizarValor, SaldoAtual = @saldoAtual Where Id = @id;" +
                 "Select @id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Excluir(Aposentadoria excluir)
         {
             LimparParametros();
             AdicionarParametros("@id", excluir.Id);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Delete From Aposentadorias Where Id = @id; Select @id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public ListaDeAposentadoria ConsultarAposentadoria()

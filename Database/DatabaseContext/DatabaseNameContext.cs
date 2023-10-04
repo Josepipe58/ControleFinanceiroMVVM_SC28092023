@@ -8,7 +8,7 @@ namespace Database.DatabaseContext
 {
     public class DatabaseNameContext
     {
-        private readonly SqlParameterCollection sqlParameterCollection = new SqlCommand().Parameters;
+        private readonly SqlParameterCollection _sqlParameterCollection = new SqlCommand().Parameters;
 
         public static SqlConnection CriarConexaoNomeDeBancos()
         {
@@ -37,12 +37,12 @@ namespace Database.DatabaseContext
 
         public void LimparParametros()
         {
-            sqlParameterCollection.Clear();
+            _sqlParameterCollection.Clear();
         }
 
         public void AdicionarParametros(string nomeParametro, object valorParametro)
         {
-            sqlParameterCollection.Add(new SqlParameter(nomeParametro, valorParametro));
+            _sqlParameterCollection.Add(new SqlParameter(nomeParametro, valorParametro));
         }
 
         //Persistência - Inserir - Alterar - Excluir
@@ -58,7 +58,7 @@ namespace Database.DatabaseContext
                 sqlCommand.CommandText = consultaDeTexto;
 
                 //Adicionar os parâmetros no comando
-                foreach (SqlParameter sqlParameter in sqlParameterCollection)
+                foreach (SqlParameter sqlParameter in _sqlParameterCollection)
                 {
                     sqlCommand.Parameters.Add(new SqlParameter(sqlParameter.ParameterName, sqlParameter.Value));
                 }
@@ -85,7 +85,7 @@ namespace Database.DatabaseContext
                 sqlCommand.CommandText = consultaDeTexto;
 
                 //Adicionar os parâmetros no comando
-                foreach (SqlParameter sqlParameter in sqlParameterCollection)
+                foreach (SqlParameter sqlParameter in _sqlParameterCollection)
                 {
                     sqlCommand.Parameters.Add(new SqlParameter(sqlParameter.ParameterName, sqlParameter.Value));
                 }

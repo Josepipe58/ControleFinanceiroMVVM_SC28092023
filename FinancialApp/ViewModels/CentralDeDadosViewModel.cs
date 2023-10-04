@@ -2,17 +2,17 @@
 using Domain.DataAccess;
 using Domain.Lists;
 using Domain.Reports;
-using FinancialApp.ManageData.Commands;
+using FinancialApp.Commands;
 using System.Collections.Generic;
 
 namespace FinancialApp.ViewModels
 {
-    public class CentralDeDadosViewModel : ComandosDaCentralDeDados
+    public class CentralDeDadosViewModel : CentralDeDadosCommand
     {
         #region |===============================| Propriedades |======================================================|
 
-        public CentralDeDados_DA centralDeDados_DA;
-        public Ano_DA ano_DA;
+        public CentralDeDados_DA _centralDeDados_DA;
+        public Ano_DA _ano_DA;
 
         //Lista de Tipos
         public List<string> ListaTipoDeDespesa { get; set; }
@@ -26,17 +26,17 @@ namespace FinancialApp.ViewModels
 
         public CentralDeDadosViewModel()
         {
-            //Não deletar essa instância porque está sendo usada na DespesaView.
-            CentralDeDados = new();
+            //Não deletar essa instância porque está sendo usada na Central de Dados.
+            CentralDeDados = new CentralDeDados();
 
             //Carregar ComboBox Anos
-            ano_DA = new();
+            _ano_DA = new();
             ListaDeAnos = new ListaDeAnos();
-            ListaDeAnos = ano_DA.ConsultarAnos();
+            ListaDeAnos = _ano_DA.ConsultarAnos();
 
             //DataGrid Dados           
-            centralDeDados_DA = new();
-            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(ListaDeAnos[0].AnoDoCadastro);
+            _centralDeDados_DA = new();
+            ListaDaCentralDeDados = _centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(ListaDeAnos[0].AnoDoCadastro);
 
 
             //DataGrid Valores

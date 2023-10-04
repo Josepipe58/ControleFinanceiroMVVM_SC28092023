@@ -9,7 +9,7 @@ namespace FinancialApp.Views
     {
         public CategoriaView()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void DtgDados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -24,6 +24,7 @@ namespace FinancialApp.Views
 
                         TxtId.Text = categoriaDeDespesa.Id.ToString();
                         TxtCategoria.Text = categoriaDeDespesa.NomeDaCategoria;
+                        CbxNomeDeFiltros.Text = categoriaDeDespesa.NomeDoFiltro;
                         TxtCategoria.Focus();
                     }
                 }

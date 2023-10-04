@@ -8,7 +8,7 @@ namespace Domain.DataAccess
 {
     public class Categoria_DA : Context
     {
-        public string consulta = string.Empty;
+        public string _consulta = string.Empty;
 
         public string Cadastrar(Categoria cadastrar)
         {
@@ -16,10 +16,10 @@ namespace Domain.DataAccess
             AdicionarParametros("@Id", cadastrar.Id + 1);
             AdicionarParametros("@NomeDaCategoria", cadastrar.NomeDaCategoria);
             AdicionarParametros("@FiltroDeControleId", cadastrar.FiltroDeControleId);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
             "Select @Id = Id + 1 From Categorias; Insert Into Categorias (Id, NomeDaCategoria, FiltroDeControleId) " +
                 "Values (@Id, @NomeDaCategoria, @FiltroDeControleId); Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Alterar(Categoria alterar)
@@ -28,19 +28,19 @@ namespace Domain.DataAccess
             AdicionarParametros("@Id", alterar.Id);
             AdicionarParametros("@NomeDaCategoria", alterar.NomeDaCategoria);
             AdicionarParametros("@FiltroDeControleId", alterar.FiltroDeControleId);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Update Categorias Set NomeDaCategoria = @NomeDaCategoria, FiltroDeControleId = @FiltroDeControleId " +
                 "Where Id = @Id; Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Excluir(Categoria excluir)
         {
             LimparParametros();
             AdicionarParametros("@Id", excluir.Id);
-            consulta = ExecutarManipulacaoDeDados(CommandType.Text,
+            _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
                 "Delete From Categorias Where Id = @Id; Select @Id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         //Preencher DataGrid e ComboBox de Categorias.

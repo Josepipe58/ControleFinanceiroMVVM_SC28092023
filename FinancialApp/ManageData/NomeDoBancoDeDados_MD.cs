@@ -2,7 +2,7 @@
 using Database.Models;
 using Domain.DataAccess;
 using Domain.Messages;
-using FinancialApp.ManageData.DataValidation;
+using FinancialApp.DataValidation;
 using System;
 using System.Windows;
 
@@ -12,7 +12,7 @@ namespace FinancialApp.ManageData
     {
         #region |=================================| Propriedades |==================================================| 
 
-        public string nomeDoMetodo = string.Empty;
+        public string _nomeDoMetodo = string.Empty;
 
         //Carregar DataGrid Dados.
         private ListaDeNomeDeBancos _listaDeNomeDeBancos;
@@ -56,8 +56,8 @@ namespace FinancialApp.ManageData
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Cadastrar";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Cadastrar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
@@ -76,8 +76,8 @@ namespace FinancialApp.ManageData
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Alterar";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Alterar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
@@ -102,8 +102,8 @@ namespace FinancialApp.ManageData
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Excluir";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Excluir";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }

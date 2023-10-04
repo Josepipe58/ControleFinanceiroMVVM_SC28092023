@@ -2,7 +2,7 @@
 using Database.Models;
 using Domain.DataAccess;
 using Domain.Messages;
-using FinancialApp.ManageData.DataValidation;
+using FinancialApp.DataValidation;
 using System;
 using System.Windows;
 
@@ -12,7 +12,22 @@ namespace FinancialApp.ManageData
     {
         #region |=================================| Propriedades |==================================================| 
         
-        public string nomeDoMetodo = string.Empty;
+        public string _nomeDoMetodo = string.Empty;
+
+        //Carregar ComboBox do Filtro de Controle.
+        private ListaDeFiltrosDeControle _listaDeFiltrosDeControle;
+        public ListaDeFiltrosDeControle ListaDeFiltrosDeControle
+        {
+            get { return _listaDeFiltrosDeControle; }
+            set
+            {
+                if (_listaDeFiltrosDeControle != value)
+                {
+                    _listaDeFiltrosDeControle = value;
+                    OnPropertyChanged(nameof(ListaDeFiltrosDeControle));
+                }
+            }
+        }
 
         //Carregar DataGrid Dados.
         private ListaDeCategorias _listaDeCategorias;
@@ -33,7 +48,8 @@ namespace FinancialApp.ManageData
         #region |=================================| Construtor |====================================================|
 
         public Categoria_MD()
-        {            
+        {
+            ListaDeFiltrosDeControle = new ListaDeFiltrosDeControle();
             ListaDeCategorias = new ListaDeCategorias();
         }
         #endregion
@@ -48,16 +64,24 @@ namespace FinancialApp.ManageData
             {
                 try
                 {
-                    Categoria_DA categoria_DA = new();
+                    Categoria_DA categoria_DA = new();                    
+                    categoria.FiltroDeControleId = Categoria.FiltroDeControleId +1;
                     string retorno = categoria_DA.Cadastrar(categoria);
-                    int codigoDeRetorno = Convert.ToInt32(retorno);
+
+                    //Ao Cadastrar o FiltroDeControleId, o ComboBox muda para o próximo item por causa do +1.
+                    //E esse if faz voltar o nome do item que foi cadastrado.
+                    if (categoria.FiltroDeControleId != 0)
+                        categoria.FiltroDeControleId = Categoria.FiltroDeControleId - 1;
+
+                    int codigoDeRetorno = Convert.ToInt32(retorno);                    
                     GerenciarMensagens.SucessoAoCadastrar(codigoDeRetorno);
-                    LimparEAtualizarDados();
+                    LimparDados();
+                   
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Cadastrar";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Cadastrar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
@@ -69,15 +93,22 @@ namespace FinancialApp.ManageData
             {
                 try
                 {
-                    Categoria_DA categoria_DA = new();
+                    Categoria_DA categoria_DA = new();                    
+                    categoria.FiltroDeControleId = Categoria.FiltroDeControleId + 1;
+
                     categoria_DA.Alterar(categoria);
+                    //Ao Alterar o FiltroDeControleId, o ComboBox muda para o próximo item por causa do +1.
+                    //E esse if faz voltar o nome do item que foi alterado. 
+                    if (categoria.FiltroDeControleId != 0)
+                        categoria.FiltroDeControleId = Categoria.FiltroDeControleId - 1;
+
                     GerenciarMensagens.SucessoAoAlterar(categoria.Id);
-                    LimparEAtualizarDados();
+                    LimparDados();
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Alterar";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Alterar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
@@ -90,7 +121,7 @@ namespace FinancialApp.ManageData
                 MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(categoria.Id);
                 if (resultado == MessageBoxResult.No)
                 {
-                    LimparEAtualizarDados();
+                    LimparDados();
                     return;
                 }
                 try
@@ -98,22 +129,35 @@ namespace FinancialApp.ManageData
                     Categoria_DA categoria_DA = new();
                     categoria_DA.Excluir(categoria);
                     GerenciarMensagens.SucessoAoExcluir(categoria.Id);
-                    LimparEAtualizarDados();
+                    LimparDados();
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Excluir";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Excluir";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
         }
-        //|===================================| Limpar e Atualizar Dados |================================|
-        public void LimparEAtualizarDados()
+
+        //|=================================| Limpar Dados |===========================|            
+
+        public void LimparDados()
         {
+            //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
             Categoria_DA categoria_DA = new();
             Categoria.Id = 0;
             Categoria.NomeDaCategoria = "";
+            ListaDeCategorias = categoria_DA.ConsultarCategorias();
+        }
+        //|===================================| Limpar e Atualizar Dados |================================|
+        public void AtualizarDados()//Esse método será executo por um comando na classe: CategoriaCommand.
+        {
+            Categoria_DA categoria_DA = new(); 
+
+            Categoria.Id = 0;
+            Categoria.NomeDaCategoria = "";
+            Categoria.NomeDoFiltro = null;            
             ListaDeCategorias = categoria_DA.ConsultarCategorias();
         }
         #endregion

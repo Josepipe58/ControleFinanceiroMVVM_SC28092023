@@ -10,17 +10,19 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosDeNavegacao : ComandosGerais
+    public class NavegacaoCommand : ComandosGerais
     {
-        public string nomeDoMetodo = string.Empty;
+
+        #region |============================| Comandos de Navegação |==========================================|
+        public string _nomeDoMetodo = string.Empty;
 
         private CollectionViewSource MenuItemsCollection { get; set; }
 
         public ICollectionView SourceCollection => MenuItemsCollection.View;
 
-        public ComandosDeNavegacao()
+        public NavegacaoCommand()
         {
             ObservableCollection<ListaDeItemsDoMenu> menuItems = new()
             {
@@ -41,7 +43,7 @@ namespace ManageData.Commands
 
         private void ExibirPaginaInicial()
         {
-            //SelecionarControleDeUsuario = new PaginaInicial();
+            SelecionarControleDeUsuario = new HomePage();
         }
 
         private ICommand _comandoVoltarPaginaInicial;
@@ -74,38 +76,38 @@ namespace ManageData.Commands
                 switch (SelecionarControleDeUsuario = parameter)
                 {
                     case "Página Inicial":
-                        //SelecionarControleDeUsuario = new PaginaInicial();
+                        SelecionarControleDeUsuario = new HomePage();
                         break;
                     case "Gerenciar Dados":
-                        //SelecionarControleDeUsuario = new CentralDeDados_UC();
+                        SelecionarControleDeUsuario = new CentralDeDadosView();
                         break;
                     case "Consultas e Relatórios":
-                        //SelecionarControleDeUsuario = new MenuDeConsultasERelatorios_UC();
+                        SelecionarControleDeUsuario = new MenuDeConsultasERelatorios();
                         break;
                     case "Aposentadoria":
-                        //SelecionarControleDeUsuario = new Aposentadoria_UC();
+                        SelecionarControleDeUsuario = new AposentadoriaView();
                         break;
                     case "Categorias":
-                        //SelecionarControleDeUsuario = new Categoria_UC();
+                        SelecionarControleDeUsuario = new CategoriaView();
                         break;
                     case "SubCategorias":
-                        //SelecionarControleDeUsuario = new SubCategoria_UC();
+                        SelecionarControleDeUsuario = new SubCategoriaView();
                         break;
                     case "Nome de Bancos de Dados":
-                        //SelecionarControleDeUsuario = new NomeDeBancoDeDados();
+                        SelecionarControleDeUsuario = new NomeDeBancoView();
                         break;
                     case "Cadastrar Anos":
-                        //SelecionarControleDeUsuario = new Ano_UC();
+                        SelecionarControleDeUsuario = new AnoView();
                         break;
                     default:
-                        //SelecionarControleDeUsuario = new PaginaInicial();
+                        SelecionarControleDeUsuario = new HomePage();
                         break;
                 }
             }
             catch (Exception erro)
             {
-                nomeDoMetodo = "MenuDoMenuInicial";
-                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                _nomeDoMetodo = "MenuDoMenuInicial";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                 return;
             }
         }
@@ -139,5 +141,6 @@ namespace ManageData.Commands
                 return _comandoSairDoAplicativo;
             }
         }
+        #endregion
     }
 }

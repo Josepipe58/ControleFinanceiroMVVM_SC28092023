@@ -4,7 +4,7 @@ using Domain.DataAccess;
 using Domain.Lists;
 using Domain.Messages;
 using Domain.Queries;
-using FinancialApp.ManageData.DataValidation;
+using FinancialApp.DataValidation;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -16,9 +16,9 @@ namespace FinancialApp.ManageData
     {
         #region |====================================| Propriedades |====================================|
 
-        public static string nomeDoMetodo = string.Empty;
-        private static SaldoFinanceiroCPI saldoFinanceiroCPI;
-        private static SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento;
+        public static string _nomeDoMetodo = string.Empty;
+        private static SaldoFinanceiroCPI _saldoFinanceiroCPI;
+        private static SaldoDaCarteiraPoupancaEInvestimento _saldoDaCarteiraPoupancaEInvestimento;
 
         //|=======================================| Lista da Central de Dados |=======================================|
 
@@ -74,9 +74,9 @@ namespace FinancialApp.ManageData
 
         public CentralDeDados_MD()
         {
-            ListaDaCentralDeDados = new();
-            saldoFinanceiroCPI = new();
-            saldoDaCarteiraPoupancaEInvestimento = new SaldoDaCarteiraPoupancaEInvestimento();
+            ListaDaCentralDeDados = new ListaDaCentralDeDados();
+            _saldoFinanceiroCPI = new SaldoFinanceiroCPI();
+            _saldoDaCarteiraPoupancaEInvestimento = new SaldoDaCarteiraPoupancaEInvestimento();
         }
         #endregion
 
@@ -98,8 +98,8 @@ namespace FinancialApp.ManageData
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Cadastrar";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Cadastrar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
@@ -119,8 +119,8 @@ namespace FinancialApp.ManageData
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Alterar";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Alterar";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
             }
@@ -146,16 +146,81 @@ namespace FinancialApp.ManageData
                 }
                 catch (Exception erro)
                 {
-                    nomeDoMetodo = "Excluir";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    _nomeDoMetodo = "Excluir";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
+            }
+        }
+
+        public static double SaldoDaCarteira(int ano)
+        {             
+            try
+            {
+                _saldoFinanceiroCPI.SaldoDaCarteira =
+                    _saldoDaCarteiraPoupancaEInvestimento.SaldoDaCarteira(ano);
+                return _saldoFinanceiroCPI.SaldoDaCarteira;
+            }
+            catch (Exception erro)
+            {
+                _nomeDoMetodo = "SaldoDaCarteira";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
+                return 0;
+            }
+        }
+
+        public static double SaldoDaPoupanca(int ano)
+        {
+            try
+            {
+                _saldoFinanceiroCPI.SaldoDaPoupanca =
+                    _saldoDaCarteiraPoupancaEInvestimento.SaldoDaPoupanca(ano);
+                return _saldoFinanceiroCPI.SaldoDaPoupanca;
+            }
+            catch (Exception erro)
+            {
+                _nomeDoMetodo = "SaldoDaPoupanca";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
+                return 0;
+            }
+        }
+
+        public static double SaldoDeInvestimentos(int ano)
+        {
+            try
+            {
+                _saldoFinanceiroCPI.SaldoDeInvestimento =
+                    _saldoDaCarteiraPoupancaEInvestimento.SaldoDeInvestimentos(ano);
+                return _saldoFinanceiroCPI.SaldoDeInvestimento;
+            }
+            catch (Exception erro)
+            {
+                _nomeDoMetodo = "SaldoDeInvestimentos";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
+                return 0;
+            }
+        }
+
+        public static double SaldoTotalPoupancaEInvestimentos()
+        {
+            try
+            {
+                _saldoFinanceiroCPI.SaldoTotalDaPoupancaEInvestimento =
+                    _saldoFinanceiroCPI.SaldoDaPoupanca + _saldoFinanceiroCPI.SaldoDeInvestimento;
+                return _saldoFinanceiroCPI.SaldoTotalDaPoupancaEInvestimento;
+            }
+            catch (Exception erro)
+            {
+                _nomeDoMetodo = "SaldoTotalPoupancaEInvestimentos";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
+                return 0;
             }
         }
         //|=================================| Limpar Dados |===========================|            
 
         public void LimparDados()
         {
+            //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
             CentralDeDados_DA centralDeDados_DA = new();
             CentralDeDados.Id = 0;
             CentralDeDados.Valor = 0;
@@ -181,70 +246,6 @@ namespace FinancialApp.ManageData
             CentralDeDados.Data = Convert.ToDateTime(dataAtual);
             CentralDeDados.Ano = ListaDaCentralDeDados[0].Ano;
             ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
-        }
-
-        public static double SaldoDaCarteira(int selecionarAno)
-        {             
-            try
-            {
-                saldoFinanceiroCPI.SaldoDaCarteira =
-                    saldoDaCarteiraPoupancaEInvestimento.SaldoDaCarteira(selecionarAno);
-                return saldoFinanceiroCPI.SaldoDaCarteira;
-            }
-            catch (Exception erro)
-            {
-                nomeDoMetodo = "SaldoDaCarteira";
-                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
-                return 0;
-            }
-        }
-
-        public static double SaldoDaPoupanca(int selecionarAno)
-        {
-            try
-            {
-                saldoFinanceiroCPI.SaldoDaPoupanca =
-                    saldoDaCarteiraPoupancaEInvestimento.SaldoDaPoupanca(selecionarAno);
-                return saldoFinanceiroCPI.SaldoDaPoupanca;
-            }
-            catch (Exception erro)
-            {
-                nomeDoMetodo = "SaldoDaPoupanca";
-                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
-                return 0;
-            }
-        }
-
-        public static double SaldoDeInvestimentos(int selecionarAno)
-        {
-            try
-            {
-                saldoFinanceiroCPI.SaldoDeInvestimento =
-                    saldoDaCarteiraPoupancaEInvestimento.SaldoDeInvestimentos(selecionarAno);
-                return saldoFinanceiroCPI.SaldoDeInvestimento;
-            }
-            catch (Exception erro)
-            {
-                nomeDoMetodo = "SaldoDeInvestimentos";
-                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
-                return 0;
-            }
-        }
-
-        public static double SaldoTotalPoupancaEInvestimentos()
-        {
-            try
-            {
-                saldoFinanceiroCPI.SaldoTotalDaPoupancaEInvestimento =
-                    saldoFinanceiroCPI.SaldoDaPoupanca + saldoFinanceiroCPI.SaldoDeInvestimento;
-                return saldoFinanceiroCPI.SaldoTotalDaPoupancaEInvestimento;
-            }
-            catch (Exception erro)
-            {
-                nomeDoMetodo = "SaldoTotalPoupancaEInvestimentos";
-                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
-                return 0;
-            }
         }
         #endregion
     }

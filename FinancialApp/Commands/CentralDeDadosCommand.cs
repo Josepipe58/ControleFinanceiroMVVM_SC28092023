@@ -1,9 +1,10 @@
 ﻿#nullable disable
+using FinancialApp.ManageData;
 using System.Windows.Input;
 
-namespace ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosDaCentralDeDados : CentralDeDados_MD
+    public class CentralDeDadosCommand : CentralDeDados_MD
     {
         #region |=================================| Comandos |==================================================|
 
@@ -14,7 +15,7 @@ namespace ManageData.Commands
         {
             get
             {
-                _comandoDeCadastrarDespesa ??= new RelayCommand(param => 
+                _comandoDeCadastrarDespesa ??= new RelayCommand(param =>
                 Cadastrar(CentralDeDados));
                 return _comandoDeCadastrarDespesa;
             }

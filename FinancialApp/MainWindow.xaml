@@ -3,14 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:nav="clr-namespace:FinancialApp.ManageData.Commands"
+        xmlns:nav="clr-namespace:FinancialApp.Commands"
         mc:Ignorable="d" xml:lang="pt-BR" Height="1000" Width="1400" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
         WindowStyle="SingleBorderWindow">
 
     <!--| ComandosDeNavegacao |-->
     <Window.DataContext>
-        <nav:ComandosDeNavegacao/>
+        <nav:NavegacaoCommand/>
     </Window.DataContext>
 
     <Grid>

@@ -11,7 +11,7 @@
     </UserControl.Resources>
 
     <!--| Grid Principal |-->
-    <Grid Background="#FF1C0BE4" Margin="0,0,0,0" DataContext="{StaticResource vmcCategoriaViewModel}" >
+    <Grid Background="#FF1C0BE4" DataContext="{StaticResource vmcCategoriaViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="313"/>
             <RowDefinition/>
@@ -27,71 +27,70 @@
                 <Grid Background="#FF082CEF" Margin="10,5,10,5">
 
                     <!--| TeextBlock |-->
-                    <TextBlock Text="Voltar > Menu de Categorias e SubCategorias" FontSize="16" FontWeight="Bold" Foreground="#FF06F7F2" 
-                           Width="391" Margin="65,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"/>
-
-                    <TextBlock Text="Categorias de Despesas" Grid.Row="0" Foreground="#FFF7F7F7" FontSize="36" Padding="0 0 0 0" 
-                       FontWeight="Bold" Margin="600,5,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="460"/>
-
-                    <!--| Seta para voltar ao Menu de Categorias e SubCategorias |-->
-                    <RadioButton Height="60" Width="65" Style="{StaticResource SetaVoltarMenuAnterior}" Margin="0,5,0,0"
-                             Command="{Binding Path=DataContext.ComandoVoltarParaMenuDeCategoriasESubCategorias, 
-                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Tag="Images/back_icon.png"/>
+                    <TextBlock Text="Categorias" Grid.Row="0" Foreground="#FFF7F7F7" FontSize="36" Padding="0 0 0 0" 
+                       FontWeight="Bold" Margin="410,5,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="220"/>
 
                     <!--| Borda Interna de Cadastrar, Alterar e Excluir |-->
-                    <Border Background="Yellow" BorderBrush="#FF06CDF3" BorderThickness="5" Margin="10,70,0,0" Height="165"
+                    <Border Background="Yellow" BorderBrush="#FF06CDF3" BorderThickness="5" Margin="10,70,0,0" Height="105"
                          CornerRadius="15" VerticalAlignment="Top">
 
                         <!--| Grid Interna de Cadastrar, Alterar e Excluir |-->
                         <Grid Background="Yellow" Margin="21,5,5,5">
 
                             <!--| Rótulos(Label) |-->
-                            <Label Content="Cadastrar, Alterar e Excluir Categorias de Despesas" FontFamily="Arial" FontSize="25" FontWeight="Bold" 
-                               Foreground="#FF110AEA" Height="40" Width="630" Margin="400,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Cadastrar, Alterar e Excluir Categorias" FontFamily="Arial" FontSize="25" FontWeight="Bold" 
+                               Foreground="#FF110AEA" Height="40" Width="490" Margin="200,0,0,45" HorizontalAlignment="Left"/>
 
-                            <Label Content="Id da Categoria" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="138" 
-                               Margin="35,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Código da Categoria" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="183" 
+                               Margin="0,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                            <Label Content="Nome da Categoria" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="175"
-                               Margin="0,80,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Nome da Categoria" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="174"
+                               Margin="290,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <Label Content="Nome de Filtros" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="145"
+                               Margin="745,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                             <!--| TextBoxes) |-->
-                            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,40,0,0" IsReadOnly="False"
-                                 Text="{Binding Categoria.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="185,40,0,0" IsReadOnly="True"
+                                     Text="{Binding Categoria.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                            <TextBox x:Name="TxtCategoria" Width="270" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,80,0,0"
+                            <TextBox x:Name="TxtCategoria" Width="270" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="465,40,0,0"
                                  Text="{Binding Categoria.NomeDaCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                            <!--| Botões da Barda Amarela |-->
-                            <Button x:Name="BtnCadastrar" Content="Cadastrar" FontSize="16" Height="50" Width="130" 
-                                Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Margin="480,70,0,0" 
-                                Command="{Binding ComandoDeCadastrarCategoria}"/>
-
-                            <Button x:Name="BtnAlterar" Content="Alterar" FontSize="16" Height="50" Width="130" 
-                                Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Margin="630,70,0,0" 
-                                Command="{Binding ComandoDeDeAlterarCategoria}"/>
-
-                            <Button x:Name="BtnExcluir" Content="Excluir" FontSize="16" Height="50" Width="130" 
-                            Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Margin="780,70,0,0"
-                                Command="{Binding ComandoDeDeExcluirCategoria}"/>
-
-                            <Button x:Name="BtnAtualizar" Content="Atualizar" FontSize="16" Height="50" Width="130" 
-                                Margin="930,70,0,0" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"                                    
-                                Command="{Binding ComandoDeDeAtualizarCategoria}"/>
+                            <!--| ComboBox de Tipos |-->
+                            <ComboBox Name="CbxNomeDeFiltros" Height="40" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}"
+                                      DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" ItemsSource="{Binding ListaDeFiltrosDeControle}"
+                                      Text="{Binding Categoria.NomeDoFiltro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedIndex="{Binding Categoria.FiltroDeControleId}" Margin="890,35,0,0"/>
                         </Grid>
                     </Border>
+
+                    <!--| Botões) |-->
+                    <Button x:Name="BtnCadastrar" Content="Cadastrar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"                            
+                        Margin="30,195,0,0" Command="{Binding ComandoDeCadastrarCategoria}"/>
+
+                    <Button x:Name="BtnAlterar" Content="Alterar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"  
+                        Margin="200,195,0,0" Command="{Binding ComandoDeDeAlterarCategoria}"/>
+
+                    <Button x:Name="BtnExcluir" Content="Excluir" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"  
+                        Margin="370,195,0,0" Command="{Binding ComandoDeDeExcluirCategoria}"/>
+
+                    <Button x:Name="BtnAtualizar" Content="Atualizar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                        Margin="540,195,0,0" Command="{Binding ComandoDeDeAtualizarCategoria}"/>
                 </Grid>
             </Border>
         </Grid>
 
         <!--| DataGrid de DtgDados |-->
         <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,0,5,5" 
-              ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Column="0"
-              ItemsSource="{Binding ListaDeCategorias}" Grid.Row="1" MouseDoubleClick="DtgDados_MouseDoubleClick">
-
+                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Column="0" Grid.Row="1"
+                  ItemsSource="{Binding ListaDeCategorias}" MouseDoubleClick="DtgDados_MouseDoubleClick">
+            
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Código" Binding="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:D4\}}" Width="110"/>
-                <DataGridTextColumn Header="Categoria" Binding="{Binding Path=NomeDaCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                <DataGridTextColumn Header="Código do Filtro" Binding="{Binding FiltroDeControleId, StringFormat=\{0:D4\}}" Width="220"/>
+                <DataGridTextColumn Header="Nome do Filtro" Binding="{Binding NomeDoFiltro}" Width="250"/>
+                <DataGridTextColumn Header="Código da Categoria" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="200"/>
+                <DataGridTextColumn Header="Nome da Categoria" Binding="{Binding NomeDaCategoria}" Width="250"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

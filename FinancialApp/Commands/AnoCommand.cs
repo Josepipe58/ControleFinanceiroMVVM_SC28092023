@@ -1,9 +1,10 @@
 ﻿#nullable disable
+using FinancialApp.ManageData;
 using System.Windows.Input;
 
-namespace ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class ComandosDeAno : Ano_MD
+    public class AnoCommand : Ano_MD
     {
         #region |=================================| Comandos |==================================================|
 

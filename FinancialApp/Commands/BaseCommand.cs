@@ -1,15 +1,18 @@
 ﻿#nullable disable
 using System.ComponentModel;
 
-namespace ManageData.Commands
+namespace FinancialApp.Commands
 {
-    public class CommandBase : RelayCommand, INotifyPropertyChanged
+    public class BaseCommand : RelayCommand, INotifyPropertyChanged
     {
+        #region |=================================| Comandos |==================================================|
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
     }
 }

@@ -8,17 +8,17 @@ namespace Domain.DataAccess
 {
     public class NomeDoBancoDeDados_DA : DatabaseNameContext
     {
-        public string consulta = string.Empty;
+        public string _consulta = string.Empty;
 
         public string Cadastrar(NomeDoBancoDeDados cadastrar)
         {
             LimparParametros();
             AdicionarParametros("@Id", cadastrar.Id + 1);
             AdicionarParametros("@nomeDoBanco", cadastrar.NomeDoBanco);
-            consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
+            _consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
                 "Select @Id = Id +1 From NomeDeBancos; Insert Into NomeDeBancos (Id, NomeDoBanco) " +
                 "Values (@Id, @nomedobanco ); Select @id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Alterar(NomeDoBancoDeDados alterar)
@@ -26,18 +26,18 @@ namespace Domain.DataAccess
             LimparParametros();
             AdicionarParametros("@id", alterar.Id);
             AdicionarParametros("@nomeDoBanco", alterar.NomeDoBanco);
-            consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
+            _consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
                 "Update NomeDeBancos Set NomeDoBanco = @nomeDoBanco Where Id = @id; Select @id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public string Excluir(NomeDoBancoDeDados excluir)
         {
             LimparParametros();
             AdicionarParametros("@id", excluir.Id);
-            consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
+            _consulta = ExecutarManipulacaoNomeDeBancos(CommandType.Text,
                 "Delete From NomeDeBancos Where Id = @id; Select @id as Retorno;").ToString();
-            return consulta;
+            return _consulta;
         }
 
         public ListaDeNomeDeBancos ConsultarNomeDeBancos()

@@ -1,6 +1,6 @@
 ﻿namespace Database.Models
 {
-    //SaldoFinanceiroCPI => CPI = Carteira, Poupança e Investimento. 
+    //CPI = Carteira, Poupança e Investimento. 
     public class SaldoFinanceiroCPI : BaseModelo
     {
         private double _saldoDaCarteira;
@@ -45,6 +45,16 @@
                 _saldoTotalDaPoupancaEInvestimento = value;
                 OnPropertyChanged(nameof(SaldoTotalDaPoupancaEInvestimento));
             }
+        }
+
+        public SaldoFinanceiroCPI(){ }
+
+        public SaldoFinanceiroCPI(SaldoFinanceiroCPI saldoFinanceiroCPI)
+        {
+            SaldoDaCarteira = saldoFinanceiroCPI.SaldoDaCarteira;
+            SaldoDaPoupanca = saldoFinanceiroCPI.SaldoDaPoupanca;
+            SaldoDeInvestimento = saldoFinanceiroCPI.SaldoDeInvestimento;
+            SaldoTotalDaPoupancaEInvestimento = saldoFinanceiroCPI.SaldoTotalDaPoupancaEInvestimento;
         }
     }
 }

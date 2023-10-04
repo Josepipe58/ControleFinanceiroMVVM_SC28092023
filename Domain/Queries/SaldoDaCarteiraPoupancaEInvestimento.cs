@@ -8,23 +8,23 @@ namespace Domain.Queries
     public class SaldoDaCarteiraPoupancaEInvestimento : Context
     {
         //==============================================================| Saldo da Carteira |======================================================================
-        public double SaldoDaCarteira(int selecionarAno)
+        public double SaldoDaCarteira(int ano)
         {
             try
             {
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 double saldoDaCarteira = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Receitas Where Tipo = 'Carteira' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Receitas Where Categoria = 'Renda' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Saque' And Ano = @selecionarAno) + " +
-                     "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saque' And Ano = @selecionarAno)) - " +
-                    "(((Select coalesce(Sum(Valor), 0) From Despesas Where Tipo = 'Despesa' And Ano = @selecionarAno) - " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Categoria = 'Débitos da Poupança' And Ano = @selecionarAno)) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Depósito' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito Inicial' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Receitas Where Categoria = 'Renda' And Ano = @selecionarAno))"));
+                    "Select((Select coalesce(Sum(Valor), 0) From Receitas Where Tipo = 'Carteira' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Receitas Where Categoria = 'Renda' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Saque' And Ano = @ano) + " +
+                     "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saque' And Ano = @ano)) - " +
+                    "(((Select coalesce(Sum(Valor), 0) From Despesas Where Tipo = 'Despesa' And Ano = @ano) - " +
+                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Categoria = 'Débitos da Poupança' And Ano = @ano)) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Depósito' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito Inicial' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Receitas Where Categoria = 'Renda' And Ano = @ano))"));
                 return saldoDaCarteira;
             }
             catch (Exception erro)
@@ -35,19 +35,19 @@ namespace Domain.Queries
             }
         }
         //==============================================================| Saldo da Poupanca |======================================================================
-        public double SaldoDaPoupanca(int selecionarAno)
+        public double SaldoDaPoupanca(int ano)
         {
             try
             {
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 double saldoDaPoupanca = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Saldo Anterior' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Categoria = 'Renda' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Categoria = 'Venda' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Depósito' And Ano = @selecionarAno)) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Despesa' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Débito' And Ano = @selecionarAno))"));
+                    "Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Saldo Anterior' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Categoria = 'Renda' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Categoria = 'Venda' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Depósito' And Ano = @ano)) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Despesa' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Débito' And Ano = @ano))"));
                 return saldoDaPoupanca;
             }
             catch (Exception erro)
@@ -58,18 +58,18 @@ namespace Domain.Queries
             }
         }
         //==============================================================| Saldo de Investimentos |======================================================================
-        public double SaldoDeInvestimentos(int selecionarAno)
+        public double SaldoDeInvestimentos(int ano)
         {
             try
             {
                 LimparParametros();
-                AdicionarParametros("@selecionarAno", selecionarAno);
+                AdicionarParametros("@ano", ano);
                 double saldoDeInvestimentos = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saldo do Ano Anterior' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Juros de Investimentos' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito Inicial' And Ano = @selecionarAno) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito' And Ano = @selecionarAno)) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saque' And Ano = @selecionarAno))"));
+                    "Select((Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saldo do Ano Anterior' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Juros de Investimentos' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito Inicial' And Ano = @ano) + " +
+                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito' And Ano = @ano)) - " +
+                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saque' And Ano = @ano))"));
                 return saldoDeInvestimentos;
             }
             catch (Exception erro)
