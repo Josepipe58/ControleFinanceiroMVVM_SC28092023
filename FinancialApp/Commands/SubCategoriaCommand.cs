@@ -7,8 +7,8 @@ namespace FinancialApp.Commands
     public class SubCategoriaCommand : SubCategoria_MD
     {
         #region |===========================| Comandos de SubCategoria |========================================|
-
-        //|================================| Comando Cadastrar |===============================================|
+        
+        //|================================| Comando Cadastrar |==========================================|
 
         private ICommand _comandoDeCadastrarSubCategoria;
         public ICommand ComandoDeCadastrarSubCategoria
@@ -20,8 +20,8 @@ namespace FinancialApp.Commands
                 return _comandoDeCadastrarSubCategoria;
             }
         }
-
-        //|================================| Comando Alterar |=================================================|
+        
+        //|================================| Comando Alterar |============================================|
 
         private ICommand _comandoDeAlterarSubCategoria;
         public ICommand ComandoDeDeAlterarSubCategoria
@@ -33,8 +33,8 @@ namespace FinancialApp.Commands
                 return _comandoDeAlterarSubCategoria;
             }
         }
-
-        //|================================| Comando Excluir |=================================================|
+        
+        //|================================| Comando Excluir |============================================|
 
         private ICommand _comandoDeExcluirSubCategoria;
         public ICommand ComandoDeDeExcluirSubCategoria
@@ -46,8 +46,8 @@ namespace FinancialApp.Commands
                 return _comandoDeExcluirSubCategoria;
             }
         }
-
-        //|================================| Comando Atualizar |===============================================|
+        
+        //|================================| Comando Atualizar |==========================================|
 
         private ICommand _comandoDeAtualizarSubCategoria;
         public ICommand ComandoDeDeAtualizarSubCategoria

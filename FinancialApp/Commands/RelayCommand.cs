@@ -5,8 +5,7 @@ using System.Windows.Input;
 namespace FinancialApp.Commands
 {
     public class RelayCommand : ICommand
-    {
-
+    {   
         #region |======================| RelayCommand(Comando de Retransmissão) |===============================|
 
 

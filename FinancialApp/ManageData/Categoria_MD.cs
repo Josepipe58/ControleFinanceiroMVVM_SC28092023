@@ -10,11 +10,11 @@ namespace FinancialApp.ManageData
 {
     public class Categoria_MD : Categoria_DV
     {
-        #region |=================================| Propriedades |==================================================| 
-        
+        #region |=================================| Gerenciar Dados(CRUD) |=====================================| 
+
         public string _nomeDoMetodo = string.Empty;
 
-        //Carregar ComboBox do Filtro de Controle.
+        //Lista do ComboBox
         private ListaDeFiltrosDeControle _listaDeFiltrosDeControle;
         public ListaDeFiltrosDeControle ListaDeFiltrosDeControle
         {
@@ -29,7 +29,7 @@ namespace FinancialApp.ManageData
             }
         }
 
-        //Carregar DataGrid Dados.
+        //Lista do DataGrid Dados
         private ListaDeCategorias _listaDeCategorias;
         public ListaDeCategorias ListaDeCategorias
         {
@@ -43,21 +43,14 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        #endregion
-
-        #region |=================================| Construtor |====================================================|
 
         public Categoria_MD()
         {
             ListaDeFiltrosDeControle = new ListaDeFiltrosDeControle();
             ListaDeCategorias = new ListaDeCategorias();
         }
-        #endregion
 
-        #region |=================================| Métodos |=======================================================|
-
-        //|===================================| Cadastrar |===============================================|
-
+        //Cadastrar
         public void Cadastrar(Categoria categoria)
         {
             if (ValidarCadastrar(categoria) == true)
@@ -86,7 +79,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|===================================| Alterar |=================================================|
+
+        //Alterar
         public void Alterar(Categoria categoria)
         {
             if (ValidarAlterarExcluir(categoria) == true)
@@ -113,7 +107,7 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|===================================| Excluir |=================================================|
+        //Excluir
         public void Excluir(Categoria categoria)
         {
             if (ValidarAlterarExcluir(categoria) == true)
@@ -140,8 +134,7 @@ namespace FinancialApp.ManageData
             }
         }
 
-        //|=================================| Limpar Dados |===========================|            
-
+        //Limpar Dados
         public void LimparDados()
         {
             //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
@@ -150,7 +143,8 @@ namespace FinancialApp.ManageData
             Categoria.NomeDaCategoria = "";
             ListaDeCategorias = categoria_DA.ConsultarCategorias();
         }
-        //|===================================| Limpar e Atualizar Dados |================================|
+
+        //Limpar e Atualizar Dados
         public void AtualizarDados()//Esse método será executo por um comando na classe: CategoriaCommand.
         {
             Categoria_DA categoria_DA = new(); 

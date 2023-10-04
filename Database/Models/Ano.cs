@@ -4,6 +4,8 @@ namespace Database.Models
 {
     public class Ano : BaseModelo
     {
+        #region |============================| Propriedades da Tabela Anos |====================================|
+
         private int _id;
         public int Id
         {
@@ -33,6 +35,7 @@ namespace Database.Models
             Id = ano.Id;
             AnoDoCadastro = ano.AnoDoCadastro;
         }
+        #endregion
     }
 
     public class ListaDeAnos : ObservableCollection<Ano> { }

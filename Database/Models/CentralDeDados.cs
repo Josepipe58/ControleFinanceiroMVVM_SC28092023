@@ -6,6 +6,8 @@ namespace Database.Models
 {
     public class CentralDeDados : BaseModelo
     {
+        #region |=========================| Propriedades da Tabela CentralDeDados |=============================|
+        
         private int _id;
         public int Id
         {
@@ -119,6 +121,7 @@ namespace Database.Models
             Mes = centralDeDados.Mes;
             Ano = centralDeDados.Ano;
         }
+        #endregion
     }
 
     public class ListaDaCentralDeDados : ObservableCollection<CentralDeDados> { }

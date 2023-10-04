@@ -1,5 +1,8 @@
 ﻿#nullable disable
+using Database.Models;
+using Domain.Lists;
 using FinancialApp.Views;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace FinancialApp.Commands
@@ -16,7 +19,7 @@ namespace FinancialApp.Commands
                 OnPropertyChanged(nameof(SelecionarControleDeUsuario));
             }
         }
-
+              
         #region |==========| Comandos de Voltar Para o Menu De Consultas e Relatorios |=========================|
 
         private void VoltarParaMenuDeConsultasERelatorios()

@@ -15,6 +15,7 @@ namespace FinancialApp.DataValidation
             SubCategoria = new SubCategoria();
         }
 
+        //Cadastrar
         public bool ValidarCadastrar(SubCategoria subCategoriaDeDespesa)
         {            
             SubCategoria = subCategoriaDeDespesa;            
@@ -34,6 +35,7 @@ namespace FinancialApp.DataValidation
             }
         }
 
+        //Alterar e Excluir
         public bool ValidarAlterarExcluir(SubCategoria subCategoriaDeDespesa)
         {           
             SubCategoria = subCategoriaDeDespesa;

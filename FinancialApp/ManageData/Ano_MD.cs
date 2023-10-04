@@ -9,12 +9,12 @@ using System.Windows;
 namespace FinancialApp.ManageData
 {
     public class Ano_MD : Ano_DV
-    {
-        #region |=================================| Propriedades |==================================================|
+    { 
+        #region |=================================| Gerenciar Dados(CRUD) |=====================================|
 
         public string _nomeDoMetodo = string.Empty;    
 
-        //Carregar DataGrid Dados.
+        //Lista do DataGrid Dados e ComboBox
         private ListaDeAnos _listaDeAnos;
         public ListaDeAnos ListaDeAnos
         {
@@ -28,20 +28,13 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        #endregion
-
-        #region |=================================| Construtor |====================================================|
 
         public Ano_MD()
         {
             ListaDeAnos = new ListaDeAnos();
         }
-        #endregion
 
-        #region |=================================| Métodos |=======================================================|
-
-        //|=================================| Cadastrar |==========================================|
-
+        //Cadastrar
         public void Cadastrar(Ano ano)
         {
             if (ValidarCadastrar(ano) == true)
@@ -62,8 +55,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=================================| Alterar |============================================|
 
+        //Alterar
         public void Alterar(Ano ano)
         {
             if (ValidarAlterarExcluir(ano) == true)
@@ -83,8 +76,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=================================| Excluir |============================================|
 
+        //Excluir
         public void Excluir(Ano ano)
         {
             if (ValidarAlterarExcluir(ano) == true)
@@ -110,8 +103,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=================================| Limpar e Atualizar Dados |===========================|
 
+        //Limpar e Atualizar Dados
         public void LimparEAtualizarDados()
         {
             Ano_DA ano_DA = new();

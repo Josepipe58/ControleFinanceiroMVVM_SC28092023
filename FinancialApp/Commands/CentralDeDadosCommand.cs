@@ -7,8 +7,8 @@ namespace FinancialApp.Commands
     public class CentralDeDadosCommand : CentralDeDados_MD
     {
         #region |=================================| Comandos |==================================================|
-
-        //|=================================| Comando Cadastrar |==================================================|
+        
+        //|=================================| Comando Cadastrar |=========================================|
 
         private ICommand _comandoDeCadastrarDespesa;
         public ICommand ComandoDeCadastrarDespesa
@@ -20,8 +20,8 @@ namespace FinancialApp.Commands
                 return _comandoDeCadastrarDespesa;
             }
         }
-
-        //|=================================| Comando Alterar |====================================================|
+        
+        //|=================================| Comando Alterar |===========================================|
 
         private ICommand _comandoDeAlterarDespesa;
         public ICommand ComandoDeDeAlterarDespesa
@@ -33,8 +33,8 @@ namespace FinancialApp.Commands
                 return _comandoDeAlterarDespesa;
             }
         }
-
-        //|=================================| Comando Excluir |====================================================|
+        
+        //|=================================| Comando Excluir |===========================================|
 
         private ICommand _comandoDeExcluirDespesa;
         public ICommand ComandoDeDeExcluirDespesa
@@ -46,8 +46,8 @@ namespace FinancialApp.Commands
                 return _comandoDeExcluirDespesa;
             }
         }
-
-        //|=================================| Comando Atualizar |==================================================|
+        
+        //|=================================| Comando Atualizar |=========================================|
 
         private ICommand _comandoDeAtualizarDespesa;
         public ICommand ComandoDeDeAtualizarDespesa

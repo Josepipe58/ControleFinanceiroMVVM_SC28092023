@@ -14,15 +14,13 @@ namespace FinancialApp.ManageData
 {
     public class CentralDeDados_MD : CentralDeDados_DV
     {
-        #region |====================================| Propriedades |====================================|
+        #region |=================================| Gerenciar Dados(CRUD) |=====================================|
 
         public static string _nomeDoMetodo = string.Empty;
         private static SaldoFinanceiroCPI _saldoFinanceiroCPI;
         private static SaldoDaCarteiraPoupancaEInvestimento _saldoDaCarteiraPoupancaEInvestimento;
 
-        //|=======================================| Lista da Central de Dados |=======================================|
-
-        //Carregar DataGrid Dados.
+        //Lista do DataGrid Dados.
         private ListaDaCentralDeDados _listaDaCentralDeDados;
         public ListaDaCentralDeDados ListaDaCentralDeDados
         {
@@ -36,9 +34,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=======================================| Lista de Valores Meses |=======================================|
 
-        //Carregar DataGrid Valores.
+        //Lista do DataGrid de Valores e Meses
         private ListaDeValoresMeses _listaDeValoresMeses;
         public ListaDeValoresMeses ListaDeValoresMeses
         {
@@ -52,9 +49,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=======================================| Lista de Anos |==================================================|
 
-        //Carregar ComboBox de Anos.
+        //Lista do ComboBox de Anos
         private ListaDeAnos _listaDeAnos;
         public ListaDeAnos ListaDeAnos
         {
@@ -68,9 +64,6 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        #endregion
-
-        #region |====================================| Construtor |================================================|
 
         public CentralDeDados_MD()
         {
@@ -78,12 +71,8 @@ namespace FinancialApp.ManageData
             _saldoFinanceiroCPI = new SaldoFinanceiroCPI();
             _saldoDaCarteiraPoupancaEInvestimento = new SaldoDaCarteiraPoupancaEInvestimento();
         }
-        #endregion
 
-        #region |====================================| Métodos |===================================================|
-
-        //|=================================| Cadastrar |==========================================|
-
+        //Cadastrar
         public void Cadastrar(CentralDeDados centralDeDados)
         {
             if (ValidarCadastrar(centralDeDados) == true)
@@ -104,8 +93,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=================================| Alterar |============================================|
 
+        //Alterar
         public void Alterar(CentralDeDados centralDeDados)
         {
             if (ValidarAlterarExcluir(centralDeDados) == true)
@@ -125,8 +114,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=================================| Excluir |============================================|
 
+        //Excluir
         public void Excluir(CentralDeDados centralDeDados)
         {
             if (ValidarAlterarExcluir(centralDeDados) == true)
@@ -152,6 +141,39 @@ namespace FinancialApp.ManageData
                 }
             }
         }
+
+        //Limpar Dados
+        public void LimparDados()
+        {
+            //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
+            CentralDeDados_DA centralDeDados_DA = new();
+            CentralDeDados.Id = 0;
+            CentralDeDados.Valor = 0;
+            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
+        }
+
+        //Atualizar Dados 
+        public void AtualizarDados()
+        {
+            CentralDeDados_DA centralDeDados_DA = new();
+
+            DateTime mes = DateTime.Now;
+            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
+            TextInfo textInfo = cultureInfo.TextInfo;
+            var mesAtual = textInfo.ToTitleCase(mes.ToString("MMMM"));
+            var dataAtual = textInfo.ToTitleCase(mes.ToString("dd/MM/yyyy"));
+
+            CentralDeDados.Id = 0;
+            CentralDeDados.NomeDaCategoria = ListaDaCentralDeDados[1].NomeDaCategoria;
+            CentralDeDados.Valor = 0;
+            CentralDeDados.Tipo = ListaDaCentralDeDados[0].Tipo;
+            CentralDeDados.Mes = mesAtual;
+            CentralDeDados.Data = Convert.ToDateTime(dataAtual);
+            CentralDeDados.Ano = ListaDaCentralDeDados[0].Ano;
+            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
+        }
+
+        #region |=====================| Saldo da Carteira, Poupança e Investimentos |===========================|
 
         public static double SaldoDaCarteira(int ano)
         {             
@@ -216,37 +238,8 @@ namespace FinancialApp.ManageData
                 return 0;
             }
         }
-        //|=================================| Limpar Dados |===========================|            
+        #endregion
 
-        public void LimparDados()
-        {
-            //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
-            CentralDeDados_DA centralDeDados_DA = new();
-            CentralDeDados.Id = 0;
-            CentralDeDados.Valor = 0;
-            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
-        }
-        //|=================================| Atualizar Dados |===========================|            
-
-        public void AtualizarDados()
-        {
-            CentralDeDados_DA centralDeDados_DA = new();
-
-            DateTime mes = DateTime.Now;
-            CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
-            TextInfo textInfo = cultureInfo.TextInfo;
-            var mesAtual = textInfo.ToTitleCase(mes.ToString("MMMM"));
-            var dataAtual = textInfo.ToTitleCase(mes.ToString("dd/MM/yyyy"));
-
-            CentralDeDados.Id = 0;
-            CentralDeDados.NomeDaCategoria = ListaDaCentralDeDados[1].NomeDaCategoria;
-            CentralDeDados.Valor = 0;
-            CentralDeDados.Tipo = ListaDaCentralDeDados[0].Tipo;
-            CentralDeDados.Mes = mesAtual;
-            CentralDeDados.Data = Convert.ToDateTime(dataAtual);
-            CentralDeDados.Ano = ListaDaCentralDeDados[0].Ano;
-            ListaDaCentralDeDados = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(CentralDeDados.Ano);
-        }
         #endregion
     }
 }

@@ -5,10 +5,10 @@ using System.Windows.Input;
 namespace FinancialApp.Commands
 {
     public class CategoriaCommand : Categoria_MD
-    {
+    {        
         #region |=================================| Comandos |==================================================|
-
-        //|=================================| Comando Cadastrar |==================================================|
+        
+        //|=================================| Comando Cadastrar |=========================================|
 
         private ICommand _comandoDeCadastrarCategoria;
         public ICommand ComandoDeCadastrarCategoria
@@ -20,8 +20,8 @@ namespace FinancialApp.Commands
                 return _comandoDeCadastrarCategoria;
             }
         }
-
-        //|=================================| Comando Alterar |====================================================|
+       
+        //|=================================| Comando Alterar |===========================================|
 
         private ICommand _comandoDeAlterarCategoria;
         public ICommand ComandoDeDeAlterarCategoria
@@ -33,8 +33,8 @@ namespace FinancialApp.Commands
                 return _comandoDeAlterarCategoria;
             }
         }
-
-        //|=================================| Comando Excluir |====================================================|
+        
+        //|=================================| Comando Excluir |===========================================|
 
         private ICommand _comandoDeExcluirCategoria;
         public ICommand ComandoDeDeExcluirCategoria
@@ -46,8 +46,8 @@ namespace FinancialApp.Commands
                 return _comandoDeExcluirCategoria;
             }
         }
-
-        //|=================================| Comando Atualizar |==================================================|
+        
+        //|=================================| Comando Atualizar |=========================================|
 
         private ICommand _comandoDeAtualizarCategoria;
         public ICommand ComandoDeDeAtualizarCategoria

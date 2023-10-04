@@ -10,11 +10,13 @@ namespace FinancialApp.ManageData
 {
     public class SubCategoria_MD : SubCategoria_DV
     {
-        #region |=================================| Propriedades |==================================================|        
+        #region |=================================| Gerenciar Dados(CRUD) |=====================================|        
 
         public string _nomeDoMetodo = string.Empty;
-        
-        //Carregar DataGrid Dados.
+
+        //OBS: As Listas dos ComboBoxes, estão no Código Por Trás(Code Behind), por causa do evento SelectionChanged.
+
+        //Lista do DataGrid Dados
         private ListaDeSubCategorias _listaDeSubCategorias;
         public ListaDeSubCategorias ListaDeSubCategorias
         {
@@ -28,20 +30,13 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        #endregion
-
-        #region |=================================| Construtor |====================================================|
 
         public SubCategoria_MD()
         {
             ListaDeSubCategorias = new ListaDeSubCategorias();           
         }
-        #endregion
 
-        #region |=================================| Métodos |=======================================================|
-
-        //|===================================| Cadastrar |===============================================|
-
+        //Cadastrar
         public void Cadastrar(SubCategoria subCategoria)
         {
             if (ValidarCadastrar(subCategoria) == true)
@@ -66,8 +61,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|===================================| Alterar |=================================================|
 
+        //Alterar
         public void Alterar(SubCategoria subCategoria)
         {
             if (ValidarAlterarExcluir(subCategoria) == true)
@@ -91,8 +86,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|===================================| Excluir |=================================================|
 
+        //Excluir
         public void Excluir(SubCategoria subCategoria)
         {
             if (ValidarAlterarExcluir(subCategoria) == true)
@@ -119,8 +114,8 @@ namespace FinancialApp.ManageData
                 }
             }
         }
-        //|=================================| Limpar Dados |===========================|           
 
+        //Limpar Dados 
         public void LimparDados()
         {
             //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
@@ -129,8 +124,8 @@ namespace FinancialApp.ManageData
             SubCategoria.NomeDaSubCategoria = null;           
             ListaDeSubCategorias = subCategoria_DA.ConsultarSubCategorias();
         }
-        //|===================================| Limpar e Atualizar Dados |================================|
 
+        //Limpar e Atualizar Dados
         public void AtualizarDados()
         {
             SubCategoria_DA subCategoria_DA = new();

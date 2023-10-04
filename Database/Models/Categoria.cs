@@ -5,6 +5,8 @@ namespace Database.Models
 {
     public class Categoria : BaseModelo
     {
+        #region |===========================| Propriedades da Tabela Categorias |===============================|
+       
         private int _id;
         public int Id
         {
@@ -38,6 +40,7 @@ namespace Database.Models
             }
         }
 
+        //Essa propriedade é usada como objeto de transferência ou variável.
         private string _nomeDoFiltro;
         public string NomeDoFiltro
         {
@@ -58,6 +61,7 @@ namespace Database.Models
             FiltroDeControleId = categoria.FiltroDeControleId;
             NomeDoFiltro = categoria.NomeDoFiltro;
         }
+        #endregion
     }
 
     public class ListaDeCategorias : ObservableCollection<Categoria> { }

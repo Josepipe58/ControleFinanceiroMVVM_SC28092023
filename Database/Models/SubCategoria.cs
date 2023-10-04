@@ -5,8 +5,8 @@ namespace Database.Models
 {
     public class SubCategoria : BaseModelo
     {
-        //==========================================================
-        //Essas propriedades são da tabela de SubCategorias.
+        #region |==========================| Propriedades da Tabela SubCategorias |=============================|
+
         private int _id;
         public int Id
         {
@@ -39,7 +39,7 @@ namespace Database.Models
                 OnPropertyChanged(nameof(CategoriaId));
             }
         }
-        //==========================================================
+        
         //Essas propriedades são usadas como objeto de transferência ou variáveis.
         private string _nomeDaCategoria;
         public string NomeDaCategoria
@@ -73,7 +73,7 @@ namespace Database.Models
                 OnPropertyChanged(nameof(NomeDoFiltro));
             }
         }
-        //==========================================================
+        
         //Essa propriedade pertence ao TextBox de pesquisar por SubCategorias.
         private string _pesquisar;
         public string Pesquisar
@@ -97,7 +97,8 @@ namespace Database.Models
             FiltroDeControleId = subCategoria.FiltroDeControleId;
             NomeDoFiltro = subCategoria.NomeDoFiltro;
         }
-    } 
+        #endregion
+    }
 
     public class ListaDeSubCategorias : ObservableCollection<SubCategoria>{ }
 }

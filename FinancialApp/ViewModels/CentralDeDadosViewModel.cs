@@ -52,6 +52,6 @@ namespace FinancialApp.ViewModels
             ListaTipoDeDespesa = new List<string>();
             ListaTipoDeDespesa = ListaDeTipos.ListaDeTodosOsTipos();
         }
-        #endregion
+        #endregion       
     }
 }

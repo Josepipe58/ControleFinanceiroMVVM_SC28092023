@@ -7,8 +7,8 @@ namespace FinancialApp.Commands
     public class AnoCommand : Ano_MD
     {
         #region |=================================| Comandos |==================================================|
-
-        //|=================================| Comando Cadastrar |==================================================|
+        
+        //|=================================| Comando Cadastrar |=========================================|
 
         private ICommand _comandoDeCadastrarAno;
         public ICommand ComandoDeCadastrarAno
@@ -20,8 +20,8 @@ namespace FinancialApp.Commands
                 return _comandoDeCadastrarAno;
             }
         }
-
-        //|=================================| Comando Alterar |====================================================|
+        
+        //|=================================| Comando Alterar |===========================================|
 
         private ICommand _comandoDeAlterarAno;
         public ICommand ComandoDeDeAlterarAno
@@ -33,8 +33,8 @@ namespace FinancialApp.Commands
                 return _comandoDeAlterarAno;
             }
         }
-
-        //|=================================| Comando Excluir |====================================================|
+       
+        //|=================================| Comando Excluir |===========================================|
 
         private ICommand _comandoDeExcluirAno;
         public ICommand ComandoDeDeExcluirAno
@@ -46,8 +46,8 @@ namespace FinancialApp.Commands
                 return _comandoDeExcluirAno;
             }
         }
-
-        //|=================================| Comando Atualizar |==================================================|
+        
+        //|=================================| Comando Atualizar |=========================================|
 
         private ICommand _comandoDeAtualizarAno;
         public ICommand ComandoDeDeAtualizarAno

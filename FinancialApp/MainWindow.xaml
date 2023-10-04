@@ -63,7 +63,8 @@
                 <Label Content="Selecione um Banco de Dados" FontSize="18" FontWeight="Bold" Height="35" 
                        Foreground="#FFF5F0F0" Margin="30,0,43,0" VerticalAlignment="Top"/>
 
-                <ComboBox Name="CbxBanco" Width="NaN" Margin="30,30,10,0" Style="{DynamicResource ComboBoxAzulMarinho}" 
+                <ComboBox Name="CbxBanco" Width="NaN" Margin="30,30,10,0" Style="{DynamicResource ComboBoxAzulMarinho}"
+                          ItemsSource="{Binding CarregarComboBoxDeNomeDeBancos}" SelectedIndex="0"
                           HorizontalAlignment="Stretch" MouseLeave="CbxBanco_MouseLeave"/>
 
                 <ItemsControl Height="600" Margin="15,70,0,66" ItemsSource="{Binding SourceCollection}">
@@ -72,7 +73,7 @@
                             <StackPanel Width="250">
                                 <RadioButton Content="{Binding MenuName}" FontSize="14" Width="250" Style="{StaticResource RadioButtonAzulMarinho}"
                                              CommandParameter="{Binding MenuName}" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                             AncestorType={x:Type ItemsControl}}, Path=DataContext.ComandoDoMenu}" GroupName="MenuGroup"/>
+                                             AncestorType={x:Type ItemsControl}}, Path=DataContext.ComandoDoMenu}" GroupName="MenuGroup" Margin="0,10,0,0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
