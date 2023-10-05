@@ -14,7 +14,7 @@ namespace FinancialApp.ManageData
 
         public string _nomeDoMetodo = string.Empty;
 
-        //Lista do ComboBox
+        //Lista do ComboBox Filtros de Controle
         private ListaDeFiltrosDeControle _listaDeFiltrosDeControle;
         public ListaDeFiltrosDeControle ListaDeFiltrosDeControle
         {
@@ -57,16 +57,10 @@ namespace FinancialApp.ManageData
             {
                 try
                 {
-                    Categoria_DA categoria_DA = new();                    
-                    categoria.FiltroDeControleId = Categoria.FiltroDeControleId +1;
+                    Categoria_DA categoria_DA = new();
                     string retorno = categoria_DA.Cadastrar(categoria);
+                    int codigoDeRetorno = Convert.ToInt32(retorno);
 
-                    //Ao Cadastrar o FiltroDeControleId, o ComboBox muda para o próximo item por causa do +1.
-                    //E esse if faz voltar o nome do item que foi cadastrado.
-                    if (categoria.FiltroDeControleId != 0)
-                        categoria.FiltroDeControleId = Categoria.FiltroDeControleId - 1;
-
-                    int codigoDeRetorno = Convert.ToInt32(retorno);                    
                     GerenciarMensagens.SucessoAoCadastrar(codigoDeRetorno);
                     LimparDados();
                    
@@ -87,14 +81,8 @@ namespace FinancialApp.ManageData
             {
                 try
                 {
-                    Categoria_DA categoria_DA = new();                    
-                    categoria.FiltroDeControleId = Categoria.FiltroDeControleId + 1;
-
+                    Categoria_DA categoria_DA = new();
                     categoria_DA.Alterar(categoria);
-                    //Ao Alterar o FiltroDeControleId, o ComboBox muda para o próximo item por causa do +1.
-                    //E esse if faz voltar o nome do item que foi alterado. 
-                    if (categoria.FiltroDeControleId != 0)
-                        categoria.FiltroDeControleId = Categoria.FiltroDeControleId - 1;
 
                     GerenciarMensagens.SucessoAoAlterar(categoria.Id);
                     LimparDados();
@@ -120,8 +108,9 @@ namespace FinancialApp.ManageData
                 }
                 try
                 {
-                    Categoria_DA categoria_DA = new();
+                    Categoria_DA categoria_DA = new();                    
                     categoria_DA.Excluir(categoria);
+
                     GerenciarMensagens.SucessoAoExcluir(categoria.Id);
                     LimparDados();
                 }
@@ -140,7 +129,7 @@ namespace FinancialApp.ManageData
             //Atenção! Não juntar esse método com AtualizarDados() para não limpar ComboBoxes ao fazer CRUD.
             Categoria_DA categoria_DA = new();
             Categoria.Id = 0;
-            Categoria.NomeDaCategoria = "";
+            Categoria.NomeDaCategoria = null;
             ListaDeCategorias = categoria_DA.ConsultarCategorias();
         }
 
@@ -150,8 +139,8 @@ namespace FinancialApp.ManageData
             Categoria_DA categoria_DA = new(); 
 
             Categoria.Id = 0;
-            Categoria.NomeDaCategoria = "";
-            Categoria.NomeDoFiltro = null;            
+            Categoria.NomeDaCategoria = null;
+            Categoria.NomeDoFiltro = ListaDeFiltrosDeControle[0].NomeDoFiltro;                        
             ListaDeCategorias = categoria_DA.ConsultarCategorias();
         }
         #endregion

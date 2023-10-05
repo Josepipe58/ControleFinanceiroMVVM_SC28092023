@@ -57,7 +57,7 @@
                                      Text="{Binding Ano.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                             <TextBox x:Name="TxtAno" Width="270" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,80,0,0"
-                                     Text="{Binding Ano.AnoDoCadastro}"/>
+                                     Text="{Binding Ano.AnoDoCadastro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                             <!--| Botões da Barda Amarela |-->
                             <Button x:Name="BtnCadastrar" Content="Cadastrar" FontSize="16" Height="50" Width="130" 

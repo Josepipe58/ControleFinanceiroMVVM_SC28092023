@@ -1,83 +1,47 @@
 ﻿using Database.DatabaseContext;
 using System;
 using System.Data;
-using System.Windows;
 
 namespace Domain.Queries
 {
     public class SaldoDaCarteiraPoupancaEInvestimento : Context
     {
         //==============================================================| Saldo da Carteira |======================================================================
-        public double SaldoDaCarteira(int ano)
+        public double ConsultarSaldoDaCarteiraPorAno(int ano)
         {
-            try
-            {
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                double saldoDaCarteira = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Receitas Where Tipo = 'Carteira' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Receitas Where Categoria = 'Renda' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Saque' And Ano = @ano) + " +
-                     "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saque' And Ano = @ano)) - " +
-                    "(((Select coalesce(Sum(Valor), 0) From Despesas Where Tipo = 'Despesa' And Ano = @ano) - " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Categoria = 'Débitos da Poupança' And Ano = @ano)) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Depósito' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito Inicial' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Receitas Where Categoria = 'Renda' And Ano = @ano))"));
-                return saldoDaCarteira;
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoDaCarteira()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return 0;
-            }
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            double saldoDaCarteira = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
+                "Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria In ('Renda', 'Saldo da Carteira') And Ano = @Ano) + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Saque' And Ano = @Ano)) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Despesas' And Ano = @Ano) + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria In ('Depósito', 'Depósito Inicial') And Ano = @Ano) + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Renda' And Ano = @Ano))"));
+            return saldoDaCarteira;
         }
-        //==============================================================| Saldo da Poupanca |======================================================================
-        public double SaldoDaPoupanca(int ano)
+        //==============================================================| Saldo da Poupança |======================================================================
+        public double ConsultarSaldoDaPoupanca(int ano)
         {
-            try
-            {
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                double saldoDaPoupanca = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Saldo Anterior' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Categoria = 'Renda' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Categoria = 'Venda' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where SubCategoria = 'Depósito' And Ano = @ano)) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Despesa' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Tipo = 'Débito' And Ano = @ano))"));
-                return saldoDaPoupanca;
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoDaPoupanca()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return 0;
-            }
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            double saldoDaPoupanca = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
+                "Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Poupança' And Tipo = 'Saldo Anterior' And Ano = @Ano) + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Poupança' And NomeDaCategoria = 'Renda' And Ano = @Ano) + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaCategoria = 'Venda' And Ano = @Ano) + " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where NomeDaSubCategoria = 'Depósito' And Ano = @Ano)) - " +
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Poupança' And Tipo In('Despesas Gerais', 'Débito') And Ano = @Ano))"));
+
+            return saldoDaPoupanca;
         }
         //==============================================================| Saldo de Investimentos |======================================================================
-        public double SaldoDeInvestimentos(int ano)
+        public double ConsultarSaldoDeInvestimentos(int ano)
         {
-            try
-            {
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                double saldoDeInvestimentos = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
-                    "Select((Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saldo do Ano Anterior' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Juros de Investimentos' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito Inicial' And Ano = @ano) + " +
-                    "(Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Depósito' And Ano = @ano)) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Investimentos Where SubCategoria = 'Saque' And Ano = @ano))"));
-                return saldoDeInvestimentos;
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: SaldoDeInvestimentos().\n" +
-                   $"Detalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return 0;
-            }
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            double saldoDeInvestimentos = Convert.ToDouble(ExecutarManipulacaoDeDados(CommandType.Text,
+                "Select((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Investimentos' And Ano = @Ano) - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Filtros = 'Investimentos' And NomeDaSubCategoria = 'Saque' And Ano = @Ano))"));
+            return saldoDeInvestimentos;
         }
     }
 }

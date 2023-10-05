@@ -10,6 +10,7 @@ namespace FinancialApp.ViewModels
 
         public AnoViewModel()
         {
+            //DataGrid Dados
             _ano_DA = new Ano_DA();            
             ListaDeAnos = _ano_DA.ConsultarAnos();
         }

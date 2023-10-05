@@ -1,8 +1,5 @@
 ﻿#nullable disable
-using Database.Models;
-using Domain.Lists;
 using FinancialApp.Views;
-using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace FinancialApp.Commands

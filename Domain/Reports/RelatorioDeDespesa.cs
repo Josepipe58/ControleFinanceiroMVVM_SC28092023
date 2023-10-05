@@ -8,453 +8,295 @@ namespace Domain.Reports
 {
     public class RelatorioDeDespesa : Context
     {
-        //========================================================| Relatório de Despesas Totais |======================================================================//        
-        public ListaDeValoresMeses RelatorioDeDespesasTotais(int ano)
+        //============================================| Relatório de Despesas Totais |=================================================================================//        
+        public ListaDeValoresMeses ConsultarDespesasTotais(int ano)
         {
-            try
+            ListaDeValoresMeses ListaDeValoresMeses = new();
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            DataTable dataTable = ExecutarConsulta(CommandType.Text,
+                "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Janeiro' And Tipo = 'Despesas Gerais')) as Janeiro," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Fevereiro' And Tipo = 'Despesas Gerais')) as Fevereiro," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Março' And Tipo = 'Despesas Gerais')) as Marco," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Abril' And Tipo = 'Despesas Gerais')) as Abril," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Maio' And Tipo = 'Despesas Gerais')) as Maio," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Junho' And Tipo = 'Despesas Gerais')) as Junho," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Julho' And Tipo = 'Despesas Gerais')) as Julho," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Agôsto' And Tipo = 'Despesas Gerais')) as Agosto," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Setembro' And Tipo = 'Despesas Gerais')) as Setembro," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Outubro' And Tipo = 'Despesas Gerais')) as Outubro," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Novembro' And Tipo = 'Despesas Gerais')) as Novembro," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Dezembro' And Tipo = 'Despesas Gerais')) as Dezembro," +
+
+                "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais')) as TotalAno");
+
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                ListaDeValoresMeses listaDeValoresMeses = new();
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Janeiro' And Tipo = 'Despesa') +	" +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro')) as Janeiro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Fevereiro' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro')) as Fevereiro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Março' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março')) as [Marco]," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Abril' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril')) as Abril," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Maio' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio')) as Maio," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Junho' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho')) as Junho," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Julho' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho')) as Julho," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Agôsto' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto')) as [Agosto]," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Setembro' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro')) as Setembro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Outubro' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro')) as Outubro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Novembro' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro')) as Novembro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Dezembro' And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro')) as Dezembro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Tipo = 'Despesa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano)) as TotalAno");
-
-                foreach (DataRow dataRow in dataTable.Rows)
+                Meses meses = new()
                 {
-                    Meses meses = new()
-                    {
-                        Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
-                        Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
-                        Marco = Convert.ToDecimal(dataRow["Marco"]),
-                        Abril = Convert.ToDecimal(dataRow["Abril"]),
-                        Maio = Convert.ToDecimal(dataRow["Maio"]),
-                        Junho = Convert.ToDecimal(dataRow["Junho"]),
-                        Julho = Convert.ToDecimal(dataRow["Julho"]),
-                        Agosto = Convert.ToDecimal(dataRow["Agosto"]),
-                        Setembro = Convert.ToDecimal(dataRow["Setembro"]),
-                        Outubro = Convert.ToDecimal(dataRow["Outubro"]),
-                        Novembro = Convert.ToDecimal(dataRow["Novembro"]),
-                        Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
-                        TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
-                    };
-                    listaDeValoresMeses.Add(meses);
-                }
-                return listaDeValoresMeses;
+                    Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
+                    Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
+                    Marco = Convert.ToDecimal(dataRow["Marco"]),
+                    Abril = Convert.ToDecimal(dataRow["Abril"]),
+                    Maio = Convert.ToDecimal(dataRow["Maio"]),
+                    Junho = Convert.ToDecimal(dataRow["Junho"]),
+                    Julho = Convert.ToDecimal(dataRow["Julho"]),
+                    Agosto = Convert.ToDecimal(dataRow["Agosto"]),
+                    Setembro = Convert.ToDecimal(dataRow["Setembro"]),
+                    Outubro = Convert.ToDecimal(dataRow["Outubro"]),
+                    Novembro = Convert.ToDecimal(dataRow["Novembro"]),
+                    Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
+                    TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
+                };
+                ListaDeValoresMeses.Add(meses);
             }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: RelatorioDeDespesasTotais()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return new ListaDeValoresMeses();
-            }
+            return ListaDeValoresMeses;
         }
-        //============================================================| Relatório de Despesas Normais |===================================================================//
-        public ListaDeValoresMeses RelatorioDeDespesasNormais(int ano)
+        //============================================| Relatório de Despesas Normais |=================================================================================//
+        public ListaDeValoresMeses ConsultarDespesasNormais(int ano)
         {
-            try
+            ListaDeValoresMeses ListaDeValoresMeses = new();
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            DataTable dataTable = ExecutarConsulta(CommandType.Text,
+                "Select ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Janeiro' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Janeiro' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa'))) as Janeiro," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Fevereiro' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Fevereiro' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa')) as Fevereiro," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Março' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Março' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa')) as Marco," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Abril' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Abril' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa')) as Abril," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Maio' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Maio' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa')) as Maio," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Junho' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Junho' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Junho," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Julho' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Julho' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Julho," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Agôsto' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Agôsto' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Agosto," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Setembro' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Setembro' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Setembro," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Outubro' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Outubro' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Outubro," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Novembro' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Novembro' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Novembro," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Dezembro' And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Dezembro' And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as Dezembro," +
+
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Tipo = 'Despesas Gerais') - " +
+                "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria " +
+                "In ('Caridade', 'Despesas Extras', 'Informática e Hardware', 'Despesas da Neusa', 'Reforma do Apto Novo')) as TotalAno");
+
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                ListaDeValoresMeses listaDeValoresMeses = new();
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                    "Select ((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Despesas da Neusa'))) as Janeiro," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Despesas da Neusa')) as Fevereiro," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Março' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Despesas da Neusa')) as Marco," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Despesas da Neusa')) as Abril," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Despesas da Neusa')) as Maio," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Despesas da Neusa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Reforma do Apto Novo')) as Junho," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Despesas da Neusa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Reforma do Apto Novo')) as Julho," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Despesas da Neusa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Reforma do Apto Novo')) as Agosto," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Despesas da Neusa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Reforma do Apto Novo')) as Setembro," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Despesas da Neusa')) as Outubro," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Despesas da Neusa')) as Novembro," +
-
-                    "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Tipo = 'Despesa') - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Despesas da Neusa')) as Dezembro," +
-
-                    "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Contas Básicas') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Tipo = 'Despesa')) - " +
-                    "((Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Caridade') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Despesas Extras') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Informática e Hardware') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Despesas da Neusa') + " +
-                    "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Reforma do Apto Novo')) as TotalAno");
-
-                foreach (DataRow dataRow in dataTable.Rows)
+                Meses meses = new()
                 {
-                    Meses meses = new()
-                    {
-                        Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
-                        Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
-                        Marco = Convert.ToDecimal(dataRow["Marco"]),
-                        Abril = Convert.ToDecimal(dataRow["Abril"]),
-                        Maio = Convert.ToDecimal(dataRow["Maio"]),
-                        Junho = Convert.ToDecimal(dataRow["Junho"]),
-                        Julho = Convert.ToDecimal(dataRow["Julho"]),
-                        Agosto = Convert.ToDecimal(dataRow["Agosto"]),
-                        Setembro = Convert.ToDecimal(dataRow["Setembro"]),
-                        Outubro = Convert.ToDecimal(dataRow["Outubro"]),
-                        Novembro = Convert.ToDecimal(dataRow["Novembro"]),
-                        Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
-                        TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
-                    };
-                    listaDeValoresMeses.Add(meses);
-                }
-                return listaDeValoresMeses;
+                    Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
+                    Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
+                    Marco = Convert.ToDecimal(dataRow["Marco"]),
+                    Abril = Convert.ToDecimal(dataRow["Abril"]),
+                    Maio = Convert.ToDecimal(dataRow["Maio"]),
+                    Junho = Convert.ToDecimal(dataRow["Junho"]),
+                    Julho = Convert.ToDecimal(dataRow["Julho"]),
+                    Agosto = Convert.ToDecimal(dataRow["Agosto"]),
+                    Setembro = Convert.ToDecimal(dataRow["Setembro"]),
+                    Outubro = Convert.ToDecimal(dataRow["Outubro"]),
+                    Novembro = Convert.ToDecimal(dataRow["Novembro"]),
+                    Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
+                    TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
+                };
+                ListaDeValoresMeses.Add(meses);
             }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: RelatorioDeDespesaNormal()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return new ListaDeValoresMeses();
-            }
+            return ListaDeValoresMeses;
         }
-        //============================================================| Relatório de Despesas Extras |===============================================================//
-        public ListaDeValoresMeses RelatorioDeDespesasExtras(int ano)
+        //============================================| Relatório de Despesas Extras |==================================================================================//
+        public ListaDeValoresMeses ConsultarDespesasExtras(int selecionarAno)
         {
-            try
+            ListaDeValoresMeses ListaDeValoresMeses = new();
+            LimparParametros();
+            AdicionarParametros("@selecionarAno", selecionarAno);
+            DataTable dataTable = ExecutarConsulta(CommandType.Text,
+            "Select (Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Janeiro' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware')) as Janeiro," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Fevereiro' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware')) as Fevereiro," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Março' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware')) as Marco," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Abril' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware')) as Abril," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Maio' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware')) as Maio, " +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Junho' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Junho," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Julho' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Julho," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Agôsto' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Agosto," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Setembro' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Setembro," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Outubro' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Outubro," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Novembro' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Novembro," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And Mes = 'Dezembro' And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as Dezembro," +
+
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @selecionarAno And NomeDaCategoria " +
+            "In ('Despesas Extras', 'Informática e Hardware', 'Reforma do Apto Novo')) as TotalAno");
+
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                ListaDeValoresMeses listaDeValoresMeses = new();
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select ((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Despesas Extras')) as Janeiro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Despesas Extras')) as Fevereiro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Março' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Março' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Despesas Extras')) as Marco," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Despesas Extras')) as Abril," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Despesas Extras')) as Maio, " +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Reforma do Apto Novo') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Despesas Extras')) as Junho," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Reforma do Apto Novo') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Despesas Extras')) as Julho," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Reforma do Apto Novo') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Despesas Extras')) as Agosto," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Stembro' And Categoria = 'Reforma do Apto Novo') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Despesas Extras')) as Setembro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Despesas Extras')) as Outubro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Despesas Extras')) as Novembro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Despesas Extras')) as Dezembro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Despesas Extras') + " +
-                "(Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Informática e Hardware') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Reforma do Apto Novo') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Despesas Extras')) as TotalAno");
-
-                foreach (DataRow dataRow in dataTable.Rows)
+                Meses meses = new()
                 {
-                    Meses meses = new()
-                    {
-                        Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
-                        Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
-                        Marco = Convert.ToDecimal(dataRow["Marco"]),
-                        Abril = Convert.ToDecimal(dataRow["Abril"]),
-                        Maio = Convert.ToDecimal(dataRow["Maio"]),
-                        Junho = Convert.ToDecimal(dataRow["Junho"]),
-                        Julho = Convert.ToDecimal(dataRow["Julho"]),
-                        Agosto = Convert.ToDecimal(dataRow["Agosto"]),
-                        Setembro = Convert.ToDecimal(dataRow["Setembro"]),
-                        Outubro = Convert.ToDecimal(dataRow["Outubro"]),
-                        Novembro = Convert.ToDecimal(dataRow["Novembro"]),
-                        Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
-                        TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
-                    };
-                    listaDeValoresMeses.Add(meses);
-                }
-                return listaDeValoresMeses;
+                    Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
+                    Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
+                    Marco = Convert.ToDecimal(dataRow["Marco"]),
+                    Abril = Convert.ToDecimal(dataRow["Abril"]),
+                    Maio = Convert.ToDecimal(dataRow["Maio"]),
+                    Junho = Convert.ToDecimal(dataRow["Junho"]),
+                    Julho = Convert.ToDecimal(dataRow["Julho"]),
+                    Agosto = Convert.ToDecimal(dataRow["Agosto"]),
+                    Setembro = Convert.ToDecimal(dataRow["Setembro"]),
+                    Outubro = Convert.ToDecimal(dataRow["Outubro"]),
+                    Novembro = Convert.ToDecimal(dataRow["Novembro"]),
+                    Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
+                    TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
+                };
+                ListaDeValoresMeses.Add(meses);
             }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: RelatorioDeDespesasExtras()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return new ListaDeValoresMeses();
-            }
+            return ListaDeValoresMeses;
         }
-        //=========================================================| Relatório de Despesas com a Neusa |===============================================================//
-        public ListaDeValoresMeses RelatorioDeDespesasComANeusa(int ano)
+        //============================================| Relatório de Despesas com a Neusa |=============================================================================//
+        public ListaDeValoresMeses ConsultarDespesasComANeusa(int ano)
         {
-            try
-            {
-                ListaDeValoresMeses listaDeValoresMeses = new();
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select (Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Despesas da Neusa') as Janeiro," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Despesas da Neusa') as Fevereiro," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Despesas da Neusa') as Marco," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Despesas da Neusa') as Abril," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Despesas da Neusa') as Maio," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Despesas da Neusa') as Junho," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Despesas da Neusa') as Julho," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Despesas da Neusa') as Agosto," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Despesas da Neusa') as Setembro," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Despesas da Neusa') as Outubro," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Despesas da Neusa') as Novembro," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Despesas da Neusa') as Dezembro," +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Despesas da Neusa') as TotalAno");
+            ListaDeValoresMeses ListaDeValoresMeses = new();
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            DataTable dataTable = ExecutarConsulta(CommandType.Text,
+            "Select (Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Janeiro' And NomeDaCategoria = 'Despesas da Neusa') as Janeiro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Fevereiro' And NomeDaCategoria = 'Despesas da Neusa') as Fevereiro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Março' And NomeDaCategoria = 'Despesas da Neusa') as Marco," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Abril' And NomeDaCategoria = 'Despesas da Neusa') as Abril," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Maio' And NomeDaCategoria = 'Despesas da Neusa') as Maio," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Junho' And NomeDaCategoria = 'Despesas da Neusa') as Junho," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Julho' And NomeDaCategoria = 'Despesas da Neusa') as Julho," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Agôsto' And NomeDaCategoria = 'Despesas da Neusa') as Agosto," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Setembro' And NomeDaCategoria = 'Despesas da Neusa') as Setembro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Outubro' And NomeDaCategoria = 'Despesas da Neusa') as Outubro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Novembro' And NomeDaCategoria = 'Despesas da Neusa') as Novembro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Dezembro' And NomeDaCategoria = 'Despesas da Neusa') as Dezembro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Despesas da Neusa') as TotalAno");
 
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    Meses meses = new()
-                    {
-                        Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
-                        Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
-                        Marco = Convert.ToDecimal(dataRow["Marco"]),
-                        Abril = Convert.ToDecimal(dataRow["Abril"]),
-                        Maio = Convert.ToDecimal(dataRow["Maio"]),
-                        Junho = Convert.ToDecimal(dataRow["Junho"]),
-                        Julho = Convert.ToDecimal(dataRow["Julho"]),
-                        Agosto = Convert.ToDecimal(dataRow["Agosto"]),
-                        Setembro = Convert.ToDecimal(dataRow["Setembro"]),
-                        Outubro = Convert.ToDecimal(dataRow["Outubro"]),
-                        Novembro = Convert.ToDecimal(dataRow["Novembro"]),
-                        Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
-                        TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
-                    };
-                    listaDeValoresMeses.Add(meses);
-                }
-                return listaDeValoresMeses;
-            }
-            catch (Exception erro)
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: RelatorioDeDespesasComANeusa()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return new ListaDeValoresMeses();
+                Meses meses = new()
+                {
+                    Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
+                    Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
+                    Marco = Convert.ToDecimal(dataRow["Marco"]),
+                    Abril = Convert.ToDecimal(dataRow["Abril"]),
+                    Maio = Convert.ToDecimal(dataRow["Maio"]),
+                    Junho = Convert.ToDecimal(dataRow["Junho"]),
+                    Julho = Convert.ToDecimal(dataRow["Julho"]),
+                    Agosto = Convert.ToDecimal(dataRow["Agosto"]),
+                    Setembro = Convert.ToDecimal(dataRow["Setembro"]),
+                    Outubro = Convert.ToDecimal(dataRow["Outubro"]),
+                    Novembro = Convert.ToDecimal(dataRow["Novembro"]),
+                    Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
+                    TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
+                };
+                ListaDeValoresMeses.Add(meses);
             }
+            return ListaDeValoresMeses;
         }
-        //=========================================================| Relatório de Despesas com Caridades |=============================================================//
-        public ListaDeValoresMeses RelatorioDeDespesasComCaridades(int ano)
+        //============================================| Relatório de Despesas com Caridade |===========================================================================//
+        public ListaDeValoresMeses ConsultarDespesasComCaridades(int ano)
         {
-            try
+            ListaDeValoresMeses ListaDeValoresMeses = new();
+            LimparParametros();
+            AdicionarParametros("@Ano", ano);
+            DataTable dataTable = ExecutarConsulta(CommandType.Text,
+            "Select (Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Janeiro' And NomeDaCategoria = 'Caridade') as Janeiro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Fevereiro' And NomeDaCategoria = 'Caridade') as Fevereiro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Março' And NomeDaCategoria = 'Caridade') as Marco," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Abril' And NomeDaCategoria = 'Caridade') as Abril," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Maio' And NomeDaCategoria = 'Caridade') as Maio," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Junho' And NomeDaCategoria = 'Caridade') as Junho," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Julho' And NomeDaCategoria = 'Caridade') as Julho," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Agôsto' And NomeDaCategoria = 'Caridade') as Agosto," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Setembro' And NomeDaCategoria = 'Caridade') as Setembro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Outubro' And NomeDaCategoria = 'Caridade') as Outubro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Novembro' And NomeDaCategoria = 'Caridade') as Novembro," +
+            "(Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And Mes = 'Dezembro' And NomeDaCategoria = 'Caridade') as Dezembro," +
+            "((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Ano = @Ano And NomeDaCategoria = 'Caridade')) as TotalAno");
+
+            foreach (DataRow dataRow in dataTable.Rows)
             {
-                ListaDeValoresMeses listaDeValoresMeses = new();
-                LimparParametros();
-                AdicionarParametros("@ano", ano);
-                DataTable dataTable = ExecutarConsulta(CommandType.Text,
-                "Select ((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Janeiro' And Categoria = 'Caridade')) as Janeiro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Fevereiro' And Categoria = 'Caridade')) as Fevereiro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Março' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Março' And Categoria = 'Caridade')) as Marco," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Abril' And Categoria = 'Caridade')) as Abril," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Maio' And Categoria = 'Caridade')) as Maio," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Junho' And Categoria = 'Caridade')) as Junho," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Julho' And Categoria = 'Caridade')) as Julho," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Agôsto' And Categoria = 'Caridade')) as Agosto," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Setembro' And Categoria = 'Caridade')) as Setembro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Outubro' And Categoria = 'Caridade')) as Outubro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Novembro' And Categoria = 'Caridade')) as Novembro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Mes = 'Dezembro' And Categoria = 'Caridade')) as Dezembro," +
-
-                "((Select coalesce(Sum(Valor), 0) From Poupancas Where Ano = @ano And Categoria = 'Caridade') + " +
-                "(Select coalesce(Sum(Valor), 0) From Despesas Where Ano = @ano And Categoria = 'Caridade')) as TotalAno");
-
-                foreach (DataRow dataRow in dataTable.Rows)
+                Meses meses = new()
                 {
-                    Meses meses = new()
-                    {
-                        Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
-                        Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
-                        Marco = Convert.ToDecimal(dataRow["Marco"]),
-                        Abril = Convert.ToDecimal(dataRow["Abril"]),
-                        Maio = Convert.ToDecimal(dataRow["Maio"]),
-                        Junho = Convert.ToDecimal(dataRow["Junho"]),
-                        Julho = Convert.ToDecimal(dataRow["Julho"]),
-                        Agosto = Convert.ToDecimal(dataRow["Agosto"]),
-                        Setembro = Convert.ToDecimal(dataRow["Setembro"]),
-                        Outubro = Convert.ToDecimal(dataRow["Outubro"]),
-                        Novembro = Convert.ToDecimal(dataRow["Novembro"]),
-                        Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
-                        TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
-                    };
-                    listaDeValoresMeses.Add(meses);
-                }
-                return listaDeValoresMeses;
+                    Janeiro = Convert.ToDecimal(dataRow["Janeiro"]),
+                    Fevereiro = Convert.ToDecimal(dataRow["Fevereiro"]),
+                    Marco = Convert.ToDecimal(dataRow["Marco"]),
+                    Abril = Convert.ToDecimal(dataRow["Abril"]),
+                    Maio = Convert.ToDecimal(dataRow["Maio"]),
+                    Junho = Convert.ToDecimal(dataRow["Junho"]),
+                    Julho = Convert.ToDecimal(dataRow["Julho"]),
+                    Agosto = Convert.ToDecimal(dataRow["Agosto"]),
+                    Setembro = Convert.ToDecimal(dataRow["Setembro"]),
+                    Outubro = Convert.ToDecimal(dataRow["Outubro"]),
+                    Novembro = Convert.ToDecimal(dataRow["Novembro"]),
+                    Dezembro = Convert.ToDecimal(dataRow["Dezembro"]),
+                    TotalAno = Convert.ToDecimal(dataRow["TotalAno"])
+                };
+                ListaDeValoresMeses.Add(meses);
             }
-            catch (Exception erro)
-            {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: RelatorioDeDespesasComCaridades()." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return new ListaDeValoresMeses();
-            }
+            return ListaDeValoresMeses;
         }
     }
 }

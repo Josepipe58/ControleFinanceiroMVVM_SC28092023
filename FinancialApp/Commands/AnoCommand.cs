@@ -8,8 +8,7 @@ namespace FinancialApp.Commands
     {
         #region |=================================| Comandos |==================================================|
         
-        //|=================================| Comando Cadastrar |=========================================|
-
+        //Cadastrar
         private ICommand _comandoDeCadastrarAno;
         public ICommand ComandoDeCadastrarAno
         {
@@ -21,8 +20,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|=================================| Comando Alterar |===========================================|
-
+        //Alterar
         private ICommand _comandoDeAlterarAno;
         public ICommand ComandoDeDeAlterarAno
         {
@@ -34,8 +32,7 @@ namespace FinancialApp.Commands
             }
         }
        
-        //|=================================| Comando Excluir |===========================================|
-
+        //Comando Excluir
         private ICommand _comandoDeExcluirAno;
         public ICommand ComandoDeDeExcluirAno
         {
@@ -46,9 +43,8 @@ namespace FinancialApp.Commands
                 return _comandoDeExcluirAno;
             }
         }
-        
-        //|=================================| Comando Atualizar |=========================================|
 
+        //Limpar e atualizar dados
         private ICommand _comandoDeAtualizarAno;
         public ICommand ComandoDeDeAtualizarAno
         {

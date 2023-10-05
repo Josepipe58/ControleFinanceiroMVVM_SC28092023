@@ -37,7 +37,7 @@ namespace Domain.Messages
         #region |====================================| Mensagens de CRUD com Erros |====================================|
         public static void ErroAoCadastrar()
         {
-            MessageBox.Show("Atenção!\nO campo Id tem que ser igual a 0 ou vazio.\nOutra opção é clicar no botão Alterar." +
+            MessageBox.Show("Atenção!\nO campo Id tem que ser igual a 0 ou vazio.\nOutra opção é clicar no botão Alterar ou Excluir." +
                     "\nCorrija esses erros, para continuar.", "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 

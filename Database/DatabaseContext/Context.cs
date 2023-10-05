@@ -8,7 +8,7 @@ namespace Database.DatabaseContext
 {
     public class Context
     {
-        public static string Banco { get; set; } = "BancoDeTestes"; //"Financeiro_2020_2025";
+        public static string Banco { get; set; } = "Financeiro_2020_2025"; //= "BancoDeTestes"; //"Financeiro_2020_2025";
 
         private readonly SqlParameterCollection _sqlParameterCollection = new SqlCommand().Parameters;
         public Context(string banco)

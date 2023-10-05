@@ -11,9 +11,11 @@
     <None Remove="Images\back_icon.png" />
     <None Remove="Images\controle_financeiro_azulclaro.png" />
     <None Remove="Images\folder.ico" />
+    <None Remove="Images\Universo01.jpg" />
     <None Remove="Resources\back_icon.png" />
     <None Remove="Resources\controle_financeiro_azulclaro.png" />
     <None Remove="Resources\folder.ico" />
+    <None Remove="Views\Universo01.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +27,7 @@
     <Resource Include="Images\back_icon.png" />
     <Resource Include="Images\controle_financeiro_azulclaro.png" />
     <Resource Include="Images\folder.ico" />
+    <Resource Include="Images\Universo01.jpg" />
   </ItemGroup>
 
 </Project>

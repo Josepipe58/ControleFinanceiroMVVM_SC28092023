@@ -8,8 +8,7 @@ namespace FinancialApp.Commands
     {
         #region |=================================| Comandos |==================================================|
         
-        //|=================================| Comando Cadastrar |=========================================|
-
+        //Cadastrar 
         private ICommand _comandoDeCadastrarDespesa;
         public ICommand ComandoDeCadastrarDespesa
         {
@@ -21,8 +20,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|=================================| Comando Alterar |===========================================|
-
+        //Alterar 
         private ICommand _comandoDeAlterarDespesa;
         public ICommand ComandoDeDeAlterarDespesa
         {
@@ -34,8 +32,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|=================================| Comando Excluir |===========================================|
-
+        //Excluir 
         private ICommand _comandoDeExcluirDespesa;
         public ICommand ComandoDeDeExcluirDespesa
         {
@@ -47,8 +44,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|=================================| Comando Atualizar |=========================================|
-
+        //Atualizar 
         private ICommand _comandoDeAtualizarDespesa;
         public ICommand ComandoDeDeAtualizarDespesa
         {

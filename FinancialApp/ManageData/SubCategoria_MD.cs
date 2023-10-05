@@ -13,7 +13,6 @@ namespace FinancialApp.ManageData
         #region |=================================| Gerenciar Dados(CRUD) |=====================================|        
 
         public string _nomeDoMetodo = string.Empty;
-
         //OBS: As Listas dos ComboBoxes, estão no Código Por Trás(Code Behind), por causa do evento SelectionChanged.
 
         //Lista do DataGrid Dados
@@ -33,7 +32,7 @@ namespace FinancialApp.ManageData
 
         public SubCategoria_MD()
         {
-            ListaDeSubCategorias = new ListaDeSubCategorias();           
+            ListaDeSubCategorias = new ListaDeSubCategorias();
         }
 
         //Cadastrar
@@ -43,10 +42,7 @@ namespace FinancialApp.ManageData
             {
                 try
                 {
-                    SubCategoria_DA subCategoria_DA = new();
-                    subCategoria.Id = SubCategoria.Id;
-                    subCategoria.NomeDaSubCategoria = SubCategoria.NomeDaSubCategoria;                    
-                    subCategoria.CategoriaId = SubCategoria.CategoriaId;
+                    SubCategoria_DA subCategoria_DA = new();                    
                     string retorno = subCategoria_DA.Cadastrar(subCategoria);
                     int codigoDeRetorno = Convert.ToInt32(retorno);
 
@@ -69,10 +65,7 @@ namespace FinancialApp.ManageData
             {
                 try
                 {
-                    SubCategoria_DA subCategoria_DA = new();
-                    subCategoria.Id = SubCategoria.Id;
-                    subCategoria.NomeDaSubCategoria = SubCategoria.NomeDaSubCategoria;
-                    subCategoria.CategoriaId = SubCategoria.CategoriaId;
+                    SubCategoria_DA subCategoria_DA = new();                    
                     subCategoria_DA.Alterar(subCategoria);
 
                     GerenciarMensagens.SucessoAoAlterar(subCategoria.Id);
@@ -100,7 +93,7 @@ namespace FinancialApp.ManageData
                 }
                 try
                 {
-                    SubCategoria_DA subCategoria_DA = new();
+                    SubCategoria_DA subCategoria_DA = new();                    
                     subCategoria_DA.Excluir(subCategoria);
 
                     GerenciarMensagens.SucessoAoExcluir(subCategoria.Id);
@@ -130,10 +123,9 @@ namespace FinancialApp.ManageData
         {
             SubCategoria_DA subCategoria_DA = new();
             SubCategoria.Id = 0;
-            SubCategoria.NomeDaSubCategoria = null;            
+            SubCategoria.NomeDaSubCategoria = null;
             SubCategoria.NomeDoFiltro = null;
-            SubCategoria.CategoriaId = 0;
-            SubCategoria.NomeDaCategoria = null;
+            SubCategoria.NomeDaCategoria = null; 
             SubCategoria.Pesquisar = null;
             ListaDeSubCategorias = subCategoria_DA.ConsultarSubCategorias();            
         }

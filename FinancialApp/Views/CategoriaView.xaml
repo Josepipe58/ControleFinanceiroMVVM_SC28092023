@@ -61,7 +61,7 @@
                             <ComboBox Name="CbxNomeDeFiltros" Height="40" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}"
                                       DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" ItemsSource="{Binding ListaDeFiltrosDeControle}"
                                       Text="{Binding Categoria.NomeDoFiltro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      SelectedIndex="{Binding Categoria.FiltroDeControleId}" Margin="890,35,0,0"/>
+                                      SelectedValue="{Binding Categoria.FiltroDeControleId}" Margin="890,35,0,0" SelectedIndex="0"/>
                         </Grid>
                     </Border>
 

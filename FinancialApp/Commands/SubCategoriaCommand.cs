@@ -8,8 +8,7 @@ namespace FinancialApp.Commands
     {
         #region |===========================| Comandos de SubCategoria |========================================|
         
-        //|================================| Comando Cadastrar |==========================================|
-
+        //Cadastrar 
         private ICommand _comandoDeCadastrarSubCategoria;
         public ICommand ComandoDeCadastrarSubCategoria
         {
@@ -21,8 +20,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|================================| Comando Alterar |============================================|
-
+        //Alterar 
         private ICommand _comandoDeAlterarSubCategoria;
         public ICommand ComandoDeDeAlterarSubCategoria
         {
@@ -34,8 +32,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|================================| Comando Excluir |============================================|
-
+        //Excluir 
         private ICommand _comandoDeExcluirSubCategoria;
         public ICommand ComandoDeDeExcluirSubCategoria
         {
@@ -47,8 +44,7 @@ namespace FinancialApp.Commands
             }
         }
         
-        //|================================| Comando Atualizar |==========================================|
-
+        //Atualizar
         private ICommand _comandoDeAtualizarSubCategoria;
         public ICommand ComandoDeDeAtualizarSubCategoria
         {
