@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using Domain.Lists;
 using Domain.Messages;
+using FinancialApp.NomeDeBancos;
 using FinancialApp.Views;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ using System.Windows.Input;
 namespace FinancialApp.Commands
 {
     public class NavegacaoCommand : ComandosGerais
-    {         
-        #region |============================| Comandos de Navegação |==========================================|
-
+    {
         public string _nomeDoMetodo = string.Empty;
+
+        public ListaDeNomeDeBancosDoSql ListaDeNomeDeBancosDoSql { get; set; }
 
         public List<string> CarregarComboBoxDeNomeDeBancos { get; set; }
 
@@ -35,15 +36,18 @@ namespace FinancialApp.Commands
                 new ListaDeItemsDoMenu{ MenuName = "Aposentadoria" },
                 new ListaDeItemsDoMenu{ MenuName = "Categorias" },
                 new ListaDeItemsDoMenu{ MenuName = "SubCategorias" },                
-                new ListaDeItemsDoMenu{ MenuName = "Cadastrar Anos" },
+                new ListaDeItemsDoMenu{ MenuName = "Cadastrar Anos" },               
             };
             MenuItemsCollection = new CollectionViewSource { Source = menuItems };
 
             // Configura a página de inicialização.
             SelecionarControleDeUsuario = new HomePage();
 
+
+
             //Carregar ComboBox do Nome de Banco de Dados.            
-            CarregarComboBoxDeNomeDeBancos = ListaDeNomeDeBancos.CarregarComboBoxDeNomeDeBancos();
+            Financeiro nomeDeBancosSql = new();
+            ListaDeNomeDeBancosDoSql = nomeDeBancosSql.ConsultarNomeDeBancos();
         }
 
         private void ExibirPaginaInicial()
@@ -100,7 +104,7 @@ namespace FinancialApp.Commands
                         break;                   
                     case "Cadastrar Anos":
                         SelecionarControleDeUsuario = new AnoView();
-                        break;
+                        break;                   
                     default:
                         SelecionarControleDeUsuario = new HomePage();
                         break;
@@ -143,6 +147,5 @@ namespace FinancialApp.Commands
                 return _comandoSairDoAplicativo;
             }
         }
-        #endregion
     }
 }

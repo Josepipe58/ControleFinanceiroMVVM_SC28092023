@@ -1,0 +1,101 @@
+﻿<Window x:Class="AppFinanceiroMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tp="clr-namespace:AppFinanceiroMVVM.Comandos"
+        mc:Ignorable="d" xml:lang="pt-BR" Height="1000" Width="1400" 
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" 
+        WindowStyle="SingleBorderWindow">
+
+    <!--| ComandosDeNavegacao |-->
+    <Window.DataContext>
+        <tp:ComandosDaTelaPrincipal/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <!--| Cabeçalho |-->
+        <Border Background="#FF06A0AB" Height="80" Margin="0,0,90,0" VerticalAlignment="Top" CornerRadius="0,0,100,0">
+
+            <TextBlock Text="C O N T R O L E   F I N A N C E I R O   P E S S O A L" FontFamily="Baskerville Old Face" 
+                       FontSize="32" FontWeight="Bold" Foreground="#FF0EF3EE" Width="755" Margin="50,25,0,0" 
+                       HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Border>
+
+        <!--Rodapé-->
+        <Border Background="#FF06A0AB" Height="80" Margin="90,0,0,0" VerticalAlignment="Bottom" CornerRadius="100,0,0,0">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.064"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+
+            <Grid>
+                <TextBlock Text="C O N T R O L E   F I N A N C E I R O   P E S S O A L" FontFamily="Baskerville Old Face" 
+                           FontSize="32" FontWeight="Bold" Foreground="#FF0EF3EE" Width="755" Margin="500,25,0,0"
+                           HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+
+        <Border Background="#FF06A0AB" BorderBrush="#FFFFFF" BorderThickness="0,5,0,5" Margin="10,80,10,80" CornerRadius="25"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="750" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--| Página Principal |-->
+            <Grid Margin="10,10,0,90" Grid.Row="2" Grid.Column="2" Grid.RowSpan="3">
+                <Border Background="#FF0A17E2" BorderBrush="#FFFFFF" BorderThickness="0,5,0,5" Margin="0,10,20,10"
+            CornerRadius="25 25 25 25">
+                    <ContentControl x:Name="Pages" Content="{Binding SelecionarControleDeUsuario}" Margin="10,10,15,10"/>
+                </Border>
+            </Grid>
+            <TextBlock Text="JOSÉ EURIPEDES HONÓRIO" FontFamily="Segoe Script" FontSize="14" FontWeight="Bold" Foreground="#FFF0F5F5"
+            Margin="455,40,357,15" Grid.Column="2" Grid.RowSpan="2"/>
+
+            <!--| Menu |-->
+            <Grid Height="729" Width="370" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1">
+
+                <Label Content="Selecione um Banco de Dados" FontSize="18" FontWeight="Bold" Height="35" 
+                       Foreground="#FFF5F0F0" Margin="30,0,43,0" VerticalAlignment="Top"/>
+
+                <ComboBox Name="CbxBanco" Width="NaN" Margin="30,30,10,0" Style="{DynamicResource ComboBoxAzulMarinho}"
+                          DisplayMemberPath="Nome" ItemsSource="{Binding ListaDeNomeDeBancosDoSql}" SelectedIndex="0"
+                          HorizontalAlignment="Stretch" MouseLeave="CbxBanco_MouseLeave"/>
+
+                <ItemsControl Height="600" Margin="15,70,0,66" ItemsSource="{Binding SourceCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="250">
+                                <RadioButton Content="{Binding MenuName}" FontSize="14" Width="250" Style="{StaticResource RadioButtonAzulMarinho}"
+                                             CommandParameter="{Binding MenuName}" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                             AncestorType={x:Type ItemsControl}}, Path=DataContext.ComandoDoMenu}" GroupName="MenuGroup" Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!--| Botões |-->
+                <Button Content="Abrir Sql Server" Height="50" Width="200" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="90,0,0,130"
+                        Command="{Binding ComandoAbrirBancoDeDados}" VerticalAlignment="Bottom"/>
+
+                <Button Content="Sair" Height="50" Width="150" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="115,0,0,60"                        
+                         Command="{Binding ComandoSairDoAplicativo}" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

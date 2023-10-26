@@ -6,55 +6,52 @@ namespace FinancialApp.Commands
 {
     public class CentralDeDadosCommand : CentralDeDados_MD
     {
-        #region |=================================| Comandos |==================================================|
-        
         //Cadastrar 
-        private ICommand _comandoDeCadastrarDespesa;
-        public ICommand ComandoDeCadastrarDespesa
+        private ICommand _comandoDeCadastrar;
+        public ICommand ComandoDeCadastrar
         {
             get
             {
-                _comandoDeCadastrarDespesa ??= new RelayCommand(param =>
+                _comandoDeCadastrar ??= new RelayCommand(param =>
                 Cadastrar(CentralDeDados));
-                return _comandoDeCadastrarDespesa;
+                return _comandoDeCadastrar;
             }
         }
         
         //Alterar 
-        private ICommand _comandoDeAlterarDespesa;
-        public ICommand ComandoDeDeAlterarDespesa
+        private ICommand _comandoDeAlterar;
+        public ICommand ComandoDeAlterar
         {
             get
             {
-                _comandoDeAlterarDespesa ??= new RelayCommand(param =>
+                _comandoDeAlterar ??= new RelayCommand(param =>
                     Alterar(CentralDeDados));
-                return _comandoDeAlterarDespesa;
+                return _comandoDeAlterar;
             }
         }
         
         //Excluir 
-        private ICommand _comandoDeExcluirDespesa;
-        public ICommand ComandoDeDeExcluirDespesa
+        private ICommand _comandoDeExcluir;
+        public ICommand ComandoDeExcluir
         {
             get
             {
-                _comandoDeExcluirDespesa ??= new RelayCommand(param =>
+                _comandoDeExcluir ??= new RelayCommand(param =>
                     Excluir(CentralDeDados));
-                return _comandoDeExcluirDespesa;
+                return _comandoDeExcluir;
             }
         }
         
         //Atualizar 
-        private ICommand _comandoDeAtualizarDespesa;
-        public ICommand ComandoDeDeAtualizarDespesa
+        private ICommand _comandoDeAtualizar;
+        public ICommand ComandoDeAtualizar
         {
             get
             {
-                _comandoDeAtualizarDespesa ??= new RelayCommand(param =>
-                AtualizarDados());
-                return _comandoDeAtualizarDespesa;
+                _comandoDeAtualizar ??= new RelayCommand(param => 
+                AtualizarDados());               
+                return _comandoDeAtualizar;
             }
         }
-        #endregion 
     }
 }

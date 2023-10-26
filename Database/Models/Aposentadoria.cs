@@ -2,9 +2,7 @@
 using System.Collections.ObjectModel;
 
 namespace Database.Models
-{         
-    #region |=========================| Propriedades da Tabela Aposentadorias |=============================|
-    
+{
     public class Aposentadoria : BaseModelo
     {
         private int _id;
@@ -108,7 +106,6 @@ namespace Database.Models
             AtualizarValor = aposentadoria.AtualizarValor;
             SaldoAtual = aposentadoria.SaldoAtual;
         }
-        #endregion
     }
 
     public class ListaDeAposentadoria : ObservableCollection<Aposentadoria> { }

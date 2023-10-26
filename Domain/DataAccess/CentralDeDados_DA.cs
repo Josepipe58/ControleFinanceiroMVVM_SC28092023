@@ -13,7 +13,7 @@ namespace Domain.DataAccess
         public string Cadastrar(CentralDeDados cadastrar)
         {
             LimparParametros();
-            AdicionarParametros("@Id", cadastrar.Id + 1);
+            AdicionarParametros("@Id", cadastrar.Id +1);
             AdicionarParametros("@NomeDaCategoria", cadastrar.NomeDaCategoria);
             AdicionarParametros("@NomeDaSubCategoria", cadastrar.NomeDaSubCategoria);
             AdicionarParametros("@Valor", cadastrar.Valor);
@@ -21,11 +21,11 @@ namespace Domain.DataAccess
             AdicionarParametros("@Tipo", cadastrar.Tipo);
             AdicionarParametros("@Data", cadastrar.Data);
             AdicionarParametros("@Mes", cadastrar.Mes);
-            AdicionarParametros("@ano", cadastrar.Ano);
+            AdicionarParametros("@Ano", cadastrar.Ano);
             _consulta = ExecutarManipulacaoDeDados(CommandType.Text,
             "Select @Id = Id +1 From CentralDeDados; Insert Into CentralDeDados (Id, NomeDaCategoria, NomeDaSubCategoria, Valor, Filtros, " +
             "Tipo, Data, Mes, Ano) Values (@Id, @NomeDaCategoria, @NomeDaSubCategoria, @Valor, " +
-            "@Filtros, @Tipo, @Data, @Mes, @ano); Select @Id as Retorno;").ToString();
+            "@Filtros, @Tipo, @Data, @Mes, @Ano); Select @Id as Retorno;").ToString();//Select @@IDENTITY as Retorno;
             return _consulta;
         }
 
@@ -89,8 +89,8 @@ namespace Domain.DataAccess
         {
             ListaDaCentralDeDados listaDaCentralDeDados = new();
             LimparParametros();
-            AdicionarParametros("@Filtros", filtros);
             AdicionarParametros("@ano", ano);
+            AdicionarParametros("@Filtros", filtros);            
             DataTable dataTable = ExecutarConsulta(CommandType.Text,
                 "Select * From CentralDeDados Where Ano = @ano And Filtros = @Filtros Order By Id Desc;");
 

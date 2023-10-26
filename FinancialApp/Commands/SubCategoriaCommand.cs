@@ -6,8 +6,6 @@ namespace FinancialApp.Commands
 {
     public class SubCategoriaCommand : SubCategoria_MD
     {
-        #region |===========================| Comandos de SubCategoria |========================================|
-        
         //Cadastrar 
         private ICommand _comandoDeCadastrarSubCategoria;
         public ICommand ComandoDeCadastrarSubCategoria
@@ -55,6 +53,5 @@ namespace FinancialApp.Commands
                 return _comandoDeAtualizarSubCategoria;
             }
         }
-        #endregion
     }
 }

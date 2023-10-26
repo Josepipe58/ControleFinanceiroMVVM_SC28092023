@@ -4,8 +4,6 @@ namespace FinancialApp.DataValidation
 {
     public class DataValidationBase : INotifyPropertyChanged
     {
-        #region |===========================| Interface INotifyPropertyChanged |================================|
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -13,7 +11,6 @@ namespace FinancialApp.DataValidation
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual void Dispose() { }
-        #endregion
+        protected virtual void Dispose() { }      
     }
 }

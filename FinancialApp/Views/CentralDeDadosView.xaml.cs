@@ -1,6 +1,8 @@
 ﻿#nullable disable
 using Database.Models;
 using Domain.DataAccess;
+using Domain.Messages;
+using Domain.Queries;
 using Domain.Reports;
 using System;
 using System.Windows;
@@ -11,12 +13,12 @@ namespace FinancialApp.Views
 {
     public partial class CentralDeDadosView : UserControl
     {
-        public CentralDeDados CentralDeDados { get; set; }
+        public string nomeDoMetodo = string.Empty;
         public CentralDeDadosView()
         {
             InitializeComponent();
-            CentralDeDados = new CentralDeDados();
-            CarregarDiversosComboBoxesDeDespesas();
+                      
+            CarregarDiversosComboBoxesDeDespesas();           
         }
 
         private void CarregarDiversosComboBoxesDeDespesas()
@@ -39,7 +41,6 @@ namespace FinancialApp.Views
                 CbxNomeDeFiltros.ItemsSource = filtroDeControle_DA.ConsultarFiltrosDeControle();
                 CbxNomeDeFiltros.DisplayMemberPath = "NomeDoFiltro";
                 CbxNomeDeFiltros.SelectedValuePath = "Id";
-                CbxNomeDeFiltros.SelectedIndex = 0;
             }
             catch (Exception erro)
             {
@@ -47,20 +48,18 @@ namespace FinancialApp.Views
                     $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            //SaldoDaCarteiraPoupancaEInvestimentos();
-            TxtValor.Focus();
+            DataGridDaCentralDeDadosEValores();            
         }
 
         private void CbxNomeDeFiltros_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Carregar ComboBox das Categorias de Despesas.
+            //Carregar ComboBox das Categorias
             Categoria_DA categoria_DA = new();
             CbxCategoria.ItemsSource = categoria_DA
                 .ConsultarCategoriasPorId(Convert.ToInt32(CbxNomeDeFiltros.SelectedValue));            
             CbxCategoria.DisplayMemberPath = "NomeDaCategoria";
             CbxCategoria.SelectedValuePath = "Id";
             CbxCategoria.SelectedIndex = 0;
-
         }
 
         private void CbxCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -78,26 +77,79 @@ namespace FinancialApp.Views
 
         private void DtgDados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (DtgDados.SelectedIndex >= 0)
+            if (DtgDados.SelectedItems.Count >= 0)
             {
-                if (DtgDados.SelectedItems.Count >= 0)
+                if (DtgDados.SelectedItems[0].GetType() == typeof(CentralDeDados))
                 {
-                    if (DtgDados.SelectedItems[0].GetType() == typeof(CentralDeDados))
-                    {
-                        CentralDeDados = (CentralDeDados)DtgDados.SelectedItems[0];
-                        TxtId.Text = CentralDeDados.Id.ToString();
-                        CbxCategoria.Text = CentralDeDados.NomeDaCategoria.ToString();
-                        CbxSubCategoria.Text = CentralDeDados.NomeDaSubCategoria.ToString();
-                        TxtValor.Text = CentralDeDados.Valor.ToString();
-                        CbxNomeDeFiltros.Text = CentralDeDados.Filtros.ToString();
-                        CbxTipo.Text = CentralDeDados.Tipo.ToString();
-                        DtpData.Text = CentralDeDados.Data.ToString();
-                        CbxMes.Text = CentralDeDados.Mes.ToString();
-                        CbxAno.Text = CentralDeDados.Ano.ToString();
-                        TxtValor.Focus();
-                    }
+                    CentralDeDados centralDeDados = (CentralDeDados)DtgDados.SelectedItems[0];
+
+                    TxtId.Text = centralDeDados.Id.ToString();
+                    CbxCategoria.Text = centralDeDados.NomeDaCategoria;
+                    CbxSubCategoria.Text = centralDeDados.NomeDaSubCategoria;
+                    TxtValor.Text = centralDeDados.Valor.ToString();
+                    CbxNomeDeFiltros.Text = centralDeDados.Filtros;
+                    CbxTipo.Text = centralDeDados.Tipo;
+                    DtpData.Text = centralDeDados.Data.ToString();
+                    CbxMes.Text = centralDeDados.Mes;
+                    CbxAno.Text = centralDeDados.Ano.ToString();                    
                 }
             }
+        }
+        
+        public void DataGridDaCentralDeDadosEValores()
+        {
+            try
+            {
+                CentralDeDados_DA centralDeDados_DA = new();
+                DtgDados.ItemsSource = centralDeDados_DA.ConsultarFiltroSelecionadoNoComboBox
+                        (CbxNomeDeFiltros.Text, Convert.ToInt32(CbxAno.Text));
+
+                if (CbxNomeDeFiltros.Text == "Despesas")
+                {
+                    RelatorioDeDespesas relatorioDeDespesa_AD = new();
+                    DtgValores.ItemsSource = relatorioDeDespesa_AD.ConsultarDespesasTotais(Convert.ToInt32(CbxAno.Text));
+                    LblTituloDtgValores.Content = "Despesa Geral - Mensal e Anual";
+                }
+                else if (CbxNomeDeFiltros.Text == "Poupança")
+                {
+                    RelatorioDePoupanca relatorioDePoupanca_AD = new();
+                    DtgValores.ItemsSource = relatorioDePoupanca_AD
+                        .ConsultarSaldoTotalDaPoupancaReceitasEInvestimentos(Convert.ToInt32(CbxAno.Text));
+                    LblTituloDtgValores.Content = "Saldo Total da Poupança";
+                    TxtValor.Focus();                    
+                }
+                else
+                {
+                    RelatorioDeInvestimentos relatorioDeInvestimentos_AD = new();
+                    DtgValores.ItemsSource = relatorioDeInvestimentos_AD
+                        .ConsultarSaldoTotalDeInvestimentos(Convert.ToInt32(CbxAno.Text));
+                    LblTituloDtgValores.Content = "Saldo Total de Investimentos.";
+                }
+
+            }
+            catch (Exception erro)
+            {
+                nomeDoMetodo = "DataGridDaCentralDeDadosEValores";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                return;
+            }
+            
+            SaldoDaCarteiraPoupancaEInvestimentos();
+        }
+
+        private void CbxAno_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DataGridDaCentralDeDadosEValores();
+        }
+        
+        private void CbxNomeDeFiltros_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DataGridDaCentralDeDadosEValores();
+        }
+        
+        private void BtnAtualizar_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridDaCentralDeDadosEValores();
         }
 
         private void TxtValor_KeyDown(object sender, KeyEventArgs e)
@@ -109,15 +161,64 @@ namespace FinancialApp.Views
             }
         }
 
-        private void CbxAno_MouseLeave(object sender, MouseEventArgs e)
+        public void SaldoDaCarteiraPoupancaEInvestimentos()
         {
-            CentralDeDados_DA centralDeDados_DA = new();
-            DtgDados.ItemsSource = centralDeDados_DA.ConsultaGeralDaCentralDeDadosPorAno(Convert.ToInt32(CbxAno.Text));
-
-            RelatorioDeDespesa relatorioDeDespesa = new();
-            DtgValores.ItemsSource = relatorioDeDespesa.ConsultarDespesasTotais(Convert.ToInt32(CbxAno.Text));
-
-            //SaldoDaCarteiraPoupancaEInvestimentos();
+            if (CbxAno.Text != "" && CbxMes.Text != "")
+            {
+                try
+                {
+                    SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento = new();
+                    //====================================| Saldo da Carteira |=======================================================================                    
+                    TxtCarteira.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(Convert.ToInt32(CbxAno.Text)));
+                    double saldoDaCarteira = Convert.ToDouble(TxtCarteira.Text.ToString().Replace("R$", ""));
+                    TxtCarteira.Text = string.Format("{0:c}", saldoDaCarteira);
+                    //====================================| Saldo da Poupança |======================================================================== 
+                    TxtPoupanca.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(Convert.ToInt32(CbxAno.Text)));
+                    double saldoDaPoupanca = Convert.ToDouble(TxtPoupanca.Text.ToString().Replace("R$", ""));
+                    TxtPoupanca.Text = string.Format("{0:c}", saldoDaPoupanca);
+                    //====================================| Saldo de Investimentos |=================================================================== 
+                    TxtInvestimento.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDeInvestimentos(Convert.ToInt32(CbxAno.Text)));
+                    double saldoDeInvestimento = Convert.ToDouble(TxtInvestimento.Text.ToString().Replace("R$", ""));
+                    TxtInvestimento.Text = string.Format("{0:c}", saldoDeInvestimento);
+                    //=====================================| Saldo Total da Poupança e de Investimentos |===============================================  
+                    double _saldoTotalPoupancaEInvestimentos = Convert.ToDouble((saldoDaPoupanca + saldoDeInvestimento).ToString().Replace("R$", ""));
+                    TxtPoupancaEInvestimento.Text = string.Format("{0:c}", _saldoTotalPoupancaEInvestimentos);
+                }
+                catch (Exception erro)
+                {
+                    nomeDoMetodo = "SaldoDaCarteiraPoupancaEInvestimentos";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
+                }
+            }
+            else
+            {
+                try
+                {
+                    SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento = new();
+                    //====================================| Saldo da Carteira |=======================================================================                    
+                    TxtCarteira.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(Convert.ToInt32(CbxAno.Text)));
+                    double saldoDaCarteira = Convert.ToDouble(TxtCarteira.Text.ToString().Replace("R$", ""));
+                    TxtCarteira.Text = string.Format("{0:c}", saldoDaCarteira);
+                    //====================================| Saldo da Poupança |======================================================================== 
+                    TxtPoupanca.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(Convert.ToInt32(CbxAno.Text)));
+                    double saldoDaPoupanca = Convert.ToDouble(TxtPoupanca.Text.ToString().Replace("R$", ""));
+                    TxtPoupanca.Text = string.Format("{0:c}", saldoDaPoupanca);
+                    //====================================| Saldo de Investimentos |=================================================================== 
+                    TxtInvestimento.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDeInvestimentos(Convert.ToInt32(CbxAno.Text)));
+                    double saldoDeInvestimento = Convert.ToDouble(TxtInvestimento.Text.ToString().Replace("R$", ""));
+                    TxtInvestimento.Text = string.Format("{0:c}", saldoDeInvestimento);
+                    //=====================================| Saldo Total da Poupança e de Investimentos |===============================================                    
+                    double _saldoTotalPoupancaEInvestimentos = Convert.ToDouble((saldoDaPoupanca + saldoDeInvestimento).ToString().Replace("R$", ""));
+                    TxtPoupancaEInvestimento.Text = string.Format("{0:c}", _saldoTotalPoupancaEInvestimentos);
+                }
+                catch (Exception erro)
+                {
+                    nomeDoMetodo = "SaldoDaCarteiraPoupancaEInvestimentos";
+                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                    return;
+                }
+            }
         }
     }
 }

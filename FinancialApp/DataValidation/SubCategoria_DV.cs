@@ -6,8 +6,6 @@ namespace FinancialApp.DataValidation
 {
     public class SubCategoria_DV : DataValidationBase
     {
-        #region |=================================| Validação de Dados |==================================================|
-
         public SubCategoria SubCategoria { get; set; }
 
         public SubCategoria_DV()
@@ -19,7 +17,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarCadastrar(SubCategoria subCategoriaDeDespesa)
         {            
             SubCategoria = subCategoriaDeDespesa;            
-            if (SubCategoria.Id == 0 && SubCategoria.NomeDaSubCategoria != null)
+            if (SubCategoria.Id == 0 && SubCategoria.NomeDaSubCategoria != null && SubCategoria.NomeDaSubCategoria != "")
             {
                 return true;
             }
@@ -39,7 +37,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarAlterarExcluir(SubCategoria subCategoriaDeDespesa)
         {           
             SubCategoria = subCategoriaDeDespesa;
-            if (SubCategoria.Id > 0 && SubCategoria.NomeDaSubCategoria != null)
+            if (SubCategoria.Id > 0 && SubCategoria.NomeDaSubCategoria != null && SubCategoria.NomeDaSubCategoria != "")
             {
                 return true;
             }
@@ -54,6 +52,5 @@ namespace FinancialApp.DataValidation
                 return false;
             }
         }
-        #endregion
     }
 }

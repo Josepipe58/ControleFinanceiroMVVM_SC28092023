@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="AppFinanceiroMVVM.Views.AnoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vma="clr-namespace:AppFinanceiroMVVM.ViewModels.AnosVM"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="800" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+        <vma:AnoViewModel x:Key="vmaAnoViewModel"/>
+    </UserControl.Resources>
+
+    <!--| Grid Principal |-->
+    <Grid Background="#FF1C0BE4" Margin="0,0,0,0" DataContext="{StaticResource vmaAnoViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="313"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--| Grid Superior |-->
+        <Grid Name="GridSuperior" Margin="5,10,5,10">
+
+            <!--| Borda Externa da Grid Superior |-->
+            <Border Background="#FF082CEF" BorderBrush="#FF06CDF3" BorderThickness="5" Margin="5,10,5,3" CornerRadius="15">
+
+                <!--| Grid Interna da Borda |-->
+                <Grid Background="#FF082CEF" Margin="10,5,10,5">
+
+                    <!--| TeextBlock |-->
+                    <TextBlock Text="Voltar > Menu de Categorias e SubCategorias" FontSize="16" FontWeight="Bold" Foreground="#FF06F7F2" 
+                               Width="391" Margin="65,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"/>
+
+                    <TextBlock Text="Cadastrar, Alterar e Excluir Anos" Grid.Row="0" Foreground="#FFF7F7F7" FontSize="36" Padding="0 0 0 0" 
+                           FontWeight="Bold" Margin="435,5,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="572"/>
+
+                    <!--| Seta para voltar ao Menu de Categorias e SubCategorias |-->
+                    <RadioButton Height="60" Width="65" Style="{StaticResource SetaVoltarMenuAnterior}" Margin="0,5,0,0"
+                                 Command="{Binding Path=DataContext.ComandoVoltarParaMenuDeCategoriasESubCategorias, 
+                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Tag="Images/back_icon.png"/>
+
+                    <!--| Borda Interna de Cadastrar, Alterar e Excluir |-->
+                    <Border Background="Yellow" BorderBrush="#FF06CDF3" BorderThickness="5" Margin="10,70,0,0" Height="165"
+                             CornerRadius="15" VerticalAlignment="Top">
+
+                        <!--| Grid Interna de Cadastrar, Alterar e Excluir |-->
+                        <Grid Background="Yellow" Margin="21,5,5,5">
+
+                            <!--| Rótulos(Label) |-->
+                            <Label Content="Id do Ano" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="138" 
+                                   Margin="35,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <Label Content="Ano do Cadastro" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="40" Width="175"
+                                   Margin="0,80,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <!--| TextBoxes) |-->
+                            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,40,0,0" IsReadOnly="True"
+                                     Text="{Binding Ano.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBox x:Name="TxtAno" Width="270" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,80,0,0"
+                                     Text="{Binding Ano.AnoDoCadastro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <!--| Botões da Barda Amarela |-->
+                            <Button x:Name="BtnCadastrar" Content="Cadastrar" FontSize="16" Height="50" Width="130" 
+                                    Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Margin="480,70,0,0" 
+                                    Command="{Binding ComandoDeCadastrarAno}"/>
+
+                            <Button x:Name="BtnAlterar" Content="Alterar" FontSize="16" Height="50" Width="130" 
+                                    Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Margin="630,70,0,0" 
+                                    Command="{Binding ComandoDeDeAlterarAno}"/>
+
+                            <Button x:Name="BtnExcluir" Content="Excluir" FontSize="16" Height="50" Width="130" 
+                                Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Margin="780,70,0,0"
+                                    Command="{Binding ComandoDeDeExcluirAno}"/>
+
+                            <Button x:Name="BtnAtualizar" Content="Atualizar" FontSize="16" Height="50" Width="130" 
+                                    Margin="930,70,0,0" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"                                    
+                                    Command="{Binding ComandoDeDeAtualizarAno}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!--| DataGrid de DtgDados |-->
+        <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,0,5,5" 
+                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Column="0"
+                  ItemsSource="{Binding ListaDeAnos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" MouseDoubleClick="DtgDados_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:D4\}}" Width="110"/>
+                <DataGridTextColumn Header="Ano do Cadastro" Binding="{Binding Path=AnoDoCadastro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

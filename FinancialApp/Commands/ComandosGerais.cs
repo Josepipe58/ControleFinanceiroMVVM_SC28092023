@@ -16,9 +16,8 @@ namespace FinancialApp.Commands
                 OnPropertyChanged(nameof(SelecionarControleDeUsuario));
             }
         }
-              
-        #region |==========| Comandos de Voltar Para o Menu De Consultas e Relatorios |=========================|
 
+        //Comandos de Voltar Para o Menu De Consultas e Relatorios
         private void VoltarParaMenuDeConsultasERelatorios()
         {
             SelecionarControleDeUsuario = new MenuDeConsultasERelatorios();
@@ -38,10 +37,7 @@ namespace FinancialApp.Commands
             }
         }
 
-        #endregion
-
-        #region |==========| Relatórios de Despesas, Poupanças, Receitas e Investimentos |======================| 
-
+        // Relatórios de Despesas, Poupanças, Receitas e Investimentos
         public void RelatorioDeDespesas()
         {
             //SelecionarControleDeUsuario = new RelatorioDeDespesas_UC();
@@ -114,10 +110,7 @@ namespace FinancialApp.Commands
             }
         }
 
-        #endregion
-
-        #region |===========| Consultas de Despesas, Finanças, Receitas e Aposentadoria |=======================|
-
+        //Consultas de Despesas, Finanças, Receitas e Aposentadoria
         public void ConsultarDespesas()
         {
             //SelecionarControleDeUsuario = new ConsultarDespesas_UC();
@@ -153,6 +146,5 @@ namespace FinancialApp.Commands
                 return _comandoDeConsultarFinancas;
             }
         }
-        #endregion
     }
 }

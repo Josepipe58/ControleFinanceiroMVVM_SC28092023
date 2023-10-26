@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using Database.Models;
 using Domain.DataAccess;
 using FinancialApp.Commands;
 

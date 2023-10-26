@@ -10,9 +10,7 @@ namespace FinancialApp.ManageData
 {
     public class Ano_MD : Ano_DV
     { 
-        #region |=================================| Gerenciar Dados(CRUD) |=====================================|
-
-        public string _nomeDoMetodo = string.Empty;    
+        public string _nomeDoMetodo = string.Empty;
 
         //Lista do DataGrid Dados e ComboBox
         private ListaDeAnos _listaDeAnos;
@@ -114,6 +112,5 @@ namespace FinancialApp.ManageData
             Ano.AnoDoCadastro = 0;
             ListaDeAnos = ano_DA.ConsultarAnos();
         }
-        #endregion
     }
 }

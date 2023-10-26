@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{3EEEF6B0-A5D0-48AF-91FD-335F7BA63D5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BancoDeDados", "BancoDeDados\BancoDeDados.csproj", "{22C3D34D-7F93-46B7-910B-DEFCF89CE7E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{0248D42A-14A7-4878-AD19-72BBB344FC56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciarDados", "GerenciarDados\GerenciarDados.csproj", "{4ED1F970-BBDE-4DF8-A48C-9976803B6E8E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialApp", "FinancialApp\FinancialApp.csproj", "{994F8D7C-5855-4D9F-981B-D0CA6E3AC896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppFinanceiroMVVM", "AppFinanceiroMVVM\AppFinanceiroMVVM.csproj", "{93DD6165-38F2-4373-8A21-5CBD5E62D0C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3EEEF6B0-A5D0-48AF-91FD-335F7BA63D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EEEF6B0-A5D0-48AF-91FD-335F7BA63D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EEEF6B0-A5D0-48AF-91FD-335F7BA63D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EEEF6B0-A5D0-48AF-91FD-335F7BA63D5E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0248D42A-14A7-4878-AD19-72BBB344FC56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0248D42A-14A7-4878-AD19-72BBB344FC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0248D42A-14A7-4878-AD19-72BBB344FC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0248D42A-14A7-4878-AD19-72BBB344FC56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{994F8D7C-5855-4D9F-981B-D0CA6E3AC896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{994F8D7C-5855-4D9F-981B-D0CA6E3AC896}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{994F8D7C-5855-4D9F-981B-D0CA6E3AC896}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{994F8D7C-5855-4D9F-981B-D0CA6E3AC896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C3D34D-7F93-46B7-910B-DEFCF89CE7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C3D34D-7F93-46B7-910B-DEFCF89CE7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C3D34D-7F93-46B7-910B-DEFCF89CE7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C3D34D-7F93-46B7-910B-DEFCF89CE7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED1F970-BBDE-4DF8-A48C-9976803B6E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED1F970-BBDE-4DF8-A48C-9976803B6E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED1F970-BBDE-4DF8-A48C-9976803B6E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED1F970-BBDE-4DF8-A48C-9976803B6E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DD6165-38F2-4373-8A21-5CBD5E62D0C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DD6165-38F2-4373-8A21-5CBD5E62D0C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DD6165-38F2-4373-8A21-5CBD5E62D0C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DD6165-38F2-4373-8A21-5CBD5E62D0C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

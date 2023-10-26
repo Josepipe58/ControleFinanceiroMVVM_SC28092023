@@ -1,13 +1,12 @@
 ﻿#nullable disable
 using Database.Models;
 using Domain.Messages;
+using System;
 
 namespace FinancialApp.DataValidation
 {
     public class Ano_DV : DataValidationBase
     {
-        #region |=================================| Validação de Dados |==================================================|
-
         public Ano Ano { get; set; }
 
         public Ano_DV()
@@ -19,7 +18,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarCadastrar(Ano ano)
         {
             Ano = ano;
-            if (Ano.Id == 0 && Ano.AnoDoCadastro > 0)
+            if (Ano.Id == 0 && Ano.AnoDoCadastro > 0 && Ano.AnoDoCadastro != 0)
             {
                 return true;
             }
@@ -39,7 +38,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarAlterarExcluir(Ano ano)
         {
             Ano = ano;
-            if (Ano.Id > 0 && Ano.AnoDoCadastro > 0)
+            if(Ano.Id > 0 && Ano.AnoDoCadastro > 0 && Ano.AnoDoCadastro != 0)
             {
                 return true;
             }
@@ -54,6 +53,5 @@ namespace FinancialApp.DataValidation
                 return false;
             }
         }
-        #endregion
     }
 }

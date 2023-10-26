@@ -53,7 +53,7 @@
                                    Margin="0,80,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                             <!--| TextBoxes) |-->
-                            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,40,0,0" IsReadOnly="False"
+                            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,40,0,0" IsReadOnly="True"
                                      Text="{Binding Ano.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                             <TextBox x:Name="TxtAno" Width="270" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="175,80,0,0"

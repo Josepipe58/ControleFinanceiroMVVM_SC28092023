@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="AppFinanceiroMVVM.Views.NomeDeBancosVW.NomeDeBancoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vmnb="clr-namespace:AppFinanceiroMVVM.ViewModels.NomeDeBancoVM"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="800" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+        <vmnb:NomeDeBancoViewModel x:Key="vmnbNomeDeBancoViewModel"/>
+    </UserControl.Resources>
+
+    <!--| Grid Principal |-->
+    <Grid Name="GridPrincipal" Background="#FF1C0BE4" DataContext="{StaticResource vmnbNomeDeBancoViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="315"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--| Grid Superior |-->
+        <Grid Name="GridSuperior" Margin="5,10,5,10" Grid.Row="0">
+
+            <!--| Borda Externa da Grid Superior |-->
+            <Border Background="#FF082CEF" BorderBrush="#FF06CDF3" BorderThickness="5" Margin="5,10,5,3" CornerRadius="15" Grid.Row="0">
+
+                <!--| Grid Interna da Borda |-->
+                <Grid Margin="10,5,10,5" Background="#FF082CEF">
+
+                    <!--| Título - Cadastrar, Alterar e Excluir |-->
+                    <TextBlock Text="Nome de Bancos do Sql Server" FontSize="30" FontWeight="Bold" Foreground="#FFF7F7F7" 
+                               Height="50" Width="455" Margin="370,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"/>
+
+                    <!--| Borda Interna de Cadastrar, Alterar e Excluir |-->
+                    <Border Background="Yellow" BorderBrush="#FF06CDF3" BorderThickness="5" Height="105" Margin="10,70,0,0"
+                            CornerRadius="15" Grid.Row="0" VerticalAlignment="Top">
+
+                        <!--| Grid Interna de Cadastrar, Alterar e Excluir |-->
+                        <Grid Background="Yellow" Margin="21,5,5,5">
+
+                            <!--| Rótulos(Label) |-->
+                            <Label Content="Id do Nome do Banco" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="30" Width="195" 
+                                   Margin="25,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <Label Content="Nome do Banco" FontSize="18" FontWeight="Bold" Foreground="#FF110AEA" Height="30" Width="150"
+                                   Margin="360,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <!--| TextBoxes) |-->
+                            <TextBox x:Name="TxtId" Text="{Binding NomeDeBanco.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="85" 
+                                     Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="220,30,0,0" IsReadOnly="True"/>
+
+                            <TextBox x:Name="TxtNomeDeBanco" Text="{Binding NomeDeBanco.NomeDoBanco, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="350" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="505,30,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <!--| Botões) |-->
+                    <Button x:Name="BtnCadastrar" Content="Cadastrar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"                            
+                            Margin="30,195,0,0" Command="{Binding ComandoDeCadastrarNomeDeBanco}"/>
+
+                    <Button x:Name="BtnAlterar" Content="Alterar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"  
+                            Margin="200,195,0,0" Command="{Binding ComandoDeDeAlterarNomeDeBanco}"/>
+
+                    <Button x:Name="BtnExcluir" Content="Excluir" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"  
+                            Margin="370,195,0,0" Command="{Binding ComandoDeDeExcluirNomeDeBanco}"/>
+
+                    <Button x:Name="BtnAtualizar" Content="Atualizar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                            Margin="540,195,0,0" Command="{Binding ComandoDeLimparEAtualizarNomeDeBanco}"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <!--| DataGrid de DtgDados |-->
+        <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,0,5,5" 
+                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Column="0"
+                  ItemsSource="{Binding ListaDeNomeDeBancos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.Row="1" MouseDoubleClick="DtgDados_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="110"/>
+                <DataGridTextColumn Header="Nome do Banco" Binding="{Binding NomeDoBanco}" Width="250"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

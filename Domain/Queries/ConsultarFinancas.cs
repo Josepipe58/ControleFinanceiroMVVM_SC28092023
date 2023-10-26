@@ -2,10 +2,10 @@
 
 namespace Domain.Queries
 {
-    public class ConsultarFinancas_DO : ConsultarCentralDeDados_DO//Não mudar essa herança senão vai dar erros.
+    public class ConsultarFinancas : ConsultarCentralDeDados//Não mudar essa herança senão vai dar erros.
     {
         public RelatorioDePoupanca RelatorioDePoupanca_AD { get; set; }
-        public ConsultarFinancas_DO()
+        public ConsultarFinancas()
         {
             RelatorioDePoupanca_AD = new RelatorioDePoupanca();
         }

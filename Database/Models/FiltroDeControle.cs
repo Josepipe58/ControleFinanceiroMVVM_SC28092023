@@ -3,10 +3,8 @@ using System.Collections.ObjectModel;
 
 namespace Database.Models
 {
-    public class FiltroDeControle :BaseModelo
+    public class FiltroDeControle : BaseModelo
     {
-        #region |=========================| Propriedades da Tabela FiltroDeControles |==========================|
-        
         private int _id;
         public int Id
         {
@@ -36,7 +34,6 @@ namespace Database.Models
             Id = filtroDeControle.Id;
             NomeDoFiltro = filtroDeControle.NomeDoFiltro;
         }
-        #endregion
     }
 
     public class ListaDeFiltrosDeControle : ObservableCollection<FiltroDeControle> { }

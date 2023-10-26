@@ -1,17 +1,24 @@
-﻿using Domain.Lists;
+﻿#nullable disable
+using BancoDeDados.ContextoDoBancoDeDados;
+using GerenciarDados.Listas;
 using System;
 using System.Data;
 
-namespace Domain.Queries
+namespace GerenciarDados.Consultas
 {
-    public class ConsultarDespesas_DO : ConsultarCentralDeDados_DO//Não mudar essa herança senão vai dar erros.
+    public class ConsultarDespesas : ConsultarCentralDeDados//Não mudar essa herança senão vai dar erros.
     {
+        public ConsultarDespesas()
+        {
+            _contexto = new Contexto();
+        }
+
         //============================================| Consultar Despesas Gerais de Todos os Anos |====================================================================//
 
         public ListaDeValoresMeses ConsultarDespesasGeraisDeTodosOsAnos()
         {
             ListaDeValoresMeses ListaDeValoresMeses = new();
-            DataTable dataTable = ExecutarConsulta(CommandType.Text,
+            DataTable dataTable = _contexto.ExecutarConsulta(CommandType.Text,
                 "Declare @Janeiro decimal (18, 2)" +
                 "Set @Janeiro = ((Select coalesce(Sum(Valor), 0) From CentralDeDados Where Tipo = 'Despesas Gerais' And Mes = 'Janeiro'))" +
 

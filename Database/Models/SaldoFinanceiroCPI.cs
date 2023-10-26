@@ -4,8 +4,7 @@
     public class SaldoFinanceiroCPI : BaseModelo
     {
         //CPI = Carteira, Poupança e Investimento.
-        #region |========================| Propriedades da Classe SaldoFinanceiroCPI |==========================|
-
+        
         private double _saldoDaCarteira;
         public double SaldoDaCarteira
         {
@@ -59,6 +58,5 @@
             SaldoDeInvestimento = saldoFinanceiroCPI.SaldoDeInvestimento;
             SaldoTotalDaPoupancaEInvestimento = saldoFinanceiroCPI.SaldoTotalDaPoupancaEInvestimento;
         }
-        #endregion
     }
 }

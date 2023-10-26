@@ -57,6 +57,16 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
+            <!--| Página Principal |-->
+            <Grid Margin="10,10,0,90" Grid.Row="2" Grid.Column="2" Grid.RowSpan="3">
+                <Border Background="#FF0A17E2" BorderBrush="#FFFFFF" BorderThickness="0,5,0,5" Margin="0,10,20,10"
+            CornerRadius="25 25 25 25">
+                    <ContentControl x:Name="Pages" Content="{Binding SelecionarControleDeUsuario}" Margin="10,10,15,10"/>
+                </Border>
+            </Grid>
+            <TextBlock Text="JOSÉ EURIPEDES HONÓRIO" FontFamily="Segoe Script" FontSize="14" FontWeight="Bold" Foreground="#FFF0F5F5"
+            Margin="455,40,357,15" Grid.Column="2" Grid.RowSpan="2"/>
+
             <!--| Menu |-->
             <Grid Height="729" Width="370" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1">
 
@@ -64,7 +74,7 @@
                        Foreground="#FFF5F0F0" Margin="30,0,43,0" VerticalAlignment="Top"/>
 
                 <ComboBox Name="CbxBanco" Width="NaN" Margin="30,30,10,0" Style="{DynamicResource ComboBoxAzulMarinho}"
-                          ItemsSource="{Binding CarregarComboBoxDeNomeDeBancos}" SelectedIndex="0"
+                          DisplayMemberPath="Nome" ItemsSource="{Binding ListaDeNomeDeBancosDoSql}" SelectedIndex="0"
                           HorizontalAlignment="Stretch" MouseLeave="CbxBanco_MouseLeave"/>
 
                 <ItemsControl Height="600" Margin="15,70,0,66" ItemsSource="{Binding SourceCollection}">
@@ -73,7 +83,7 @@
                             <StackPanel Width="250">
                                 <RadioButton Content="{Binding MenuName}" FontSize="14" Width="250" Style="{StaticResource RadioButtonAzulMarinho}"
                                              CommandParameter="{Binding MenuName}" Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                             AncestorType={x:Type ItemsControl}}, Path=DataContext.ComandoDoMenu}" GroupName="MenuGroup" Margin="0,10,0,0"/>
+                                             AncestorType={x:Type ItemsControl}}, Path=DataContext.ComandoDoMenu}" GroupName="MenuGroup" Margin="0,8,0,0"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -86,16 +96,6 @@
                 <Button Content="Sair" Height="50" Width="150" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="115,0,0,90"                        
                          Command="{Binding ComandoSairDoAplicativo}" VerticalAlignment="Bottom"/>
             </Grid>
-
-            <!--| Página Principal |-->
-            <Grid Margin="10,10,0,90" Grid.Row="2" Grid.Column="2" Grid.RowSpan="3">
-                <Border Background="#FF0A17E2" BorderBrush="#FFFFFF" BorderThickness="0,5,0,5" Margin="0,10,20,10"
-                        CornerRadius="25 25 25 25">
-                    <ContentControl x:Name="Pages" Content="{Binding SelecionarControleDeUsuario}" Margin="10,10,15,10"/>
-                </Border>
-            </Grid>
-            <TextBlock Text="JOSÉ EURIPEDES HONÓRIO" FontFamily="Segoe Script" FontSize="14" FontWeight="Bold" Foreground="#FFF0F5F5"
-                        Margin="455,40,357,15" Grid.Column="2" Grid.RowSpan="2"/>
         </Grid>
     </Grid>
 </Window>

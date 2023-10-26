@@ -71,13 +71,12 @@
 
                             <!--| ComboBox de Categorias |-->
                             <ComboBox Name="CbxNomeDeFiltros" Height="40" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="355,35,0,0" 
-                                      DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" SelectionChanged="CbxNomeDeFiltros_SelectionChanged"
-                                      Text="{Binding SubCategoria.NomeDoFiltro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
+                                      Text="{Binding SubCategoria.NomeDoFiltro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                                      
+                                      DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" SelectionChanged="CbxNomeDeFiltros_SelectionChanged"/>
 
                             <ComboBox Name="CbxCategoria" Height="40" Width="310" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="720,35,0,0"
-                                      DisplayMemberPath="NomeDaCategoria" SelectedValuePath="Id" SelectedIndex="0"
                                       Text="{Binding SubCategoria.NomeDaCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                      SelectedValue="{Binding SubCategoria.CategoriaId}"/>
+                                      DisplayMemberPath="NomeDaCategoria" SelectedValuePath="Id" SelectedValue="{Binding SubCategoria.CategoriaId}"/>
 
                             <!--| Pesquisar SubCategorias|-->
                             <Grid Margin="800,70,0,0" Height="80" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">

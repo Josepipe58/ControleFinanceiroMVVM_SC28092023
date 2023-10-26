@@ -2,8 +2,6 @@
 
 namespace Domain.Lists
 {
-    public class ListaDeValoresMeses : ObservableCollection<Meses> { }
-
     public class Meses
     {
         public decimal Janeiro { get; set; }
@@ -34,4 +32,6 @@ namespace Domain.Lists
 
         public decimal SaldoCarteira { get; set; }
     }
+
+    public class ListaDeValoresMeses : ObservableCollection<Meses> { }
 }

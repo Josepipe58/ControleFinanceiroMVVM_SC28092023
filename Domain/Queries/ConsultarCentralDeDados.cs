@@ -8,10 +8,10 @@ using System.Data;
 
 namespace Domain.Queries
 {
-    public class ConsultarCentralDeDados_DO : Context
+    public class ConsultarCentralDeDados : Context
     {
         //============================================| Carregar DataGrid de Consultas |================================================================================//
-        public ListaDaCentralDeDados ConsultarCentralDeDados()
+        public ListaDaCentralDeDados ConsultarListaDaCentralDeDados()
         {
             ListaDaCentralDeDados listaDaCentralDeDados = new();
             DataTable dataTable = ExecutarConsulta(CommandType.Text,

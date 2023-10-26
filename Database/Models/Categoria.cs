@@ -5,8 +5,6 @@ namespace Database.Models
 {
     public class Categoria : BaseModelo
     {
-        #region |===========================| Propriedades da Tabela Categorias |===============================|
-       
         private int _id;
         public int Id
         {
@@ -61,7 +59,6 @@ namespace Database.Models
             FiltroDeControleId = categoria.FiltroDeControleId;
             NomeDoFiltro = categoria.NomeDoFiltro;
         }
-        #endregion
     }
 
     public class ListaDeCategorias : ObservableCollection<Categoria> { }

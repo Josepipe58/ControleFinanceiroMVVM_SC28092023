@@ -5,9 +5,7 @@ namespace Domain.Messages
 {
     public static class GerenciarMensagens
     {
-              
-        #region |====================================| Mensagens de CRUD com Sucesso |==================================|
-
+        //Mensagens de CRUD com Sucesso
         public static void SucessoAoCadastrar(int id)
         {
             MessageBox.Show($"Registro cadastrado com sucesso.\nCódigo do registro: {id}",
@@ -32,9 +30,8 @@ namespace Domain.Messages
             $"\nNúmero do Código: {id}", "Cuidado! Atenção!",
             MessageBoxButton.YesNo, MessageBoxImage.Information);
         }
-        #endregion
-
-        #region |====================================| Mensagens de CRUD com Erros |====================================|
+        
+        //Mensagens de CRUD com Erros
         public static void ErroAoCadastrar()
         {
             MessageBox.Show("Atenção!\nO campo Id tem que ser igual a 0 ou vazio.\nOutra opção é clicar no botão Alterar ou Excluir." +
@@ -52,25 +49,19 @@ namespace Domain.Messages
             MessageBox.Show("Atenção! Existe um ou mais de um campo, que está vazio.\n Corrija esse erro para continuar.",
                 "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        #endregion
-              
-        #region |================================| Erros do Try Catch(Exception) |======================================|
-
+       
+        //Erros do Try Catch(Exception)
         public static string ErroDeExcecaoENomeDoMetodo(Exception erro, string _nomeDoMetodo)
         {
             return MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: {_nomeDoMetodo}." +
                     $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error).ToString();
         }
 
-        #endregion
-              
-        #region |=================================| Mensagem de Erro de Switch Case |===================================|
-
+        //Mensagem de Erro de Switch Case
         public static void MensagemDeErroDeSwitchCase()
         {
             MessageBox.Show($"Atenção! Ocorreu um erro no Switch Case.\nNão foi possível selecionar nenhum mês.",
                             "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        #endregion
     }
 }

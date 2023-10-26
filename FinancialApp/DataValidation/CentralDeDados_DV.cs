@@ -6,9 +6,16 @@ namespace FinancialApp.DataValidation
 {
     public class CentralDeDados_DV : DataValidationBase
     {
-        #region |=================================| Validação de Dados |==================================================|
-
-        public CentralDeDados CentralDeDados { get; set; }
+        private CentralDeDados _centralDeDados;
+        public CentralDeDados CentralDeDados
+        {
+            get { return _centralDeDados; }
+            set
+            {
+                _centralDeDados = value;
+                OnPropertyChanged(nameof(CentralDeDados));
+            }
+        }
 
         public CentralDeDados_DV()
         {
@@ -19,7 +26,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarCadastrar(CentralDeDados centralDeDados)
         {
             CentralDeDados = centralDeDados;
-            if (CentralDeDados.Id == 0 && CentralDeDados.Valor > 0)
+            if (CentralDeDados.Id == 0 && CentralDeDados.Valor > 0 && CentralDeDados.Valor != 0)
             {
                 return true;
             }
@@ -35,11 +42,11 @@ namespace FinancialApp.DataValidation
             }
         }
 
-        //Alterar e Excluir
-        public bool ValidarAlterarExcluir(CentralDeDados centralDeDados)
+        //Alterar e Excluir        
+        public bool ValidarAlterarExcluir(CentralDeDados centralDeDados2)
         {
-            CentralDeDados = centralDeDados;            
-            if (CentralDeDados.Id > 0 && CentralDeDados.Valor > 0)
+            CentralDeDados = centralDeDados2;            
+            if (CentralDeDados.Id > 0 && CentralDeDados.Valor > 0 && CentralDeDados.Valor != 0)
             {
                 return true;
             }
@@ -54,6 +61,5 @@ namespace FinancialApp.DataValidation
                 return false;
             }
         }
-        #endregion
     }
 }

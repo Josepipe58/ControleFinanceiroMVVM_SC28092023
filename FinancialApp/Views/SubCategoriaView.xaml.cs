@@ -22,7 +22,7 @@ namespace FinancialApp.Views
             try
             {
                 //Carregar ComboBox do Filtro de Controle.
-                //Não mudar o ItemsSource daqui senão dá erro.
+                //Não mudar o ItemsSource daqui senão dá erro.                
                 FiltroDeControle_DA filtroDeControle_DA = new();
                 CbxNomeDeFiltros.ItemsSource = filtroDeControle_DA.ConsultarFiltrosDeControle();
                 CbxNomeDeFiltros.DisplayMemberPath = "NomeDoFiltro";
@@ -36,15 +36,16 @@ namespace FinancialApp.Views
                 return;
             }
         }
-
+        
         private void CbxNomeDeFiltros_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Carregar ComboBox das Categorias.
             //Não colocar nenhum tratamento de erros nesse Método porque eles não serão executados e
             //também porque não há necessidade de tratamento de erros.
+            
             Categoria_DA categoria_DA = new();
             CbxCategoria.ItemsSource = categoria_DA
-                .ConsultarCategoriasPorId(Convert.ToInt32(CbxNomeDeFiltros.SelectedValue)).ToList();
+                .ConsultarCategoriasPorId(Convert.ToInt32(CbxNomeDeFiltros.SelectedValue));            
             CbxCategoria.DisplayMemberPath = "NomeDaCategoria";
             CbxCategoria.SelectedValuePath = "Id";
             CbxCategoria.SelectedIndex = 0;

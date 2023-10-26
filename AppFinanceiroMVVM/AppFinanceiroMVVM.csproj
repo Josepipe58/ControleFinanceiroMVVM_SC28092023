@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Imagens\back_icon.png" />
+    <None Remove="Imagens\controle_financeiro_azulclaro.png" />
+    <None Remove="Imagens\folder.ico" />
+    <None Remove="Imagens\Universo01.jpg" />
+    <None Remove="Recursos\back_icon.png" />
+    <None Remove="Recursos\controle_financeiro_azulclaro.png" />
+    <None Remove="Recursos\folder.ico" />
+    <None Remove="Views\Universo01.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\ConsultasVM\" />
+    <Folder Include="ViewModels\RelatoriosVM\" />
+    <Folder Include="Views\Relatorios\" />
+    <Folder Include="Views\Consultas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BancoDeDados\BancoDeDados.csproj" />
+    <ProjectReference Include="..\GerenciarDados\GerenciarDados.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Imagens\back_icon.png" />
+    <Resource Include="Imagens\controle_financeiro_azulclaro.png" />
+    <Resource Include="Imagens\folder.ico" />
+    <Resource Include="Imagens\Universo01.jpg" />
+  </ItemGroup>
+
+</Project>

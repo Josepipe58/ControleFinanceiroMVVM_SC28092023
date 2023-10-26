@@ -62,68 +62,65 @@
             
             <!--| ComboBoxes |-->
             <ComboBox x:Name="CbxTipo" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="345,80,0,0" Width="200"
-                      ItemsSource="{Binding ListaTipoDeDespesa}" 
-                      Text="{Binding CentralDeDados.Tipo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
+                      Text="{Binding CentralDeDados.Tipo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                      ItemsSource="{Binding ListaDeTiposDaCentralDeDados}" SelectedIndex="0"/>
 
             <ComboBox x:Name="CbxMes" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="555,80,0,0" Width="155"
                       Text="{Binding CentralDeDados.Mes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding ListaDeMeses}" SelectedIndex="0"/>
 
             <ComboBox x:Name="CbxAno" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="720,80,0,0"
-                      DisplayMemberPath="AnoDoCadastro" SelectedValuePath="Id"
-                      Text="{Binding CentralDeDados.Ano, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                       ItemsSource="{Binding ListaDeAnos}" SelectedIndex="0" MouseLeave="CbxAno_MouseLeave" Width="120"/>
+                      DisplayMemberPath="AnoDoCadastro" SelectedValuePath="Id" SelectedIndex="0"
+                      Text="{Binding CentralDeDados.Ano, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
+                       ItemsSource="{Binding ListaDeAnos}" MouseLeave="CbxAno_MouseLeave" Width="120"/>
 
-            <ComboBox Name="CbxNomeDeFiltros" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="870,35,0,0"                      
-                      SelectionChanged="CbxNomeDeFiltros_SelectionChanged"/>
+            <ComboBox Name="CbxNomeDeFiltros" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="870,35,0,0"
+                       Text="{Binding CentralDeDados.Filtros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      DisplayMemberPath="NomeDoFiltro" SelectedValuePath="Id" MouseLeave="CbxNomeDeFiltros_MouseLeave"
+                      SelectionChanged="CbxNomeDeFiltros_SelectionChanged" SelectedIndex="0"/>
 
             <ComboBox Name="CbxCategoria" Width="320" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="870,100,0,0" 
                       Text="{Binding CentralDeDados.NomeDaCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                      SelectionChanged="CbxCategoria_SelectionChanged"/>
+                      DisplayMemberPath="NomeDaCategoria" SelectedValuePath="Id" SelectionChanged="CbxCategoria_SelectionChanged" SelectedIndex="0"/>
 
             <ComboBox Name="CbxSubCategoria" Width="390" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="870,160,0,0"
-                      Text="{Binding CentralDeDados.NomeDaSubCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      Text="{Binding CentralDeDados.NomeDaSubCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="NomeDaSubCategoria" SelectedValuePath="Id" SelectedIndex="0"/>
 
             <!--| TextBoxes |-->
-            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="20,80,0,0" IsReadOnly="True"
-                     Text="{Binding CentralDeDados.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="TxtId" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="20,80,0,0"
+                     Text="{Binding CentralDeDados.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 
             <TextBox x:Name="TxtValor" Width="150" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="20,160,0,0"
-                     Text="{Binding CentralDeDados.Valor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     KeyDown="TxtValor_KeyDown"/>
+                     Text="{Binding CentralDeDados.Valor}" KeyDown="TxtValor_KeyDown"/>
 
-            <TextBox x:Name="TxtCarteira" Text="{Binding SaldoDaCarteira}" Width="150" Style="{DynamicResource TextBoxVerde}" 
-                     Margin="1110,35,0,0"/>
+            <TextBox x:Name="TxtCarteira" Text="R$ 0,00" Width="150" Style="{DynamicResource TextBoxVerde}" Margin="1110,35,0,0"/>
 
-            <TextBox x:Name="TxtPoupanca" Text="{Binding SaldoDaPoupanca}" Style="{DynamicResource TextBoxVerde}" 
-                     Margin="1280,35,0,0"/>
+            <TextBox x:Name="TxtPoupanca" Text="R$ 0,00" Style="{DynamicResource TextBoxVerde}" Margin="1280,35,0,0"/>
+            
+            <TextBox x:Name="TxtInvestimento" Text="R$ 0,00" Style="{DynamicResource TextBoxVerde}" Margin="1280,100,0,0"/>
 
-
-            <TextBox x:Name="TxtInvestimento" Text="{Binding SaldoDeInvestimentos}" Style="{DynamicResource TextBoxVerde}" 
-                     Margin="1280,100,0,0"/>
-
-            <TextBox x:Name="TxtPoupancaEInvestimento" Text="{Binding SaldoTotalPoupancaEInvestimentos}" Style="{DynamicResource TextBoxVerde}" 
-                     Margin="1280,165,0,0"/>
+            <TextBox x:Name="TxtPoupancaEInvestimento" Text="R$ 0,00" Style="{DynamicResource TextBoxVerde}" Margin="1280,165,0,0"/>
 
             <!--| Botões |-->
             <Button x:Name="BtnCadastrar" Content="Cadastrar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="190,150,0,0" 
-                    Command="{Binding ComandoDeCadastrarDespesa}" Width="150"/>
+                    Command="{Binding ComandoDeCadastrar}" Width="150"/>
 
-            <Button x:Name="BtnAlterar" Content="Alterar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="360,150,0,0"  
-                     Command="{Binding ComandoDeDeAlterarDespesa}" Width="150" />
+            <Button Content="Alterar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="360,150,0,0"  
+                     Command="{Binding ComandoDeAlterar}" Width="150" />
 
             <Button x:Name="BtnExcluir" Content="Excluir" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="530,150,0,0" 
-                    Command="{Binding ComandoDeDeExcluirDespesa}" Width="150"/>
+                    Command="{Binding ComandoDeExcluir}" Width="150"/>
 
-            <Button x:Name="BtnAtualizar" Content="Atualizar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="700,150,0,0" 
-                    Command="{Binding ComandoDeDeAtualizarDespesa}" Width="150" />
+            <Button x:Name="BtnAtualizar" Content="Atualizar"  Width="150" Style="{StaticResource BtnAzulEscuroEAzulClaro}" 
+                    Margin="700,150,0,0" Command="{Binding ComandoDeAtualizar}" Click="BtnAtualizar_Click" />
         </Grid>
 
         <!--| Grid Inferior |-->
         <Grid x:Name="GridInferior" Grid.Row="2" Background="#FFFCFFFF">
 
             <!--| Título - Data Grid de Valores |-->
-            <Label Name="LblTituloDtgValores" Content="Despesa Geral - Mensal e Anual" Margin="5,0,5,0" OpacityMask="#FF0C01F5" Foreground="#FF06F0F0" 
+            <Label Name="LblTituloDtgValores" Content="{Binding LblTituloDtgValores}" Margin="5,0,5,0" Foreground="#FF06F0F0" 
             FontWeight="Bold" FontSize="18" Background="#FF09320F" Padding="550,0,0,0" Height="30" VerticalAlignment="Top"/>
 
             <!--| Data Grid de Valores |-->
@@ -149,8 +146,9 @@
             </DataGrid>
 
             <!--| Data Grid de Dados |-->
-            <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,90,5,2"
-                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoGradienteAzul}" ItemsSource="{Binding ListaDaCentralDeDados}" 
+            <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" 
+                      Margin="5,90,5,2" ColumnHeaderStyle="{DynamicResource DtgCabecalhoGradienteAzul}" 
+                      ItemsSource="{Binding ListaDaCentralDeDados, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       MouseDoubleClick="DtgDados_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="100"/>

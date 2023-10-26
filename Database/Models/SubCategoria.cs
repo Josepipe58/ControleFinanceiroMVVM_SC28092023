@@ -5,8 +5,6 @@ namespace Database.Models
 {
     public class SubCategoria : BaseModelo
     {
-        #region |==========================| Propriedades da Tabela SubCategorias |=============================|
-
         private int _id;
         public int Id
         {
@@ -97,7 +95,6 @@ namespace Database.Models
             FiltroDeControleId = subCategoria.FiltroDeControleId;
             NomeDoFiltro = subCategoria.NomeDoFiltro;
         }
-        #endregion
     }
 
     public class ListaDeSubCategorias : ObservableCollection<SubCategoria>{ }

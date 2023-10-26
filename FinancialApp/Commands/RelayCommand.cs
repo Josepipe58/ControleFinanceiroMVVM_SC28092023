@@ -5,10 +5,7 @@ using System.Windows.Input;
 namespace FinancialApp.Commands
 {
     public class RelayCommand : ICommand
-    {   
-        #region |======================| RelayCommand(Comando de Retransmissão) |===============================|
-
-
+    {
         private readonly Action<object> _execute;
 
         private readonly Func<object, bool> _canExecute;
@@ -42,6 +39,5 @@ namespace FinancialApp.Commands
         {
             _execute(parameter);
         }
-        #endregion
     }
 }

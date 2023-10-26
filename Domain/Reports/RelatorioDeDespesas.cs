@@ -2,11 +2,10 @@
 using Domain.Lists;
 using System;
 using System.Data;
-using System.Windows;
 
 namespace Domain.Reports
 {
-    public class RelatorioDeDespesa : Context
+    public class RelatorioDeDespesas : Context
     {
         //============================================| Relatório de Despesas Totais |=================================================================================//        
         public ListaDeValoresMeses ConsultarDespesasTotais(int ano)

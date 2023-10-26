@@ -6,8 +6,6 @@ namespace FinancialApp.DataValidation
 {
     public class Categoria_DV : DataValidationBase
     {
-        #region |=================================| Validação de Dados |==================================================|
-        
         public Categoria Categoria { get; set; }
 
         public Categoria_DV()
@@ -19,7 +17,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarCadastrar(Categoria categoria)
         {
             Categoria = categoria;
-            if (Categoria.Id == 0 && Categoria.NomeDaCategoria != null)
+            if (Categoria.Id == 0 && Categoria.NomeDaCategoria != null && Categoria.NomeDaCategoria != "")
             {
                 return true;
             }
@@ -39,7 +37,7 @@ namespace FinancialApp.DataValidation
         public bool ValidarAlterarExcluir(Categoria categoria)
         {
             Categoria = categoria;
-            if (Categoria.Id > 0 && Categoria.NomeDaCategoria != null)
+            if (Categoria.Id > 0 && Categoria.NomeDaCategoria != null && Categoria.NomeDaCategoria != "")
             {
                 return true;
             }
@@ -54,6 +52,5 @@ namespace FinancialApp.DataValidation
                 return false;
             }
         }
-        #endregion
     }
 }

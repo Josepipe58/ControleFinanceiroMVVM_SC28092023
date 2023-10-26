@@ -6,8 +6,6 @@ namespace FinancialApp.Commands
 {
     public class AnoCommand : Ano_MD
     {
-        #region |=================================| Comandos |==================================================|
-        
         //Cadastrar
         private ICommand _comandoDeCadastrarAno;
         public ICommand ComandoDeCadastrarAno
@@ -55,6 +53,5 @@ namespace FinancialApp.Commands
                 return _comandoDeAtualizarAno;
             }
         }
-        #endregion       
     }
 }
