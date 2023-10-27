@@ -1,5 +1,4 @@
 ﻿#nullable disable
-using AppFinanceiroMVVM.Modelos;
 using BancoDeDados.ModelosDto;
 using GerenciarDados.AcessarDados;
 using GerenciarDados.Mensagens;
@@ -22,13 +21,13 @@ namespace AppFinanceiroMVVM.Views
             try
             {
                 Categoria_AD categoria_AD = new();
-                FiltroDeControle filtrosDeControle = new();
+                FiltroDeControleDto filtrosDeControleDto = new();
 
-                if (filtrosDeControle.NomeDoFiltro == "Despesas")
+                if (filtrosDeControleDto.NomeDoFiltro == "Despesas")
                 {
                     DtgDados.ItemsSource = categoria_AD.ConsultarCategoriasPorNomeDoFiltro(CbxNomeDeFiltros.Text);
                 }
-                else if (filtrosDeControle.NomeDoFiltro == "Poupança")
+                else if (filtrosDeControleDto.NomeDoFiltro == "Poupança")
                 {
                     DtgDados.ItemsSource = categoria_AD.ConsultarCategoriasPorNomeDoFiltro(CbxNomeDeFiltros.Text);
                 }

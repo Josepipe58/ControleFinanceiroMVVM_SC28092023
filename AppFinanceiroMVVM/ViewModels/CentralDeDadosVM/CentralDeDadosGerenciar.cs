@@ -139,8 +139,10 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
             }
         }
 
-        public void DataGridDaCentralDeDadosEValores()
+        public void DataGridDaCentralDeDadosEValores(string filtro, int ano)
         {
+            CentralDeDados.Filtros = filtro;
+            ListaDeAnos[0].AnoDoCadastro = ano;
             try
             {
                 CentralDeDados_AD centralDeDados_AD = new();
@@ -175,22 +177,23 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
                 GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                 return;
             }
-
-            SaldoDaCarteiraPoupancaEInvestimentos();
+            SaldoDaCarteiraPoupancaEInvestimentos(ListaDeAnos[0].AnoDoCadastro);
         }
-            public void SaldoDaCarteiraPoupancaEInvestimentos()
+
+        public void SaldoDaCarteiraPoupancaEInvestimentos(int ano)
         {
+            ListaDeAnos[0].AnoDoCadastro = ano;
             try
             {
                 SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento = new();
-                                  
-                SaldoDaCarteira = Convert.ToDecimal(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(ListaDeAnos[0].AnoDoCadastro));                
-               
-                SaldoDaPoupanca = Convert.ToDecimal(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(ListaDeAnos[0].AnoDoCadastro));               
-                
+
+                SaldoDaCarteira = Convert.ToDecimal(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(ListaDeAnos[0].AnoDoCadastro));
+
+                SaldoDaPoupanca = Convert.ToDecimal(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(ListaDeAnos[0].AnoDoCadastro));
+
                 SaldoDeInvestimento = Convert.ToDecimal(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDeInvestimentos(ListaDeAnos[0].AnoDoCadastro));
 
-                SaldoPoupancaEInvestimento = SaldoDaPoupanca + SaldoDeInvestimento;                
+                SaldoPoupancaEInvestimento = SaldoDaPoupanca + SaldoDeInvestimento;
             }
             catch (Exception erro)
             {
@@ -198,7 +201,6 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
                 GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                 return;
             }
-            
         }
 
         //Limpar Dados
@@ -209,7 +211,7 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
             CentralDeDados.Valor = 0;
 
             //SaldoDaCarteiraPoupancaEInvestimentos();
-            DataGridDaCentralDeDadosEValores();
+            DataGridDaCentralDeDadosEValores(CentralDeDados.Filtros, ListaDeAnos[0].AnoDoCadastro);
         }
 
         //Atualizar Dados 
@@ -221,7 +223,7 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
             var mesAtual = textInfo.ToTitleCase(mes.ToString("MMMM"));
             var dataAtual = textInfo.ToTitleCase(mes.ToString("dd/MM/yyyy"));
 
-            CentralDeDados.Data = Convert.ToDateTime(dataAtual);            
+            CentralDeDados.Data = Convert.ToDateTime(dataAtual);
             CentralDeDados.Tipo = ListaDeTipos.ListaDeTodosOsTipos()[0];
             CentralDeDados.Mes = mesAtual.ToString();
             CentralDeDados.Ano = ListaDeAnos[0].AnoDoCadastro;

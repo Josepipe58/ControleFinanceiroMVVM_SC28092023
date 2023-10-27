@@ -12,7 +12,7 @@ namespace AppFinanceiroMVVM.ViewModels.NomeDeBancoVM
         //Cadastrar
         public void Cadastrar(NomeDeBanco nomeDeBanco)
         {
-            if (ValidarCadastrar(nomeDeBanco) == true)
+            if (nomeDeBanco.Id == 0 && nomeDeBanco.NomeDoBanco != null && nomeDeBanco.NomeDoBanco != "")
             {
                 try
                 {
@@ -33,12 +33,22 @@ namespace AppFinanceiroMVVM.ViewModels.NomeDeBancoVM
                     return;
                 }
             }
+            else if (nomeDeBanco.Id > 0 && nomeDeBanco.NomeDoBanco != null)
+            {
+                GerenciarMensagens.ErroAoCadastrar();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Alterar
         public void Alterar(NomeDeBanco nomeDeBanco)
         {
-            if (ValidarAlterarExcluir(nomeDeBanco) == true)
+            if (nomeDeBanco.Id > 0 && nomeDeBanco.NomeDoBanco != null && nomeDeBanco.NomeDoBanco != "")
             {
                 try
                 {
@@ -58,11 +68,22 @@ namespace AppFinanceiroMVVM.ViewModels.NomeDeBancoVM
                     return;
                 }
             }
+            else if (nomeDeBanco.Id == 0 && nomeDeBanco.NomeDoBanco != null)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
+
         //Excluir
         public void Excluir(NomeDeBanco nomeDeBanco)
         {
-            if (ValidarAlterarExcluir(nomeDeBanco) == true)
+            if (nomeDeBanco.Id > 0 && nomeDeBanco.NomeDoBanco != null && nomeDeBanco.NomeDoBanco != "")
             {
                 MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(nomeDeBanco.Id);
                 if (resultado == MessageBoxResult.No)
@@ -86,6 +107,16 @@ namespace AppFinanceiroMVVM.ViewModels.NomeDeBancoVM
                     GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
+            }
+            else if (nomeDeBanco.Id == 0 && nomeDeBanco.NomeDoBanco != null)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
             }
         }
 

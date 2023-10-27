@@ -3,10 +3,8 @@ using AppFinanceiroMVVM.Commandos;
 using AppFinanceiroMVVM.Modelos;
 using BancoDeDados.ModelosDto;
 using GerenciarDados.AcessarDados;
-using GerenciarDados.Consultas;
 using GerenciarDados.Listas;
 using GerenciarDados.Relatorios;
-using System;
 using System.Collections.Generic;
 
 namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
@@ -18,14 +16,11 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
         public CentralDeDadosDto CentralDeDadosDto { get; set; }
         public CentralDeDados CentralDeDados { get; set; }
 
-        public FiltroDeControle FiltroDeControle { get; set; }
-
         //Construtor
         public CentralDeDadosViewModel()
         {
             CentralDeDados = new CentralDeDados();
             CentralDeDadosDto = new CentralDeDadosDto();
-            FiltroDeControle = new FiltroDeControle();
 
             ListaDeValoresMeses = new ListaDeValoresMeses();
             ListaDeAnos = new ListaDeAnos();           
@@ -59,7 +54,7 @@ namespace AppFinanceiroMVVM.ViewModels.CentralDeDadosVM
             ListaDaCentralDeDados = centralDeDados_AD.ConsultarFiltroSelecionadoNoComboBox
                        (ListaDeFiltrosDeControles[0].NomeDoFiltro, ListaDeAnos[0].AnoDoCadastro);
 
-            SaldoDaCarteiraPoupancaEInvestimentos();
+            SaldoDaCarteiraPoupancaEInvestimentos(ListaDeAnos[0].AnoDoCadastro);
         }
     }
 }

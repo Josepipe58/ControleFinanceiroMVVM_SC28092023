@@ -8,7 +8,7 @@ namespace GerenciarDados.AcessarDados
 {
     public class Categoria_AD
     {
-        public string _consulta = string.Empty;
+        public string _consulta, _nomeDoMetodo = string.Empty;
         public Contexto _contexto;
 
         public Categoria_AD()

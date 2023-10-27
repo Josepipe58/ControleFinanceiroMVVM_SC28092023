@@ -11,7 +11,8 @@ namespace AppFinanceiroMVVM.ViewModels.AnosVM
         //Cadastrar
         public void Cadastrar(Ano ano)
         {
-            if (ValidarCadastrar(ano) == true)
+            
+            if (ano.Id == 0 && ano.AnoDoCadastro > 0)
             {
                 try
                 {
@@ -31,12 +32,22 @@ namespace AppFinanceiroMVVM.ViewModels.AnosVM
                     return;
                 }
             }
+            else if (ano.Id > 0 && ano.AnoDoCadastro > 0)
+            {
+                GerenciarMensagens.ErroAoCadastrar();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Alterar
         public void Alterar(Ano ano)
         {
-            if (ValidarAlterarExcluir(ano) == true)
+            if (ano.Id > 0 && ano.AnoDoCadastro > 0)
             {
                 try
                 {
@@ -56,12 +67,22 @@ namespace AppFinanceiroMVVM.ViewModels.AnosVM
                     return;
                 }
             }
+            else if (ano.Id == 0 && ano.AnoDoCadastro > 0)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Excluir
         public void Excluir(Ano ano)
         {
-            if (ValidarAlterarExcluir(ano) == true)
+            if (ano.Id > 0 && ano.AnoDoCadastro > 0)
             {
                 MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(ano.Id);
                 if (resultado == MessageBoxResult.No)
@@ -85,6 +106,16 @@ namespace AppFinanceiroMVVM.ViewModels.AnosVM
                     GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
+            }
+            else if (ano.Id == 0 && ano.AnoDoCadastro > 0)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
             }
         }
 

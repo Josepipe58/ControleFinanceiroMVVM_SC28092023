@@ -3,10 +3,115 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AppFinanceiroMVVM.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:vmap="clr-namespace:AppFinanceiroMVVM.ViewModels.AposentadoriaVM"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="800" Width="1490">
+
+    <UserControl.Resources>
+        <vmap:AposentadoriaViewModel x:Key="vmapAposentadoriaViewModel"/>
+    </UserControl.Resources>
+
+    <!--| Grid Principal |-->
+    <Grid Background="#FF0D55E4" DataContext="{StaticResource vmapAposentadoriaViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="180*"/>
+            <RowDefinition Height="711*"/>
+        </Grid.RowDefinitions>
+
+        <!--| Grid Superior |-->
+        <Grid x:Name="GridSuperior" Background="#FF390AE6" Grid.RowSpan="2">
+
+            <!--| Imagem de Fundo |-->
+            <Image Height="290" Margin="5,0,5,0" Source="/Imagens/Universo01.jpg" Stretch="Fill"/>
+
+            <!--| Título da Grid Superior |-->
+            <TextBlock Text="Cadastrar, Alterar e Excluir Aposentadorias" FontSize="30" Foreground="White" Width="581"
+                       Margin="250,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <TextBlock Text="{Binding MensagemCalcularReajusteDaAposentadoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="16" 
+                       Foreground="#FFE1F19B" Height="90" Margin="866,40,10,0" VerticalAlignment="Top" TextWrapping="Wrap"/>
+
+            <!--| Rótulos(Label) |-->
+            <Label Content="Código" Style="{DynamicResource LabelTransparente}" Margin="12,63,0,0"/>
+
+            <Label Content="Data" Style="{DynamicResource LabelTransparente}" Margin="106,65,0,0"/>
+
+            <Label Content="Ano do Índice" Style="{DynamicResource LabelTransparente}" Margin="340,63,0,0"/>
+
+            <Label Content="Ano do Reajuste" Style="{DynamicResource LabelTransparente}" Margin="525,63,0,0"/>
+
+            <Label Content="Indice do Aumento" Style="{DynamicResource LabelTransparente}" Margin="685,135,0,0"/>
+
+            <Label Content="Valor do Aumento" Style="{DynamicResource LabelTransparente}" Margin="870,135,0,0"/>
+
+            <Label Content="Atualizar Valor" Style="{DynamicResource LabelTransparente}" Margin="695,63,0,0" Width="160"/>
+
+            <Label Content="Saldo Atual da Aposentadoeia" Style="{DynamicResource LabelTransparente}" Margin="1045,136,0,0" Width="255"/>
+
+            <!--| Calendário |-->
+            <DatePicker x:Name="DtpData" Style="{DynamicResource CalendarioDatePicker}" Margin="111,0,0,0"                        
+                        Text="{Binding Aposentadoria.Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+            <!--| TextBoxes |-->
+            <TextBox x:Name="TxtId" Width="84" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="17,0,0,0" IsReadOnly="True"
+                     Text="{Binding Aposentadoria.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+            <TextBox x:Name="TxtIndiceDoAumento" Style="{DynamicResource TextBoxAzulMarinho}" Margin="690,160,0,0" Width="165"
+                     Text="{Binding Aposentadoria.IndiceDoAumento, Mode=TwoWay}"/>
+
+            <TextBox x:Name="TxtValorDoAumento" Style="{DynamicResource TextBoxAzulMarinho}" Margin="875,160,0,0"
+                     Text="{Binding Aposentadoria.ValorDoAumento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=R$ \{0:N2\}}"/>
+
+            <TextBox x:Name="TxtAtualizarValor" Style="{DynamicResource TextBoxAzulMarinho}" Margin="705,0,0,0"
+                     Text="{Binding Aposentadoria.AtualizarValor, Mode=TwoWay, StringFormat=R$ \{0:N2\}}" VerticalAlignment="Center"/>
+
+            <TextBox x:Name="TxtSaldoAtual" Width="245" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="1055,160,0,0"
+                     Text="{Binding Aposentadoria.SaldoAtual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=R$ \{0:N2\}}"/>
+
+            <!--| Botões |-->
+            <Button x:Name="BtnCadastrar" Content="Cadastrar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="72,152,0,0" 
+                    Command="{Binding ComandoDeCadastrarAposentadoria}"/>
+
+            <Button x:Name="BtnAlterar" Content="Alterar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,152,0,0"  
+                     Command="{Binding ComandoDeDeAlterarAposentadoria}" />
+
+            <Button x:Name="BtnExcluir" Content="Excluir" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="362,152,0,0" 
+                    Command="{Binding ComandoDeDeExcluirAposentadoria}"/>
+
+            <Button x:Name="BtnAtualizar" Content="Atualizar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="508,152,0,0" 
+                    Command="{Binding ComandoDeDeAtualizarAposentadoria}"/>
+
+            <!--| ComboBox |-->
+            <ComboBox x:Name="CbxAnoDoIndice" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="340,0,0,0" Width="165"
+                      Text="{Binding Aposentadoria.AnoDoIndice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"
+                      ItemsSource="{Binding ListaDeAnosDoReajusteDaAposentadoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+            <ComboBox x:Name="CbxAnoDoReajuste" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="525,0,0,0" 
+                      Text="{Binding Aposentadoria.AnoDoReajuste, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"
+                      ItemsSource="{Binding ListaDeAnosDoReajusteDaAposentadoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+
+            <Button x:Name="BtnCalcular" Content="Calcular" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="1320,152,0,0" 
+                Command="{Binding ComandoDeDeCalcularAposentadoria}"/>
+        </Grid>
+
+        <!--| Grid Inferior |-->
+        <Grid x:Name="GridInferior" Grid.Row="2" Background="#FFFCFFFF">
+
+            <!--| Data Grid de Dados |-->
+            <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,5,5,7" IsReadOnly="true"
+                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoGradienteAzul}" MouseDoubleClick="DtgDados_MouseDoubleClick"
+                      ItemsSource="{Binding ListaDeAposentadoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="120"/>
+                    <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="150"/>
+                    <DataGridTextColumn Header="Ano do Índice" Binding="{Binding AnoDoIndice, StringFormat=\{0:D4\}}" Width="180"/>
+                    <DataGridTextColumn Header="Ano do Reajuste" Binding="{Binding AnoDoReajuste, StringFormat=\{0:D4\}}" Width="200"/>
+                    <DataGridTextColumn Header="Indice do Aumento(%)" Binding="{Binding IndiceDoAumento}" Width="220"/>
+                    <DataGridTextColumn Header="Valor do Aumento" Binding="{Binding ValorDoAumento, StringFormat=R$ \{0:N2\}}" Width="200"/>
+                    <DataGridTextColumn Header="Atualizar Valor" Binding="{Binding AtualizarValor}" Width="200"/>
+                    <DataGridTextColumn Header="Saldo Atual" Binding="{Binding SaldoAtual, StringFormat=R$ \{0:N2\}}" Width="200"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

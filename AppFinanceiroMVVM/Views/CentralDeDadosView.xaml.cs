@@ -13,10 +13,12 @@ namespace AppFinanceiroMVVM.Views
 {
     public partial class CentralDeDadosView : UserControl
     {
-        public string nomeDoMetodo = string.Empty;
+        public string _nomeDoMetodo = string.Empty;
+
         public CentralDeDadosView()
         {
             InitializeComponent();
+            
             CarregarDiversosComboBoxesDeDespesas();
         }
 
@@ -43,13 +45,11 @@ namespace AppFinanceiroMVVM.Views
             }
             catch (Exception erro)
             {
-                MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: CarregarDiversosComboBoxesDeDespesas." +
-                    $"\nDetalhes: {erro.Message}", "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
+                _nomeDoMetodo = "CarregarDiversosComboBoxesDeDespesas";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                 return;
             }
         }
-
-        
 
         private void CbxNomeDeFiltros_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -107,8 +107,8 @@ namespace AppFinanceiroMVVM.Views
             }
             catch (Exception erro)
             {
-                nomeDoMetodo = "DataGridDaCentralDeDadosEValores";
-                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
+                _nomeDoMetodo = "DataGridDaCentralDeDadosEValores";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                 return;
             }
 
@@ -158,61 +158,30 @@ namespace AppFinanceiroMVVM.Views
 
         public void SaldoDaCarteiraPoupancaEInvestimentos()
         {
-            if (CbxAno.Text != "" && CbxMes.Text != "")
+            try
             {
-                try
-                {
-                    SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento = new();
-                    //====================================| Saldo da Carteira |=======================================================================                    
-                    TxtCarteira.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(Convert.ToInt32(CbxAno.Text)));
-                    double saldoDaCarteira = Convert.ToDouble(TxtCarteira.Text.ToString().Replace("R$", ""));
-                    TxtCarteira.Text = string.Format("{0:c}", saldoDaCarteira);
-                    //====================================| Saldo da Poupança |======================================================================== 
-                    TxtPoupanca.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(Convert.ToInt32(CbxAno.Text)));
-                    double saldoDaPoupanca = Convert.ToDouble(TxtPoupanca.Text.ToString().Replace("R$", ""));
-                    TxtPoupanca.Text = string.Format("{0:c}", saldoDaPoupanca);
-                    //====================================| Saldo de Investimentos |=================================================================== 
-                    TxtInvestimento.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDeInvestimentos(Convert.ToInt32(CbxAno.Text)));
-                    double saldoDeInvestimento = Convert.ToDouble(TxtInvestimento.Text.ToString().Replace("R$", ""));
-                    TxtInvestimento.Text = string.Format("{0:c}", saldoDeInvestimento);
-                    //=====================================| Saldo Total da Poupança e de Investimentos |===============================================  
-                    double _saldoTotalPoupancaEInvestimentos = Convert.ToDouble((saldoDaPoupanca + saldoDeInvestimento).ToString().Replace("R$", ""));
-                    TxtPoupancaEInvestimento.Text = string.Format("{0:c}", _saldoTotalPoupancaEInvestimentos);
-                }
-                catch (Exception erro)
-                {
-                    nomeDoMetodo = "SaldoDaCarteiraPoupancaEInvestimentos";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
-                    return;
-                }
+                SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento = new();
+                //====================================| Saldo da Carteira |=======================================================================                    
+                TxtCarteira.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(Convert.ToInt32(CbxAno.Text)));
+                double saldoDaCarteira = Convert.ToDouble(TxtCarteira.Text.ToString().Replace("R$", ""));
+                TxtCarteira.Text = string.Format("{0:c}", saldoDaCarteira);
+                //====================================| Saldo da Poupança |======================================================================== 
+                TxtPoupanca.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(Convert.ToInt32(CbxAno.Text)));
+                double saldoDaPoupanca = Convert.ToDouble(TxtPoupanca.Text.ToString().Replace("R$", ""));
+                TxtPoupanca.Text = string.Format("{0:c}", saldoDaPoupanca);
+                //====================================| Saldo de Investimentos |=================================================================== 
+                TxtInvestimento.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDeInvestimentos(Convert.ToInt32(CbxAno.Text)));
+                double saldoDeInvestimento = Convert.ToDouble(TxtInvestimento.Text.ToString().Replace("R$", ""));
+                TxtInvestimento.Text = string.Format("{0:c}", saldoDeInvestimento);
+                //=====================================| Saldo Total da Poupança e de Investimentos |===============================================  
+                double _saldoTotalPoupancaEInvestimentos = Convert.ToDouble((saldoDaPoupanca + saldoDeInvestimento).ToString().Replace("R$", ""));
+                TxtPoupancaEInvestimento.Text = string.Format("{0:c}", _saldoTotalPoupancaEInvestimentos);
             }
-            else
+            catch (Exception erro)
             {
-                try
-                {
-                    SaldoDaCarteiraPoupancaEInvestimento saldoDaCarteiraPoupancaEInvestimento = new();
-                    //====================================| Saldo da Carteira |=======================================================================                    
-                    TxtCarteira.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaCarteiraPorAno(Convert.ToInt32(CbxAno.Text)));
-                    double saldoDaCarteira = Convert.ToDouble(TxtCarteira.Text.ToString().Replace("R$", ""));
-                    TxtCarteira.Text = string.Format("{0:c}", saldoDaCarteira);
-                    //====================================| Saldo da Poupança |======================================================================== 
-                    TxtPoupanca.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDaPoupanca(Convert.ToInt32(CbxAno.Text)));
-                    double saldoDaPoupanca = Convert.ToDouble(TxtPoupanca.Text.ToString().Replace("R$", ""));
-                    TxtPoupanca.Text = string.Format("{0:c}", saldoDaPoupanca);
-                    //====================================| Saldo de Investimentos |=================================================================== 
-                    TxtInvestimento.Text = Convert.ToString(saldoDaCarteiraPoupancaEInvestimento.ConsultarSaldoDeInvestimentos(Convert.ToInt32(CbxAno.Text)));
-                    double saldoDeInvestimento = Convert.ToDouble(TxtInvestimento.Text.ToString().Replace("R$", ""));
-                    TxtInvestimento.Text = string.Format("{0:c}", saldoDeInvestimento);
-                    //=====================================| Saldo Total da Poupança e de Investimentos |===============================================                    
-                    double _saldoTotalPoupancaEInvestimentos = Convert.ToDouble((saldoDaPoupanca + saldoDeInvestimento).ToString().Replace("R$", ""));
-                    TxtPoupancaEInvestimento.Text = string.Format("{0:c}", _saldoTotalPoupancaEInvestimentos);
-                }
-                catch (Exception erro)
-                {
-                    nomeDoMetodo = "SaldoDaCarteiraPoupancaEInvestimentos";
-                    GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, nomeDoMetodo);
-                    return;
-                }
+                _nomeDoMetodo = "SaldoDaCarteiraPoupancaEInvestimentos";
+                GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
+                return;
             }
         }
     }

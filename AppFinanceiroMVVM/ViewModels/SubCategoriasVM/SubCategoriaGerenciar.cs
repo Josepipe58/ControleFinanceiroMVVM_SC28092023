@@ -10,15 +10,14 @@ namespace AppFinanceiroMVVM.ViewModels.SubCategoriasVM
 {
     public partial class SubCategoriaViewModel//Gerenciar
     {
-
         //Cadastrar
         public void Cadastrar(SubCategoria subCategoria)
         {
-            if (ValidarCadastrar(subCategoria) == true)
+            if (subCategoria.Id == 0 && subCategoria.NomeDaSubCategoria != null && subCategoria.NomeDaSubCategoria != "")
             {
                 try
                 {
-                    SubCategoria_AD subCategoria_AD = new(); 
+                    SubCategoria_AD subCategoria_AD = new();
                     SubCategoriaDto.NomeDaSubCategoria = subCategoria.NomeDaSubCategoria;
                     SubCategoriaDto.CategoriaId = subCategoria.CategoriaId;
 
@@ -35,12 +34,22 @@ namespace AppFinanceiroMVVM.ViewModels.SubCategoriasVM
                     return;
                 }
             }
+            else if (subCategoria.Id > 0 && subCategoria.NomeDaSubCategoria != null)
+            {
+                GerenciarMensagens.ErroAoCadastrar();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Alterar
         public void Alterar(SubCategoria subCategoria)
         {
-            if (ValidarAlterarExcluir(subCategoria) == true)
+            if (subCategoria.Id > 0 && subCategoria.NomeDaSubCategoria != null && subCategoria.NomeDaSubCategoria != "")
             {
                 try
                 {
@@ -61,12 +70,22 @@ namespace AppFinanceiroMVVM.ViewModels.SubCategoriasVM
                     return;
                 }
             }
+            else if (subCategoria.Id == 0 && subCategoria.NomeDaSubCategoria != null)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Excluir
         public void Excluir(SubCategoria subCategoria)
         {
-            if (ValidarAlterarExcluir(subCategoria) == true)
+            if (subCategoria.Id > 0 && subCategoria.NomeDaSubCategoria != null && subCategoria.NomeDaSubCategoria != "")
             {
                 MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(subCategoria.Id);
                 if (resultado == MessageBoxResult.No)
@@ -90,6 +109,16 @@ namespace AppFinanceiroMVVM.ViewModels.SubCategoriasVM
                     GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
+            }
+            else if (subCategoria.Id == 0 && subCategoria.NomeDaSubCategoria != null)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
             }
         }
 

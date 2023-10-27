@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using AppFinanceiroMVVM.Modelos;
+using BancoDeDados.ModelosDto;
 using GerenciarDados.AcessarDados;
 using GerenciarDados.Mensagens;
 using System;
@@ -11,8 +12,8 @@ namespace AppFinanceiroMVVM.ViewModels.CategoriasVM
     {
         //Cadastrar
         public void Cadastrar(Categoria categoria)
-        {
-            if (ValidarCadastrar(categoria) == true)
+        {            
+            if (categoria.Id == 0 && categoria.NomeDaCategoria != null && categoria.NomeDaCategoria != "")
             {
                 try
                 {
@@ -34,12 +35,22 @@ namespace AppFinanceiroMVVM.ViewModels.CategoriasVM
                     return;
                 }
             }
+            else if (categoria.Id > 0 && categoria.NomeDaCategoria != null)
+            {
+                GerenciarMensagens.ErroAoCadastrar();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Alterar
         public void Alterar(Categoria categoria)
         {
-            if (ValidarAlterarExcluir(categoria) == true)
+            if (categoria.Id > 0 && categoria.NomeDaCategoria != null && categoria.NomeDaCategoria != "")
             {
                 try
                 {
@@ -60,12 +71,22 @@ namespace AppFinanceiroMVVM.ViewModels.CategoriasVM
                     return;
                 }
             }
+            else if (categoria.Id == 0 && categoria.NomeDaCategoria != null)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
+            }
         }
 
         //Excluir
         public void Excluir(Categoria categoria)
         {
-            if (ValidarAlterarExcluir(categoria) == true)
+            if (categoria.Id > 0 && categoria.NomeDaCategoria != null && categoria.NomeDaCategoria != "")
             {
                 MessageBoxResult resultado = GerenciarMensagens.ConfirmarExcluir(categoria.Id);
                 if (resultado == MessageBoxResult.No)
@@ -77,11 +98,17 @@ namespace AppFinanceiroMVVM.ViewModels.CategoriasVM
                 {
                     Categoria_AD categoria_DA = new();
                     CategoriaDto.Id = categoria.Id;
+                    
+                    string retorno = categoria_DA.Excluir(CategoriaDto);
+                    int id = Convert.ToInt32(retorno);
 
-                    categoria_DA.Excluir(CategoriaDto);
-
-                    GerenciarMensagens.SucessoAoExcluir(CategoriaDto.Id);
-                    LimparDados();
+                    //Esse if é exclusivo para tabelas que tem relacionamentos.
+                    if (id > 0)
+                    {
+                        GerenciarMensagens.SucessoAoExcluir(CategoriaDto.Id);
+                        LimparDados();
+                        return;
+                    }
                 }
                 catch (Exception erro)
                 {
@@ -89,6 +116,16 @@ namespace AppFinanceiroMVVM.ViewModels.CategoriasVM
                     GerenciarMensagens.ErroDeExcecaoENomeDoMetodo(erro, _nomeDoMetodo);
                     return;
                 }
+            }
+            else if (categoria.Id == 0 && categoria.NomeDaCategoria != null)
+            {
+                GerenciarMensagens.ErroAoAlterarOuExcluir();
+                return;
+            }
+            else
+            {
+                GerenciarMensagens.PreencherCampoVazio();
+                return;
             }
         }
 

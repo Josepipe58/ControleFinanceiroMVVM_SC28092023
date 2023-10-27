@@ -101,7 +101,7 @@ namespace AppFinanceiroMVVM.Comandos
                         //SelecionarControleDeUsuario = new MenuDeConsultasERelatorios();
                         break;
                     case "Aposentadoria":
-                        //SelecionarControleDeUsuario = new AposentadoriaView();
+                        SelecionarControleDeUsuario = new AposentadoriaView();
                         break;
                     case "Categorias":
                         SelecionarControleDeUsuario = new CategoriaView();

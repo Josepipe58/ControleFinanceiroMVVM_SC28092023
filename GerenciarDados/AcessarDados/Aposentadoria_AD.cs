@@ -61,6 +61,7 @@ namespace GerenciarDados.AcessarDados
             return _consulta;
         }
 
+        //DataGrid
         public ListaDeAposentadoria ConsultarAposentadoria()
         {
             ListaDeAposentadoria listaDeAposentadoria = new();
@@ -84,5 +85,23 @@ namespace GerenciarDados.AcessarDados
             }
             return listaDeAposentadoria;
         }
+
+        ////ComboBox Saldo Atual
+        //public ListaDeAposentadoria ConsultarSaldoAtualAposentadoria()
+        //{
+        //    ListaDeAposentadoria listaDeAposentadoria = new();
+        //    DataTable dataTable = _contexto.ExecutarConsulta(CommandType.Text,
+        //       "Select SaldoAtual From Aposentadorias Order By SaldoAtual Desc;");
+
+        //    foreach (DataRow dataRow in dataTable.Rows)
+        //    {
+        //        AposentadoriaDto aposentadoriaDto = new()
+        //        {                   
+        //            SaldoAtual = Convert.ToDecimal(dataRow["SaldoAtual"])
+        //        };
+        //        listaDeAposentadoria.Add(aposentadoriaDto);
+        //    }
+        //    return listaDeAposentadoria;
+        //}
     }
 }
