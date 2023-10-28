@@ -6,7 +6,7 @@ namespace AppFinanceiroMVVM
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow();
+            MainWindow = new TelaPrincipal();
             MainWindow.Show();
             base.OnStartup(e);
         }

@@ -19,13 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\ConsultasVM\" />
-    <Folder Include="ViewModels\RelatoriosVM\" />
-    <Folder Include="Views\Relatorios\" />
-    <Folder Include="Views\Consultas\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BancoDeDados\BancoDeDados.csproj" />
     <ProjectReference Include="..\GerenciarDados\GerenciarDados.csproj" />
   </ItemGroup>

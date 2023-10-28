@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="AppFinanceiroMVVM.Views.MenuDeConsultasERelatoriosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppFinanceiroMVVM.Views"
+             mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="1200">
+
+    <Grid Background="#FF1C0BE4" Height="800" VerticalAlignment="Top">
+
+        <!--| Titulo das Categorias e SubCategorias |-->
+        <TextBlock Text="Controle Financeiro - Relatórios" FontSize="30" Foreground="#DDDDDD" Width="450" 
+                   Margin="425,105,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <TextBlock Text="Controle Financeiro - Consultar" FontSize="30" Foreground="#DDDDDD" Width="450" 
+                   Margin="425,400,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!--| Relatórios |-->
+        <RadioButton Content="Relatorio de Despesas" Style="{StaticResource RadionButtonComImagem}" Margin="425,155,0,0"
+                     Command="{Binding Path=DataContext.ComandoDoRelatorioDeDespesas, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}" Width="225"/>
+
+        <RadioButton Content="Relatorio da Poupança" Width="225" Style="{StaticResource RadionButtonComImagem}" Margin="655,155,0,0"
+                     Command="{Binding Path=DataContext.ComandoDoRelatorioDaPoupanca, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}"/>
+
+        <RadioButton Content="Relatorio de Receitas" Width="225" Style="{StaticResource RadionButtonComImagem}" Margin="425,265,0,0"
+                     Command="{Binding Path=DataContext.ComandoDoRelatorioDeReceitas, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}"/>
+
+        <RadioButton Content="Relatorio de Investimentos" Width="225" Style="{StaticResource RadionButtonComImagem}" Margin="655,265,0,0"
+                     Command="{Binding Path=DataContext.ComandoDoRelatorioDeInvestimentos, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}"/>
+
+        <!--| Consultas |-->
+        <RadioButton Content="Consultar Despesas" Width="225" Style="{StaticResource RadionButtonComImagem}" Margin="425,465,0,0"
+                     Command="{Binding DataContext.ComandoDeConsultarDespesas, RelativeSource={RelativeSource FindAncestor, 
+            AncestorType={x:Type Window}}}"/>
+
+        <RadioButton Content="Consultar Finanças" Width="225" Style="{StaticResource RadionButtonComImagem}" Margin="655,465,0,0"
+                     Command="{Binding DataContext.ComandoDeConsultarFinancas, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}"/>
+    </Grid>
+</UserControl>

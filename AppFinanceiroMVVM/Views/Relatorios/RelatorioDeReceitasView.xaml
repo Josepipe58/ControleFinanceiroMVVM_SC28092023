@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="AppFinanceiroMVVM.Views.Relatorios.RelatorioDeReceitasView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="850" d:DesignWidth="1430">
+
+    <!--| Grid Principal |-->
+    <Grid x:Name="GridPrincipal" Background="#FF0D6C5B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="325*"/>
+        </Grid.RowDefinitions>
+
+        <!--| TextBlock |-->
+        <TextBlock Text="R E L A T Ó R I O  D E  R E C E I T A S" FontSize="30" FontWeight="Bold" Foreground="#FF0EF3EE"
+                   Height="40" Width="600" Margin="500,20,0,0" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!--| Seta para voltar ao Menu de Consultas e Relatórios |-->
+        <RadioButton Height="60" Width="66" Style="{StaticResource SetaVoltarMenuAnterior}" Margin="10,5,0,0"
+                     Command="{Binding DataContext.ComandoVoltarParaMenuDeConsultasERelatorios, RelativeSource={RelativeSource 
+                     FindAncestor, AncestorType={x:Type Window}}}" Tag="/Imagens/back_icon.png"/>
+
+        <TextBlock Text="Voltar &gt; Menu de Consultas e Relatórios" FontSize="18" FontWeight="Bold" Foreground="#FF06F7F2" 
+                   Height="22" Width="352" Margin="80,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!--| Rótulos(Label) |-->
+        <Label Content="Selecione o Ano---&gt;" FontSize="20" FontWeight="Bold" Foreground="#FF09320F" Background="#FF15E4DF" 
+               Height="35" Width="220" Margin="95,85,0,0" Padding="25,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <Label Content="José Euripedes Honório" FontFamily="Segoe Print" FontSize="18" FontWeight="Bold" Foreground="#FF07F3F3" 
+               Height="26" Width="240" Margin="955,95,0,0" Padding="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!--| ComboBox |-->
+        <ComboBox x:Name="CbxAno" Margin="325,85,0,0" Style="{DynamicResource ComboBoxVerdeEscuro}" MouseLeave="CbxAno_MouseLeave"/>
+
+        <!--| Botões |-->
+        <Button x:Name="BtnAtualizar" Content="Atualizar" Height="50" Style="{DynamicResource BtnRetangularVerdeEscuro}" 
+                Margin="520,80,0,0" Click="BtnAtualizar_Click" FontSize="18" Width="150"/>
+
+        <!--| Grid Inferior |-->
+        <Grid x:Name="GridInferior" Background="#FF11E4E4" Grid.Row="1">
+
+            <!--| Rótulos(Label) |-->
+            <Label Content="BENEFÍCIOS DO INSS" FontSize="24" FontWeight="Bold" Foreground="#FF0E0E61" Background="#FF0DDEDE" 
+                   Height="45" Width="1430" Padding="550,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                   BorderBrush="#FF09320F" BorderThickness="0,5,0,0"/>
+
+            <Label Content="BENEFÍCIOS DO INSS, JUROS DA POUPANÇA E INVESTIMENTOS" FontSize="24" FontWeight="Bold" Foreground="#FF0E0E61" 
+                   Background="#FF0DDEDE" Height="45" Width="1430" Margin="0,125,0,0" Padding="400,0,0,0" HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" BorderBrush="#FF09320F" BorderThickness="0,10,0,0"/>
+
+            <Label Content="DESCONTOS NO BENEFÍCIO DO INSS" FontSize="24" FontWeight="Bold" Foreground="#FF0E0E61" Background="#FF0DDEDE" 
+                   Height="45" Width="1430" Margin="0,250,0,0" Padding="500,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                   BorderBrush="#FF09320F" BorderThickness="0,10,0,0"/>
+
+            <Label Content="FLUXO DE CAIXA - RECEITAS MENOS DESPESAS" FontSize="24" FontWeight="Bold" Foreground="#FF0E0E61" Background="#FF0DDEDE" 
+                   Height="45" Width="1430" Margin="0,375,0,0" Padding="400,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                   BorderBrush="#FF09320F" BorderThickness="0,10,0,0"/>
+
+            <Label Content="SALDO DA CARTEIRA DE TODOS OS MESES" FontSize="24" FontWeight="Bold" Foreground="#FF0E0E61" Background="#FF0DDEDE" 
+                   Height="45" Width="1430" Margin="0,498,0,0" Padding="400,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                   BorderBrush="#FF09320F" BorderThickness="0,10,0,0"/>
+
+            <!--Atenção! Essa Label serve para marcar uma ljnha depois da última DataGrid de Valores.-->
+            <Label FontSize="24" FontWeight="Bold" Foreground="#FF0E0E61" Background="#FF0DDEDE" 
+                   Height="10" Margin="0,500,0,0" VerticalAlignment="Top"
+                   BorderBrush="#FF09320F" BorderThickness="0,10,0,0" Width="1430" HorizontalAlignment="Left"/>
+
+            <!--|===================================| Relatório de Benefícios do INSS |======================================================================|-->
+            <DataGrid x:Name="DtgBeneficiosDoINSS" Height="85" Width="1430" Style="{DynamicResource DtgDeValoresCorVerde}" 
+                      Margin="0,45,0,0" ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Janeiro" Binding="{Binding Janeiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Fevereiro" Binding="{Binding Fevereiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Março" Binding="{Binding Marco, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Abril" Binding="{Binding Abril, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Maio" Binding="{Binding Maio, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Junho" Binding="{Binding Junho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Julho" Binding="{Binding Julho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Agôsto" Binding="{Binding Agosto, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Setembro" Binding="{Binding Setembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Outubro" Binding="{Binding Outubro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Novembro" Binding="{Binding Novembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Dezembro" Binding="{Binding Dezembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Total Ano" Binding="{Binding TotalAno, StringFormat=R$ \{0:N2\}}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--|===================================| Relatório de Benefícios do INSS, Juros da Poupança e Investimentos  |==================================|-->
+            <DataGrid x:Name="DtgBeneficiosJurosEInvestimentos" Height="85" Width="1430" Style="{DynamicResource DtgDeValoresCorVerde}" 
+                      Margin="0,170,0,0" ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Janeiro" Binding="{Binding Janeiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Fevereiro" Binding="{Binding Fevereiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Março" Binding="{Binding Marco, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Abril" Binding="{Binding Abril, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Maio" Binding="{Binding Maio, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Junho" Binding="{Binding Junho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Julho" Binding="{Binding Julho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Agôsto" Binding="{Binding Agosto, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Setembro" Binding="{Binding Setembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Outubro" Binding="{Binding Outubro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Novembro" Binding="{Binding Novembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Dezembro" Binding="{Binding Dezembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Total Ano" Binding="{Binding TotalAno, StringFormat=R$ \{0:N2\}}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--|===================================| Relatório de Descontos, no Benefício do INSS |=========================================================|-->
+            <DataGrid x:Name="DtgDescontosNoBeneficio" Height="85" Width="1430" Style="{DynamicResource DtgDeValoresCorVerde}" 
+                      Margin="0,295,0,0" ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Janeiro" Binding="{Binding Janeiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Fevereiro" Binding="{Binding Fevereiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Março" Binding="{Binding Marco, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Abril" Binding="{Binding Abril, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Maio" Binding="{Binding Maio, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Junho" Binding="{Binding Junho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Julho" Binding="{Binding Julho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Agôsto" Binding="{Binding Agosto, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Setembro" Binding="{Binding Setembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Outubro" Binding="{Binding Outubro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Novembro" Binding="{Binding Novembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Dezembro" Binding="{Binding Dezembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Total Ano" Binding="{Binding TotalAno, StringFormat=R$ \{0:N2\}}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--|===================================| Fluxo de Caixa - Receitas Menos Despesas |=============================================================|-->
+            <DataGrid x:Name="DtgFluxoDeCaixa" Height="85" Width="1430" Style="{DynamicResource DtgDeValoresCorVerde}" 
+                      Margin="0,420,0,0" ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Janeiro" Binding="{Binding Janeiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Fevereiro" Binding="{Binding Fevereiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Março" Binding="{Binding Marco, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Abril" Binding="{Binding Abril, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Maio" Binding="{Binding Maio, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Junho" Binding="{Binding Junho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Julho" Binding="{Binding Julho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Agôsto" Binding="{Binding Agosto, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Setembro" Binding="{Binding Setembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Outubro" Binding="{Binding Outubro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Novembro" Binding="{Binding Novembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Dezembro" Binding="{Binding Dezembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Total Ano" Binding="{Binding TotalAno, StringFormat=R$ \{0:N2\}}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--|===================================| Relatório do Saldo da Carteira de Todos os Meses |=====================================================|-->
+            <DataGrid x:Name="DtgSaldoCarteira" Height="85" Width="1430" Style="{DynamicResource DtgDeValoresCorVerde}" 
+                      Margin="0,543,0,0" ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Janeiro" Binding="{Binding Janeiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Fevereiro" Binding="{Binding Fevereiro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Março" Binding="{Binding Marco, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Abril" Binding="{Binding Abril, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Maio" Binding="{Binding Maio, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Junho" Binding="{Binding Junho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Julho" Binding="{Binding Julho, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Agôsto" Binding="{Binding Agosto, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Setembro" Binding="{Binding Setembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Outubro" Binding="{Binding Outubro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Novembro" Binding="{Binding Novembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Dezembro" Binding="{Binding Dezembro, StringFormat=R$ \{0:N2\}}" Width="105"/>
+                    <DataGridTextColumn Header="Total Ano" Binding="{Binding TotalAno, StringFormat=R$ \{0:N2\}}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

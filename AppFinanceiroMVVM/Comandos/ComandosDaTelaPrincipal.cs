@@ -15,22 +15,9 @@ using System.Windows.Input;
 
 namespace AppFinanceiroMVVM.Comandos
 {
-    public class ComandosDaTelaPrincipal : RelayCommand
+    public partial class ComandosDaTelaPrincipal : RelayCommand
     {
-        private object _selecionarControleDeUsuario;
-        public object SelecionarControleDeUsuario
-        {
-            get => _selecionarControleDeUsuario;
-            set
-            {
-                _selecionarControleDeUsuario = value;
-                OnPropertyChanged(nameof(SelecionarControleDeUsuario));
-            }
-        }
-
         public string _nomeDoMetodo = string.Empty;
-
-        //public ListaDeNomeDeBancosDoSql ListaDeNomeDeBancosDoSql { get; set; }
 
         public List<string> CarregarComboBoxDeNomeDeBancos { get; set; }
 
@@ -55,6 +42,17 @@ namespace AppFinanceiroMVVM.Comandos
 
             // Configura a página de inicialização.
             SelecionarControleDeUsuario = new PaginaInicial();
+        }
+
+        private object _selecionarControleDeUsuario;
+        public object SelecionarControleDeUsuario
+        {
+            get => _selecionarControleDeUsuario;
+            set
+            {
+                _selecionarControleDeUsuario = value;
+                OnPropertyChanged(nameof(SelecionarControleDeUsuario));
+            }
         }
 
         private void ExibirPaginaInicial()
@@ -98,7 +96,7 @@ namespace AppFinanceiroMVVM.Comandos
                         SelecionarControleDeUsuario = new CentralDeDadosView();
                         break;
                     case "Consultas e Relatórios":
-                        //SelecionarControleDeUsuario = new MenuDeConsultasERelatorios();
+                        SelecionarControleDeUsuario = new MenuDeConsultasERelatoriosView();
                         break;
                     case "Aposentadoria":
                         SelecionarControleDeUsuario = new AposentadoriaView();
