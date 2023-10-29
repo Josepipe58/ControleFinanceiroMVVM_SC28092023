@@ -18,12 +18,11 @@ namespace GerenciarDados.AcessarDados
 
         public string Cadastrar(AnoDto cadastrar)
         {
-            _contexto.LimparParametros();
-            _contexto.AdicionarParametros("@Id", cadastrar.Id + 1);
+            _contexto.LimparParametros();            
             _contexto.AdicionarParametros("@AnoDoCadastro", cadastrar.AnoDoCadastro);
             _consulta = _contexto.ExecutarManipulacaoDeDados(CommandType.Text,
-                "Select @Id = Id +1 From Anos; Insert Into Anos (Id, AnoDoCadastro) " +
-                "Values (@Id, @AnoDoCadastro); Select @Id as Retorno;").ToString();
+                "Insert Into Anos (AnoDoCadastro) " +
+                "Values (@AnoDoCadastro); Select @@IDENTITY as Retorno;").ToString();
             return _consulta;
         }
 

@@ -18,13 +18,12 @@ namespace GerenciarDados.AcessarDados
 
         public string Cadastrar(SubCategoriaDto cadastrar)
         {
-            _contexto.LimparParametros();
-            _contexto.AdicionarParametros("@Id", cadastrar.Id +1);
+            _contexto.LimparParametros();            
             _contexto.AdicionarParametros("@NomeDaSubCategoria", cadastrar.NomeDaSubCategoria);
             _contexto.AdicionarParametros("@CategoriaId", cadastrar.CategoriaId);
             _consulta = _contexto.ExecutarManipulacaoDeDados(CommandType.Text,
-                "Select @Id = Id +1 From SubCategorias; Insert Into SubCategorias (Id, NomeDaSubCategoria, CategoriaId) " +
-                "Values (@Id, @NomeDaSubCategoria, @CategoriaId); Select @Id as Retorno;").ToString();
+                "Insert Into SubCategorias (NomeDaSubCategoria, CategoriaId) " +
+                "Values (@NomeDaSubCategoria, @CategoriaId); Select @@IDENTITY as Retorno;").ToString();
             return _consulta;
         }
 

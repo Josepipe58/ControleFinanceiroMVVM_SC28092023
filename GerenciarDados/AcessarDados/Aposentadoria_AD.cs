@@ -18,8 +18,7 @@ namespace GerenciarDados.AcessarDados
 
         public string Cadastrar(AposentadoriaDto cadastrar)
         {
-            _contexto.LimparParametros();
-            _contexto.AdicionarParametros("@Id", cadastrar.Id + 1);
+            _contexto.LimparParametros();            
             _contexto.AdicionarParametros("@Data", cadastrar.Data);
             _contexto.AdicionarParametros("@AnoDoIndice", cadastrar.AnoDoIndice);
             _contexto.AdicionarParametros("@AnoDoReajuste", cadastrar.AnoDoReajuste);
@@ -28,9 +27,9 @@ namespace GerenciarDados.AcessarDados
             _contexto.AdicionarParametros("@AtualizarValor", cadastrar.AtualizarValor);
             _contexto.AdicionarParametros("@SaldoAtual", cadastrar.SaldoAtual);
             _consulta = _contexto.ExecutarManipulacaoDeDados(CommandType.Text,
-            "Select @Id = Id +1 From Aposentadorias; Insert Into Aposentadorias (Id, Data, AnoDoIndice, AnoDoReajuste, IndiceDoAumento, ValorDoAumento, AtualizarValor, " +
-            "SaldoAtual) Values (@Id, @Data, @AnoDoIndice, @AnoDoReajuste, @IndiceDoAumento, @ValorDoAumento,  @AtualizarValor, @SaldoAtual); " +
-            "Select @Id as Retorno;").ToString();
+            "Insert Into Aposentadorias (Data, AnoDoIndice, AnoDoReajuste, IndiceDoAumento, ValorDoAumento, AtualizarValor, " +
+            "SaldoAtual) Values (@Data, @AnoDoIndice, @AnoDoReajuste, @IndiceDoAumento, @ValorDoAumento,  @AtualizarValor, @SaldoAtual); " +
+            "Select @@IDENTITY as Retorno;").ToString();
             return _consulta;
         }
 

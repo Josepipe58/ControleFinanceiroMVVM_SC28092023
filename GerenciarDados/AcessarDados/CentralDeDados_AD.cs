@@ -18,8 +18,7 @@ namespace GerenciarDados.AcessarDados
 
         public string Cadastrar(CentralDeDadosDto cadastrar)
         {
-            _contexto.LimparParametros();
-            //_contexto.AdicionarParametros("@Id", cadastrar.Id +1);
+            _contexto.LimparParametros();            
             _contexto.AdicionarParametros("@NomeDaCategoria", cadastrar.NomeDaCategoria);
             _contexto.AdicionarParametros("@NomeDaSubCategoria", cadastrar.NomeDaSubCategoria);
             _contexto.AdicionarParametros("@Valor", cadastrar.Valor);
@@ -31,7 +30,7 @@ namespace GerenciarDados.AcessarDados
             _consulta = _contexto.ExecutarManipulacaoDeDados(CommandType.Text,
             "Insert Into CentralDeDados (NomeDaCategoria, NomeDaSubCategoria, Valor, Filtros, " +
             "Tipo, Data, Mes, Ano) Values (@NomeDaCategoria, @NomeDaSubCategoria, @Valor, " +
-            "@Filtros, @Tipo, @Data, @Mes, @Ano); Select @@IDENTITY as Retorno;").ToString();//Select @@IDENTITY as Retorno;
+            "@Filtros, @Tipo, @Data, @Mes, @Ano); Select @@IDENTITY as Retorno;").ToString();
             return _consulta;
         }
 
@@ -54,7 +53,7 @@ namespace GerenciarDados.AcessarDados
         }
 
         public string Excluir(CentralDeDadosDto excluir)
-        {
+        {            
             _contexto.LimparParametros();
             _contexto.AdicionarParametros("@Id", excluir.Id);
             _consulta = _contexto.ExecutarManipulacaoDeDados(CommandType.Text,
@@ -89,7 +88,7 @@ namespace GerenciarDados.AcessarDados
             }
             return listaDaCentralDeDados;
         }
-
+        
         //Fazer _consulta de acordo com o filtro selecionado no ComboBox.
         public ListaDaCentralDeDados ConsultarFiltroSelecionadoNoComboBox(string filtros, int ano)
         {

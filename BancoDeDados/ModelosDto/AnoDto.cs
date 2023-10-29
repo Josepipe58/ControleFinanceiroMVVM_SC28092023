@@ -3,8 +3,7 @@
 namespace BancoDeDados.ModelosDto
 {
     public class AnoDto
-    {
-        
+    {        
         public int Id { get; set; }
 
         public int AnoDoCadastro { get; set; }

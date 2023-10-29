@@ -20,10 +20,10 @@ namespace GerenciarDados.AcessarDados
         {
             _contextoNomeDeBancos.LimparParametros();
             _contextoNomeDeBancos.AdicionarParametros("@Id", cadastrar.Id + 1);
-            _contextoNomeDeBancos.AdicionarParametros("@NomeDoBanco", cadastrar.NomeDoBanco);
+            _contextoNomeDeBancos.AdicionarParametros("@nomeDoBanco", cadastrar.NomeDoBanco);
             _consulta = _contextoNomeDeBancos.ExecutarManipulacaoDeDados(CommandType.Text,
                 "Select @Id = Id +1 From NomeDeBancos; Insert Into NomeDeBancos (Id, NomeDoBanco) " +
-                "Values (@Id, @NomeDoBanco ); Select @Id as Retorno;").ToString();
+                "Values (@Id, @nomedobanco ); Select @Id as Retorno;").ToString();
             return _consulta;
         }
 

@@ -71,8 +71,8 @@
 
             <ComboBox x:Name="CbxAno" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="720,80,0,0"
                       DisplayMemberPath="AnoDoCadastro" SelectedValuePath="Id" SelectedIndex="0"
-                      Text="{Binding CentralDeDados.Ano, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                      
-                       ItemsSource="{Binding ListaDeAnos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      Text="{Binding CentralDeDados.Ano, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                       
+                      ItemsSource="{Binding ListaDeAnos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       MouseLeave="CbxAno_MouseLeave" Width="120"/>
 
             <ComboBox Name="CbxNomeDeFiltros" Width="200" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="870,35,0,0"

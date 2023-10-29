@@ -18,13 +18,12 @@ namespace GerenciarDados.AcessarDados
 
         public string Cadastrar(CategoriaDto cadastrar)
         {
-            _contexto.LimparParametros();
-            _contexto.AdicionarParametros("@Id", cadastrar.Id + 1);
+            _contexto.LimparParametros();            
             _contexto.AdicionarParametros("@NomeDaCategoria", cadastrar.NomeDaCategoria);
             _contexto.AdicionarParametros("@FiltroDeControleId", cadastrar.FiltroDeControleId);
             _consulta = _contexto.ExecutarManipulacaoDeDados(CommandType.Text,
-            "Select @Id = Id + 1 From Categorias; Insert Into Categorias (Id, NomeDaCategoria, FiltroDeControleId) " +
-                "Values (@Id, @NomeDaCategoria, @FiltroDeControleId); Select @Id as Retorno;").ToString();
+            "Insert Into Categorias (NomeDaCategoria, FiltroDeControleId) " +
+                "Values (@NomeDaCategoria, @FiltroDeControleId); Select @@IDENTITY as Retorno;").ToString();
             return _consulta;
         }
 
